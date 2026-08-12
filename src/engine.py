@@ -1,11 +1,13 @@
 # engine.py
 import os
+from typing import Optional
 from src.parsers import TextParser, DocxParser, DocParser, ExcelParser
+from src.chunker import SmartChunker
 from src.schema import ExtractedDocument
 
 
 class DataExtractionEngine:
-    def __init__(self):
+    def __init__(self, chunker: Optional[SmartChunker] = None):
         self.parsers = {
             ".txt": TextParser,
             ".docx": DocxParser,
@@ -14,8 +16,9 @@ class DataExtractionEngine:
             ".xls": ExcelParser,
             ".csv": ExcelParser,
         }
+        self.chunker = chunker or SmartChunker()
 
-    def extract(self, file_path: str) -> ExtractedDocument:
+    def extract(self, file_path: str, enable_chunking: bool = True) -> ExtractedDocument:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
             
@@ -29,4 +32,15 @@ class DataExtractionEngine:
             )
 
         parser_cls = self.parsers[ext]
-        return parser_cls.parse(file_path, file_name)
+        raw_doc = parser_cls.parse(file_path, file_name)
+
+        if enable_chunking and self.chunker:
+            processed_chunks = self.chunker.process_document(raw_doc)
+            return ExtractedDocument(
+                file_name=raw_doc.file_name,
+                file_type=raw_doc.file_type,
+                chunks=processed_chunks,
+                full_text=raw_doc.full_text
+            )
+
+        return raw_doc
