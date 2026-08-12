@@ -1,6 +1,7 @@
-# parsers.py
+import os
 import docx
 import pandas as pd
+from spire.doc import Document, FileFormat
 from src.schema import ExtractedDocument, DocumentChunk
 
 class TextParser:
@@ -62,6 +63,36 @@ class DocxParser:
             chunks=chunks,
             full_text=full_text
         )
+
+
+class DocParser:
+    @staticmethod
+    def parse(file_path: str, file_name: str) -> ExtractedDocument:
+        temp_docx_path = f"{file_path}.temp.docx"
+        try:
+            # 1. Convert legacy .doc to .docx on the fly
+            doc = Document()
+            doc.LoadFromFile(file_path)
+            doc.SaveToFile(temp_docx_path, FileFormat.Docx)
+            doc.Close()
+
+            # 2. Delegate to DocxParser
+            extracted = DocxParser.parse(temp_docx_path, file_name)
+            
+            # 3. Return ExtractedDocument with file_type='doc'
+            return ExtractedDocument(
+                file_name=file_name,
+                file_type="doc",
+                chunks=extracted.chunks,
+                full_text=extracted.full_text
+            )
+        finally:
+            # Clean up temporary converted docx file
+            if os.path.exists(temp_docx_path):
+                try:
+                    os.remove(temp_docx_path)
+                except OSError:
+                    pass
 
 
 class ExcelParser:

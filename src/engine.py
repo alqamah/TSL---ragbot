@@ -1,6 +1,6 @@
 # engine.py
 import os
-from src.parsers import TextParser, DocxParser, ExcelParser
+from src.parsers import TextParser, DocxParser, DocParser, ExcelParser
 from src.schema import ExtractedDocument
 
 
@@ -9,6 +9,7 @@ class DataExtractionEngine:
         self.parsers = {
             ".txt": TextParser,
             ".docx": DocxParser,
+            ".doc": DocParser,
             ".xlsx": ExcelParser,
             ".xls": ExcelParser,
             ".csv": ExcelParser,
