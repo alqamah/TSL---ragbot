@@ -25,7 +25,11 @@ def main():
         nargs="?",
         default=os.path.join(PROJECT_ROOT, "io", "SOP", "01_test.XLSX"),
     )
-    parser.add_argument("query", nargs="?", default="कंप्रेसर को स्टार्ट कैसे करें।")
+    parser.add_argument(
+        "query",
+        nargs="?",
+        default="\u0915\u0902\u092a\u094d\u0930\u0947\u0938\u0930 \u0915\u094b \u0938\u094d\u091f\u093e\u0930\u094d\u091f \u0915\u0948\u0938\u0947 \u0915\u0930\u0947\u0902\u0964",
+    )
     args = parser.parse_args()
 
     print("=" * 60)

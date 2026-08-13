@@ -106,11 +106,27 @@ class VectorStoreManager:
         size = vector_size or self.vector_size
         if recreate and self.qdrant_client.collection_exists(name):
             self.qdrant_client.delete_collection(name)
-        if not self.qdrant_client.collection_exists(name):
+        if self.qdrant_client.collection_exists(name):
+            info = self.qdrant_client.get_collection(name)
+            existing_size = info.config.params.vectors.size
+            if existing_size != size:
+                raise ValueError(
+                    f"Collection '{name}' has vector size {existing_size}; expected {size}."
+                )
+        else:
             self.qdrant_client.create_collection(
                 collection_name=name,
                 vectors_config=VectorParams(size=size, distance=distance),
             )
+
+    def close(self) -> None:
+        self.qdrant_client.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
 
     def get_embeddings(
         self,
