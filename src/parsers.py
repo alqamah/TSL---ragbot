@@ -102,7 +102,8 @@ class ExcelParser:
         full_text_list = []
 
         # Handle CSV or Excel
-        if file_name.endswith(".csv"):
+        is_csv = os.path.splitext(file_name)[1].lower() == ".csv"
+        if is_csv:
             sheets_dict = {"CSV_Data": pd.read_csv(file_path)}
         else:
             sheets_dict = pd.read_excel(file_path, sheet_name=None)  # Reads all sheets
@@ -133,7 +134,7 @@ class ExcelParser:
         full_text = "\n\n".join(full_text_list)
         return ExtractedDocument(
             file_name=file_name,
-            file_type="xlsx" if not file_name.endswith(".csv") else "csv",
+            file_type="csv" if is_csv else "xlsx",
             chunks=chunks,
             full_text=full_text
         )

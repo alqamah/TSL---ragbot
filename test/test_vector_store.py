@@ -36,10 +36,10 @@ def main():
     doc = engine.extract(test_file)
     print(f"Extracted {len(doc.chunks)} chunks from {doc.file_name}.")
 
-    # 3. Check for OPENAI_API_KEY
-    if not os.getenv("OPENAI_API_KEY"):
-        print("\n[NOTE] OPENAI_API_KEY is not set in environment or .env file.")
-        print("To run vector embedding and Qdrant upsert, add OPENAI_API_KEY to your .env file.")
+    # 3. Check for Gemini API key
+    if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
+        print("\n[NOTE] GEMINI_API_KEY or GOOGLE_API_KEY is not set in the environment.")
+        print("Add a Gemini API key to run vector embedding and Qdrant upsert.")
         print("Test verified: Qdrant client connection and schema initialization passed successfully.")
         return
 

@@ -1,186 +1,267 @@
-# vector_store.py
+import hashlib
+import json
 import os
+import time
 import uuid
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional, Union
+
 from dotenv import load_dotenv
-from openai import OpenAI
+from google import genai
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue
+from qdrant_client.models import Distance, PointStruct, VectorParams
+
 from src.schema import DocumentChunk
 
 load_dotenv()
 
-class VectorStore:
+
+class VectorStoreManager:
+    """Gemini embedding store backed by either Qdrant Server or local Qdrant."""
+
     def __init__(
         self,
-        qdrant_url: Optional[str] = None,
-        qdrant_path: Optional[str] = None,
-        openai_api_key: Optional[str] = None,
-        embedding_model: str = "text-embedding-3-small"
+        collection_name: str = "industrial_sops_gemini",
+        qdrant_host: str = "localhost",
+        qdrant_port: int = 6333,
+        qdrant_path: str = "./qdrant_db",
+        model_name: str = "models/gemini-embedding-001",
     ):
-        """
-        Initializes the VectorStore with OpenAI embedding client and Qdrant vector database.
-        
-        Args:
-            qdrant_url: Qdrant server URL (e.g., http://localhost:6333). If None, checks env or defaults to local host.
-            qdrant_path: Path for local embedded Qdrant database if server is unavailable.
-            openai_api_key: OpenAI API key. If None, reads from OPENAI_API_KEY env var.
-            embedding_model: OpenAI embedding model name.
-        """
-        self.embedding_model = embedding_model
-        api_key = openai_api_key or os.getenv("OPENAI_API_KEY")
-        
-        # Initialize OpenAI client
-        if api_key:
-            self.openai_client = OpenAI(api_key=api_key)
-        else:
-            self.openai_client = None
+        self.collection_name = collection_name
+        self.model_name = model_name
+        self.vector_size = 3072
 
-        # Initialize Qdrant Client (attempt server connection first, fallback to path if specified)
-        target_url = qdrant_url or os.getenv("QDRANT_URL", "http://localhost:6333")
-        
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY environment variable is missing!")
+        self.ai_client = genai.Client(api_key=api_key)
+
+        configured_path = os.getenv("QDRANT_PATH", qdrant_path)
+        configured_url = os.getenv("QDRANT_URL")
         try:
-            client = QdrantClient(url=target_url, timeout=3.0, check_compatibility=False)
-            client.get_collections() # Test connection
-            self.qdrant_client = client
-            self.mode = f"server ({target_url})"
-        except Exception as e:
-            # Fallback to local persistent database path if server is down/not running
-            local_path = qdrant_path or os.getenv("QDRANT_PATH", "./qdrant_db")
-            print(f"Warning: Could not connect to Qdrant server at '{target_url}' ({e}). Falling back to local storage path: '{local_path}'.")
-            self.qdrant_client = QdrantClient(path=local_path)
-            self.mode = f"local_path ({local_path})"
+            if configured_url:
+                client = QdrantClient(
+                    url=configured_url,
+                    timeout=3.0,
+                    check_compatibility=False,
+                )
+                client.get_collections()
+                self.qdrant_client = client
+                self.mode = f"server ({configured_url})"
+            else:
+                client = QdrantClient(
+                    host=qdrant_host,
+                    port=qdrant_port,
+                    timeout=3.0,
+                    check_compatibility=False,
+                )
+                client.get_collections()
+                self.qdrant_client = client
+                self.mode = f"server ({qdrant_host}:{qdrant_port})"
+        except Exception as server_error:
+            print(
+                f"Warning: Qdrant server unavailable ({server_error}). "
+                f"Using local storage at '{configured_path}'."
+            )
+            try:
+                self.qdrant_client = QdrantClient(path=configured_path)
+            except Exception as local_error:
+                raise RuntimeError(
+                    f"Qdrant server is unavailable and local storage '{configured_path}' "
+                    "is unavailable or locked. Use QDRANT_URL or a different QDRANT_PATH."
+                ) from local_error
+            self.mode = f"local_path ({configured_path})"
+
+        self._ensure_collection_exists()
+
+    def _ensure_collection_exists(self) -> None:
+        if self.qdrant_client.collection_exists(self.collection_name):
+            info = self.qdrant_client.get_collection(self.collection_name)
+            existing_size = info.config.params.vectors.size
+            if existing_size != self.vector_size:
+                raise ValueError(
+                    f"Collection '{self.collection_name}' has vector size {existing_size}, "
+                    f"but model '{self.model_name}' returns {self.vector_size}. "
+                    "Use a new collection or explicitly recreate the old one."
+                )
+            return
+
+        self.qdrant_client.create_collection(
+            collection_name=self.collection_name,
+            vectors_config=VectorParams(
+                size=self.vector_size,
+                distance=Distance.COSINE,
+            ),
+        )
+        print(f"Created Qdrant Collection: '{self.collection_name}' ({self.vector_size} dims)")
 
     def create_collection(
         self,
-        collection_name: str,
-        vector_size: int = 1536,
+        collection_name: Optional[str] = None,
+        vector_size: Optional[int] = None,
         distance: Distance = Distance.COSINE,
-        recreate: bool = False
+        recreate: bool = False,
     ) -> None:
-        """
-        Creates or recreates a collection in Qdrant.
-        """
-        if recreate and self.qdrant_client.collection_exists(collection_name):
-            self.qdrant_client.delete_collection(collection_name)
-
-        if not self.qdrant_client.collection_exists(collection_name):
+        """Create a collection, optionally replacing it when explicitly requested."""
+        name = collection_name or self.collection_name
+        size = vector_size or self.vector_size
+        if recreate and self.qdrant_client.collection_exists(name):
+            self.qdrant_client.delete_collection(name)
+        if not self.qdrant_client.collection_exists(name):
             self.qdrant_client.create_collection(
-                collection_name=collection_name,
-                vectors_config=VectorParams(size=vector_size, distance=distance)
+                collection_name=name,
+                vectors_config=VectorParams(size=size, distance=distance),
             )
 
-    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        """
-        Generates vector embeddings for a list of texts using OpenAI embedding API.
-        """
-        if not self.openai_client:
-            raise ValueError("OpenAI client is not initialized. Please provide a valid OPENAI_API_KEY.")
-            
-        # Clean texts to remove empty string embeddings
-        cleaned_texts = [t.replace("\n", " ") if t else " " for t in texts]
-        
-        response = self.openai_client.embeddings.create(
-            input=cleaned_texts,
-            model=self.embedding_model
+    def get_embeddings(
+        self,
+        texts: Union[str, List[str]],
+        max_retries: int = 5,
+    ) -> List[List[float]]:
+        input_texts = [texts] if isinstance(texts, str) else list(texts)
+        cleaned_texts = [text.replace("\n", " ") if text else " " for text in input_texts]
+        if not cleaned_texts:
+            return []
+        if max_retries < 1:
+            raise ValueError("max_retries must be at least 1")
+
+        for attempt in range(max_retries):
+            try:
+                response = self.ai_client.models.embed_content(
+                    model=self.model_name,
+                    contents=cleaned_texts,
+                )
+                embeddings = [list(embedding.values) for embedding in response.embeddings]
+                if len(embeddings) != len(cleaned_texts):
+                    raise RuntimeError(
+                        f"Gemini returned {len(embeddings)} embeddings for "
+                        f"{len(cleaned_texts)} inputs."
+                    )
+                if any(len(embedding) != self.vector_size for embedding in embeddings):
+                    raise RuntimeError(
+                        f"Gemini returned an embedding with the wrong size; expected {self.vector_size}."
+                    )
+                return embeddings
+            except Exception as error:
+                error_text = str(error)
+                if "429" not in error_text and "RESOURCE_EXHAUSTED" not in error_text:
+                    raise
+                if attempt == max_retries - 1:
+                    break
+                wait_time = 5 * (attempt + 1)
+                print(
+                    f"Rate limit hit (429). Retrying in {wait_time}s... "
+                    f"(Attempt {attempt + 1}/{max_retries})"
+                )
+                time.sleep(wait_time)
+
+        raise RuntimeError("Exceeded maximum retries for Gemini API embedding due to rate limits.")
+
+    def get_embedding(self, text: str) -> List[float]:
+        return self.get_embeddings(text)[0]
+
+    @staticmethod
+    def _point_id(chunk: DocumentChunk) -> str:
+        payload = chunk.metadata.copy() if chunk.metadata else {}
+        identity = json.dumps(
+            {"content": chunk.content, "metadata": payload},
+            sort_keys=True,
+            default=str,
         )
-        return [item.embedding for item in response.data]
+        digest = hashlib.sha256(identity.encode("utf-8")).hexdigest()
+        return str(uuid.uuid5(uuid.NAMESPACE_URL, digest))
+
+    def upsert_chunks(
+        self,
+        chunks: List[DocumentChunk],
+        batch_size: int = 15,
+        collection_name: Optional[str] = None,
+    ) -> int:
+        if not chunks:
+            return 0
+        if batch_size < 1:
+            raise ValueError("batch_size must be at least 1")
+
+        target_collection = collection_name or self.collection_name
+        if not self.qdrant_client.collection_exists(target_collection):
+            raise ValueError(f"Qdrant collection does not exist: '{target_collection}'")
+
+        print(
+            f"Embedding {len(chunks)} chunks using Gemini '{self.model_name}' "
+            f"(batch_size={batch_size})..."
+        )
+        total_batches = (len(chunks) + batch_size - 1) // batch_size
+        uploaded = 0
+        for batch_idx, start in enumerate(range(0, len(chunks), batch_size), 1):
+            batch_chunks = chunks[start : start + batch_size]
+            embeddings = self.get_embeddings([chunk.content for chunk in batch_chunks])
+            points = []
+            for chunk, vector in zip(batch_chunks, embeddings):
+                payload = chunk.metadata.copy() if chunk.metadata else {}
+                payload["content"] = chunk.content
+                points.append(
+                    PointStruct(
+                        id=self._point_id(chunk),
+                        vector=vector,
+                        payload=payload,
+                    )
+                )
+            self.qdrant_client.upsert(collection_name=target_collection, points=points)
+            uploaded += len(points)
+            print(f"Embedded batch {batch_idx}/{total_batches} ({uploaded}/{len(chunks)} stored)...")
+            if batch_idx < total_batches:
+                time.sleep(3.5)
+        return uploaded
 
     def upsert_document_chunks(
         self,
         collection_name: str,
         chunks: List[DocumentChunk],
-        batch_size: int = 64
+        batch_size: int = 15,
     ) -> int:
-        """
-        Embeds DocumentChunks and uploads them to the specified Qdrant collection.
-        
-        Args:
-            collection_name: Name of Qdrant collection.
-            chunks: List of DocumentChunk dataclass objects.
-            batch_size: Number of chunks per embedding & upload batch.
-            
-        Returns:
-            Total number of chunks uploaded.
-        """
-        if not chunks:
-            return 0
-
-        self.create_collection(collection_name=collection_name)
-
-        total_uploaded = 0
-        for i in range(0, len(chunks), batch_size):
-            batch_chunks = chunks[i : i + batch_size]
-            batch_texts = [chunk.content for chunk in batch_chunks]
-
-            # 1. Generate embeddings for batch
-            embeddings = self.get_embeddings(batch_texts)
-
-            # 2. Build Qdrant PointStructs
-            points = []
-            for chunk, vector in zip(batch_chunks, embeddings):
-                point_id = str(uuid.uuid4())
-                payload = {
-                    "content": chunk.content,
-                    **chunk.metadata
-                }
-                points.append(PointStruct(id=point_id, vector=vector, payload=payload))
-
-            # 3. Upsert into Qdrant
-            self.qdrant_client.upsert(
-                collection_name=collection_name,
-                points=points
-            )
-            total_uploaded += len(points)
-
-        return total_uploaded
+        return self.upsert_chunks(chunks, batch_size=batch_size, collection_name=collection_name)
 
     def search(
         self,
-        collection_name: str,
-        query_text: str,
-        top_k: int = 5,
-        filter_dict: Optional[Dict[str, Any]] = None
+        query: Optional[str] = None,
+        limit: int = 3,
+        *,
+        collection_name: Optional[str] = None,
+        query_text: Optional[str] = None,
+        top_k: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
-        """
-        Searches Qdrant vector collection for closest matching document chunks.
-        
-        Args:
-            collection_name: Target Qdrant collection.
-            query_text: Natural language user query.
-            top_k: Number of top search results to return.
-            filter_dict: Optional exact-match payload filter key-values (e.g. {"source": "01_test.XLSX"}).
-            
-        Returns:
-            List of matching results with score and payload metadata.
-        """
-        # Embed query text
-        query_vector = self.get_embeddings([query_text])[0]
+        search_text = query if query is not None else query_text
+        if not search_text:
+            raise ValueError("A non-empty query is required")
+        result_limit = top_k if top_k is not None else limit
+        target_collection = collection_name or self.collection_name
+        query_vector = self.get_embedding(search_text)
 
-        # Construct optional payload filter
-        qdrant_filter = None
-        if filter_dict:
-            must_conditions = [
-                FieldCondition(key=k, match=MatchValue(value=v))
-                for k, v in filter_dict.items()
-            ]
-            qdrant_filter = Filter(must=must_conditions)
+        if hasattr(self.qdrant_client, "query_points"):
+            hits = self.qdrant_client.query_points(
+                collection_name=target_collection,
+                query=query_vector,
+                limit=result_limit,
+            ).points
+        else:
+            hits = self.qdrant_client.search(
+                collection_name=target_collection,
+                query_vector=query_vector,
+                limit=result_limit,
+            )
 
-        # Query Qdrant
-        results = self.qdrant_client.query_points(
-            collection_name=collection_name,
-            query=query_vector,
-            query_filter=qdrant_filter,
-            limit=top_k
-        )
+        results = []
+        for hit in hits:
+            payload = getattr(hit, "payload", {}) or {}
+            results.append(
+                {
+                    "score": hit.score,
+                    "content": payload.get("content", ""),
+                    "source": payload.get("source"),
+                    "metadata": payload,
+                }
+            )
+        return results
 
-        output = []
-        for point in results.points:
-            output.append({
-                "id": point.id,
-                "score": point.score,
-                "content": point.payload.get("content", ""),
-                "metadata": {k: v for k, v in point.payload.items() if k != "content"}
-            })
 
-        return output
+# Kept as a compatibility alias for existing callers.
+VectorStore = VectorStoreManager
