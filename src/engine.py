@@ -5,7 +5,6 @@ from src.parsers import TextParser, DocxParser, DocParser, ExcelParser
 from src.chunker import SmartChunker
 from src.schema import ExtractedDocument
 
-
 class DataExtractionEngine:
     def __init__(self, chunker: Optional[SmartChunker] = None):
         self.parsers = {
