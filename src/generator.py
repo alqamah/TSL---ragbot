@@ -1,6 +1,8 @@
+import json
 import os
 import sys
 import time
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
@@ -16,7 +18,7 @@ load_dotenv()
 
 
 class RAGGenerator:
-    """RAG Synthesis and Generation Engine with fine-grained layer latency logging."""
+    """RAG Synthesis and Generation Engine with fine-grained layer latency logging and persistent file logging."""
 
     def __init__(
         self,
@@ -24,6 +26,7 @@ class RAGGenerator:
         generation_model: Optional[str] = None,
         embedding_model: str = "models/gemini-embedding-001",
         vector_store: Optional[VectorStoreManager] = None,
+        log_dir: Optional[str] = None,
     ):
         self.collection_name = collection_name
         self.embedding_model = embedding_model
@@ -32,6 +35,8 @@ class RAGGenerator:
             or os.getenv("GEMINI_GENERATION_MODEL")
             or "gemini-3.7-flash"
         )
+        self.log_dir = log_dir or os.path.join(PROJECT_ROOT, "log")
+        os.makedirs(self.log_dir, exist_ok=True)
 
         api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
         if not api_key:
@@ -100,7 +105,7 @@ class RAGGenerator:
         max_retries: int = 3,
         verbose: bool = True,
     ) -> Dict[str, Any]:
-        """Execute full RAG generation with per-layer latency tracking."""
+        """Execute full RAG generation with per-layer latency tracking and automated persistent logging."""
         total_start = time.perf_counter()
 
         # Layer 1 & 2: Retrieval
@@ -153,9 +158,9 @@ Answer:"""
 
         prompt_build_duration = (time.perf_counter() - t_prompt_start) * 1000
 
-        # Layer 4: LLM Generation (Synthesis)
+        # Layer 4: LLM Generation (Synthesis) with Gemini 2.0 Flash in fallback pool
         candidate_models = [self.generation_model]
-        for fallback in ["gemini-3.7-flash", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-3.1-flash-lite"]:
+        for fallback in ["gemini-2.0-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-3.1-flash-lite"]:
             if fallback not in candidate_models:
                 candidate_models.append(fallback)
 
@@ -205,8 +210,12 @@ Answer:"""
             "total_e2e_latency_ms": round(total_elapsed, 2),
         }
 
+        # 1. Console telemetry summary
         if verbose:
             self._log_layer_summary(metrics, contexts)
+
+        # 2. Persistent file logging to log/ folder
+        self._write_persistent_log(query, answer_text, metrics, contexts)
 
         return {
             "query": query,
@@ -214,6 +223,70 @@ Answer:"""
             "sources": contexts,
             "metrics": metrics,
         }
+
+    def _write_persistent_log(
+        self,
+        query: str,
+        answer: str,
+        metrics: Dict[str, Any],
+        sources: List[Dict[str, Any]],
+    ) -> None:
+        """Write human-readable and structured logs to the log directory."""
+        now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        iso_str = datetime.now().isoformat()
+
+        # Write to log/rag_pipeline.log
+        readable_log_file = os.path.join(self.log_dir, "rag_pipeline.log")
+        try:
+            with open(readable_log_file, "a", encoding="utf-8") as f:
+                f.write("=" * 80 + "\n")
+                f.write(f"TIMESTAMP : {now_str}\n")
+                f.write(f"QUESTION  : {query}\n")
+                f.write("-" * 80 + "\n")
+                f.write("LAYER TIMINGS & MODELS:\n")
+                f.write(f"  * Query Embedding   : {metrics['query_embedding_ms']} ms  (Model: {metrics['embedding_model']})\n")
+                f.write(f"  * Qdrant Lookup     : {metrics['qdrant_search_ms']} ms\n")
+                f.write(f"  * Total Retrieval   : {metrics['total_retrieval_ms']} ms\n")
+                f.write(f"  * Prompt Assembly   : {metrics['prompt_construction_ms']} ms\n")
+                f.write(f"  * Final LLM Model   : {metrics['final_llm_model']}\n")
+                f.write(f"  * LLM Synthesis     : {metrics['llm_generation_ms']} ms ({metrics['llm_generation_ms']/1000:.2f}s)\n")
+                f.write(f"  * Total Latency     : {metrics['total_e2e_latency_ms']} ms ({metrics['total_e2e_latency_ms']/1000:.2f}s)\n")
+                f.write("-" * 80 + "\n")
+                f.write("RETRIEVED SOURCES:\n")
+                for idx, src in enumerate(sources, 1):
+                    doc = src.get("source") or "Unknown"
+                    score = src.get("score", 0.0)
+                    meta = src.get("metadata", {})
+                    sheet = meta.get("sheet", "N/A")
+                    rows = meta.get("row_range", "N/A")
+                    f.write(f"  [{idx}] {doc} | Sheet: {sheet} | Rows: {rows} | Similarity: {score:.4f}\n")
+                f.write("-" * 80 + "\n")
+                f.write(f"RESPONSE:\n{answer}\n")
+                f.write("=" * 80 + "\n\n")
+        except Exception as e:
+            print(f"[Warning] Failed to write readable log: {e}")
+
+        # Write to log/runs.jsonl
+        jsonl_log_file = os.path.join(self.log_dir, "runs.jsonl")
+        try:
+            record = {
+                "timestamp": iso_str,
+                "query": query,
+                "answer": answer,
+                "metrics": metrics,
+                "sources": [
+                    {
+                        "source": s.get("source"),
+                        "score": s.get("score"),
+                        "metadata": s.get("metadata", {}),
+                    }
+                    for s in sources
+                ],
+            }
+            with open(jsonl_log_file, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except Exception as e:
+            print(f"[Warning] Failed to write JSONL log: {e}")
 
     @staticmethod
     def _log_layer_summary(metrics: Dict[str, Any], sources: List[Dict[str, Any]]):

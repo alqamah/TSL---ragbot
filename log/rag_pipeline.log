@@ -1,0 +1,65 @@
+================================================================================
+TIMESTAMP : 2026-08-14 19:48:44
+QUESTION  : कंप्रेसर का एयर प्रेशर कैसे सेट करते हैं और स्क्रू घुमाने पर कितना प्रेशर बढ़ता है?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 862.91 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 5.41 ms
+  * Total Retrieval   : 868.33 ms
+  * Prompt Assembly   : 0.06 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 26880.55 ms (26.88s)
+  * Total Latency     : 27748.99 ms (27.75s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 205-208 | Similarity: 0.7149
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 201-204 | Similarity: 0.6329
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.6205
+--------------------------------------------------------------------------------
+RESPONSE:
+प्रदान किए गए संदर्भ (Context) के अनुसार, कंप्रेसर का एयर प्रेशर सेट करने की प्रक्रिया और स्क्रू घुमाने पर बढ़ने वाले प्रेशर का विवरण निम्नलिखित है:
+
+### **कंप्रेसर का एयर प्रेशर सेट करने की चरण-दर-चरण प्रक्रिया:**
+
+1. **तैयारी और सुरक्षा:** प्रेशर सेट करने से पहले इंजन को रोकें (बंद करें)। कंप्रेसर का दरवाजा खोलें और स्टैंड को ठीक से रखें। कंप्रेसर के चलने (रनिंग) की स्थिति में प्रेशर सेट न करें।
+2. **प्रेशर हटाना:** डिस्चार्ज वाल्व को खोलकर कंप्रेसर के पूरे प्रेशर को हटा दें (रिलीज़ कर दें)।
+3. **चेक नट ढीला करना:** प्रेशर रेगुलेटर वाल्व के चेक नट (check nut) को ढीला करें।
+4. **प्रेशर सेट करना:**
+   * **प्रेशर बढ़ाने के लिए:** स्क्रू को टाइट (कसें) करें।
+   * **प्रेशर घटाने के लिए:** स्क्रू को ढीला करें।
+5. **सुरक्षित करना और जांचना:** प्रेशर सेट करने के बाद चेक नट को वापस ठीक से टाइट करें। इसके बाद इंजन को शुरू करके प्रेशर की जांच करें। यदि फिर से सुधार की आवश्यकता हो, तो इसी प्रक्रिया को दोबारा दोहराएं।
+
+---
+
+### **स्क्रू घुमाने पर प्रेशर में वृद्धि:**
+* स्क्रू को कसने के दौरान सावधानी बरतें, क्योंकि स्क्रू को **एक बार घुमा कर टाइट करने पर प्रेशर में 4 किलो/सेमी² (4 kg/cm²)** की वृद्धि होती है।
+
+---
+**स्रोत (Source):** 
+यह जानकारी **[Source 1]: 01_test.XLSX (Rows: 205-208, Sheet: Hindi Sop)** से ली गई है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-14 19:48:49
+QUESTION  : What safety precautions are required before marching the mobile crane?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 710.24 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 5.06 ms
+  * Total Retrieval   : 715.31 ms
+  * Prompt Assembly   : 0.07 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 3677.66 ms (3.68s)
+  * Total Latency     : 4393.08 ms (4.39s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.6370
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6240
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.6224
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, there is no information or Standard Operating Procedure (SOP) regarding **marching the mobile crane** or safety precautions specific to a mobile crane. 
+
+The provided sources (**Source 1, Source 2, and Source 3** from `01_test.XLSX`) only cover safety guidelines and standard operating procedures for **compressor inspection, startup, and servicing/maintenance**.
+================================================================================
+

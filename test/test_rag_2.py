@@ -12,7 +12,7 @@ if sys.platform == "win32":
     except AttributeError:
         pass
 
-from generator import RAGGenerator
+from src.generator import RAGGenerator
 
 def main():
     rag = RAGGenerator()
