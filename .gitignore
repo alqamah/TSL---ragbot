@@ -12,3 +12,7 @@ qdrant_db
 
 graphify-out
 
+frontend/.venv_frontend
+frontend/__pycache__
+
+
