@@ -1,0 +1,243 @@
+{
+  "communities": {
+    "0": [
+      "src_main",
+      "src_main_main",
+      "src_main_print_banner",
+      "src_main_py_any",
+      "src_main_ragpipeline",
+      "src_main_ragpipeline_ask",
+      "src_main_ragpipeline_close",
+      "src_main_ragpipeline_count_indexed_points",
+      "src_main_ragpipeline_enter",
+      "src_main_ragpipeline_exit",
+      "src_main_ragpipeline_generate_answer",
+      "src_main_ragpipeline_ingest_directory",
+      "src_main_ragpipeline_ingest_file",
+      "src_main_ragpipeline_retrieve",
+      "src_main_rationale_114",
+      "src_main_rationale_123",
+      "src_main_rationale_128",
+      "src_main_rationale_29",
+      "src_main_rationale_58",
+      "src_main_rationale_68",
+      "src_main_rationale_87",
+      "src_main_run_interactive_session"
+    ],
+    "1": [
+      "src_chunker",
+      "src_chunker_rationale_38",
+      "src_chunker_smartchunker",
+      "src_chunker_smartchunker_chunk_table_text",
+      "src_chunker_smartchunker_init",
+      "src_chunker_smartchunker_process_document",
+      "src_engine",
+      "src_parsers",
+      "src_parsers_docparser",
+      "src_parsers_docparser_parse",
+      "src_parsers_docxparser",
+      "src_parsers_docxparser_parse",
+      "src_parsers_excelparser",
+      "src_parsers_excelparser_parse",
+      "src_parsers_textparser",
+      "src_parsers_textparser_parse",
+      "src_schema",
+      "src_schema_documentchunk",
+      "src_schema_extracteddocument",
+      "src_schema_rationale_13",
+      "src_schema_rationale_7"
+    ],
+    "2": [
+      "distance",
+      "src_vector_store_py_any",
+      "src_vector_store_rationale_150",
+      "src_vector_store_rationale_66",
+      "src_vector_store_vectorstoremanager",
+      "src_vector_store_vectorstoremanager_close",
+      "src_vector_store_vectorstoremanager_create_collection",
+      "src_vector_store_vectorstoremanager_ensure_collection_exists",
+      "src_vector_store_vectorstoremanager_enter",
+      "src_vector_store_vectorstoremanager_exit",
+      "src_vector_store_vectorstoremanager_get_embedding",
+      "src_vector_store_vectorstoremanager_get_embeddings",
+      "src_vector_store_vectorstoremanager_init",
+      "src_vector_store_vectorstoremanager_point_id",
+      "src_vector_store_vectorstoremanager_search",
+      "src_vector_store_vectorstoremanager_upsert_chunks",
+      "src_vector_store_vectorstoremanager_upsert_document_chunks"
+    ],
+    "3": [
+      "src_generator",
+      "src_generator_py_any",
+      "src_generator_raggenerator",
+      "src_generator_raggenerator_close",
+      "src_generator_raggenerator_enter",
+      "src_generator_raggenerator_exit",
+      "src_generator_raggenerator_generate_answer",
+      "src_generator_raggenerator_log_layer_summary",
+      "src_generator_raggenerator_retrieve_with_metrics",
+      "src_generator_raggenerator_write_persistent_log",
+      "src_generator_rationale_110",
+      "src_generator_rationale_21",
+      "src_generator_rationale_245",
+      "src_generator_rationale_304",
+      "src_generator_rationale_56",
+      "test_test_rag_2",
+      "test_test_rag_2_main"
+    ],
+    "4": [
+      "src_engine_dataextractionengine",
+      "src_engine_dataextractionengine_extract",
+      "src_engine_dataextractionengine_init",
+      "src_main_ragpipeline_init",
+      "src_vector_store",
+      "test_test_engine",
+      "test_test_engine_main",
+      "test_test_gemini_rag",
+      "test_test_gemini_rag_main",
+      "test_test_vector_store",
+      "test_test_vector_store_main"
+    ],
+    "5": [
+      "client",
+      "src_generator_raggenerator_init",
+      "src_vector_store_geminiclientmanager",
+      "src_vector_store_geminiclientmanager_current_client",
+      "src_vector_store_geminiclientmanager_current_key_masked",
+      "src_vector_store_geminiclientmanager_init",
+      "src_vector_store_geminiclientmanager_key_count",
+      "src_vector_store_geminiclientmanager_rotate",
+      "src_vector_store_rationale_19",
+      "src_vector_store_rationale_60"
+    ],
+    "6": [
+      "src_init"
+    ],
+    "7": [
+      "test_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.12987012987012986,
+    "1": 0.2523809523809524,
+    "2": 0.16911764705882354,
+    "3": 0.18382352941176472,
+    "4": 0.2545454545454545,
+    "5": 0.2222222222222222,
+    "6": 1.0,
+    "7": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_vector_store_vectorstoremanager",
+      "label": "VectorStoreManager",
+      "degree": 25
+    },
+    {
+      "id": "src_engine_dataextractionengine",
+      "label": "DataExtractionEngine",
+      "degree": 18
+    },
+    {
+      "id": "src_main_ragpipeline",
+      "label": "RAGPipeline",
+      "degree": 18
+    },
+    {
+      "id": "src_schema_documentchunk",
+      "label": "DocumentChunk",
+      "degree": 18
+    },
+    {
+      "id": "src_generator_raggenerator",
+      "label": "RAGGenerator",
+      "degree": 17
+    },
+    {
+      "id": "src_schema_extracteddocument",
+      "label": "ExtractedDocument",
+      "degree": 17
+    },
+    {
+      "id": "src_vector_store_geminiclientmanager",
+      "label": "GeminiClientManager",
+      "degree": 11
+    },
+    {
+      "id": "src_chunker_smartchunker",
+      "label": "SmartChunker",
+      "degree": 9
+    },
+    {
+      "id": "src_parsers_textparser",
+      "label": "TextParser",
+      "degree": 6
+    },
+    {
+      "id": "src_parsers_docxparser",
+      "label": "DocxParser",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "main()",
+      "target": "DataExtractionEngine",
+      "source_files": [
+        "test/test_engine.py",
+        "src/engine.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `main()` unexpectedly reaches hub `DataExtractionEngine`"
+    },
+    {
+      "source": "main()",
+      "target": "RAGGenerator",
+      "source_files": [
+        "test/test_rag_2.py",
+        "src/generator.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `main()` unexpectedly reaches hub `RAGGenerator`"
+    },
+    {
+      "source": "main()",
+      "target": "VectorStoreManager",
+      "source_files": [
+        "test/test_gemini_rag.py",
+        "src/vector_store.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "VectorStoreManager",
+      "source_files": [
+        "test/test_vector_store.py",
+        "src/vector_store.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "DataExtractionEngine",
+      "source_files": [
+        "test/test_gemini_rag.py",
+        "src/engine.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

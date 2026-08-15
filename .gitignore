@@ -1,8 +1,10 @@
 .venv
+.vscode
+log
 io
 test/op
 
 # Environment variable files
 .env
 .env.*
-!.env.example
+!.env.example

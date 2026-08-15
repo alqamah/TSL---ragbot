@@ -63,3 +63,59 @@ Based on the provided context, there is no information or Standard Operating Pro
 The provided sources (**Source 1, Source 2, and Source 3** from `01_test.XLSX`) only cover safety guidelines and standard operating procedures for **compressor inspection, startup, and servicing/maintenance**.
 ================================================================================
 
+================================================================================
+TIMESTAMP : 2026-08-15 11:43:14
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 2346.65 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 18.69 ms
+  * Total Retrieval   : 2365.34 ms
+  * Prompt Assembly   : 0.07 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 7541.23 ms (7.54s)
+  * Total Latency     : 9906.66 ms (9.91s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 29-32 | Similarity: 0.6725
+  [2] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 33-36 | Similarity: 0.6627
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6563
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, here is the step-by-step procedure to start and operate the compressor:
+
+---
+
+### **1. Pre-Start Checks & Safety Preparation**
+* **PPE:** Wear required personal protective equipment (safety helmet, hand gloves, safety shoes, and safety glasses) **[Source 3]**.
+* **Levels & Connections:** Check the engine oil level, radiator water level, battery condition, and self-starter connections **[Source 3]**.
+  * *Note: Use an aluminum ladder when checking the radiator water level **[Source 3]**.*
+* **Valve Positions:** 
+  * Ensure the air delivery line valve is kept closed before starting the engine **[Source 2, Source 3]**.
+  * Keep the positive isolation valve in the OFF position **[Source 3]**.
+
+---
+
+### **2. Starting the Compressor**
+* Turn ON the ignition switch using the key, then press the starting switch to start the compressor **[Source 1, Source 3]**.
+
+---
+
+### **3. Warm-up and Loading**
+* **Warm-up:** Run the compressor for 5 minutes to let the compressor oil warm up **[Source 3]**.
+* **Loading:** Ensure the air delivery valve remains closed, and once the pressure reaches $4\text{ kg/cm}^2$, press/operate the loading switch/valve to put the compressor on load **[Source 2, Source 3]**.
+
+---
+
+### **4. Running Checks & Precautions**
+* **Door Safety:** Keep the compressor doors closed while it is running **[Source 2]**.
+* **Inspection of Gauges & Operation:** Check the machine sound, body vibration, and verify all gauges are functioning properly (engine oil pressure gauge, water temperature gauge, air discharge temperature gauge, hour meter, ampere meter, etc.) **[Source 1, Source 2]**.
+* **Leakage Checks:** Check for any oil leakages or abnormalities. If a leak is detected, stop the compressor immediately and inform the relevant section **[Source 1, Source 3]**.
+
+---
+
+**Sources:**
+* `09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx` **[Source 1 & Source 2]**
+* `01_test.XLSX` **[Source 3]**
+================================================================================
+
