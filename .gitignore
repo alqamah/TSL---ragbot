@@ -3,6 +3,7 @@
 log
 io
 test/op
+qdrant_db
 
 # Environment variable files
 .env
