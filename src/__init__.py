@@ -1,1 +1,1 @@
-# Package marker for src
+"""Industrial SOP RAG Assistant package."""

@@ -8,3 +8,6 @@ test/op
 .env
 .env.*
 !.env.example
+
+graphify-out
+

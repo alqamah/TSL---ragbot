@@ -9,8 +9,8 @@ An end-to-end, high-performance Retrieval-Augmented Generation (RAG) system buil
 ```mermaid
 flowchart TD
     subgraph Ingestion_Layer ["1. Ingestion & Indexing Layer"]
-        A[Documents in io/SOP\n.xlsx, .docx, .doc, .txt, .csv] --> B[DataExtractionEngine\nsrc/engine.py & src/parsers.py]
-        B --> C[SmartChunker\nsrc/chunker.py\nHindi & Table-aware]
+        A[Documents in io/SOP\n.xlsx, .docx, .doc, .txt, .csv] --> B[DataExtractionEngine\nsrc/rag_engine/engine.py & parsers.py]
+        B --> C[SmartChunker\nsrc/rag_engine/chunker.py\nHindi & Table-aware]
         C --> D[Gemini Embeddings API\nmodels/gemini-embedding-001\n3072 dimensions]
         D --> E[(Qdrant Vector DB\nCollection: industrial_sops_gemini)]
     end
@@ -20,11 +20,17 @@ flowchart TD
         V --> W[Dense Semantic Search\nQdrant Cosine Similarity]
         E -. Search Top-K Matches .-> W
         W --> X[Prompt Augmentation\nStructured Context + Safety Constraints]
-        X --> Y[LLM Generation Layer\ngemini-3.7-flash / gemini-2.0-flash fallback]
+        X --> Y[LLM Generation Layer\ngemini-3.7-flash / gemini-fallback pool]
         Y --> Z[Grounded Response\nwith Source Citations & Telemetry]
     end
 
-    subgraph Telemetry_Layer ["3. Telemetry & Logging Layer"]
+    subgraph Interfaces ["3. Interface Layers"]
+        CLI[src/main.py\nInteractive CLI & Terminal] --> RAGPipe[src/rag_engine/pipeline.py\nRAGPipeline]
+        API[src/api/app.py\nFastAPI REST Endpoints] --> RAGPipe
+        RAGPipe --> Query_Layer
+    end
+
+    subgraph Telemetry_Layer ["4. Telemetry & Logging Layer"]
         Z --> L1[Console Telemetry Output]
         Z --> L2[log/rag_pipeline.log\nHuman-readable breakdown]
         Z --> L3[log/runs.jsonl\nStructured JSON-Lines]
@@ -35,10 +41,12 @@ flowchart TD
 
 ## 2. Key Features
 
+- **Modular Clean Architecture**: Core RAG domain logic (`src/rag_engine/`) is cleanly separated from interfaces (`src/main.py` CLI and `src/api/` FastAPI REST API).
+- **FastAPI RESTful Service**: Production-ready API with automatic OpenAPI Swagger documentation (`/docs`), request validation with Pydantic v2, file upload indexing, directory indexing, and telemetry endpoints.
 - **Multilingual Domain Intelligence**: Native support for Devanagari Hindi, Hinglish, and English queries with zero translation loss.
 - **Table-Preserving Chunking**: Specialized Markdown & Docx table splitters that preserve column headers across chunk boundaries.
 - **Sub-Millisecond Vector Search**: Powered by Qdrant (embedded local database or high-performance remote server).
-- **High-Dimension Embeddings**: Uses Google's 3072-dimensional `models/gemini-embedding-001` with automated rate-limit exponential backoff.
+- **High-Dimension Embeddings**: Uses Google's 3072-dimensional `models/gemini-embedding-001` with automated rate-limit exponential backoff and multi-key rotation.
 - **Resilient Generation & Model Fallbacks**: Defaults to `gemini-3.7-flash` with automatic fallback to `gemini-2.0-flash`, `gemini-3.5-flash`, and `gemini-3-flash-preview` on server load spikes.
 - **Zero Hallucination Grounding**: Strict system prompt constraints ensure the assistant cites exact source files, sheets, and row ranges, refusing to invent steps when context is absent.
 - **Fine-Grained Latency Tracking**: Records sub-millisecond timestamps for every individual layer (Query Embedding, Qdrant Search, Prompt Assembly, LLM Synthesis, and Total E2E Latency).
@@ -61,15 +69,26 @@ d:\TSL\ragbot\
 │
 ├── src/
 │   ├── __init__.py
-│   ├── chunker.py               # Smart semantic & table chunking
-│   ├── engine.py                # File parsing orchestrator
-│   ├── generator.py             # RAG synthesis engine & telemetry logger
-│   ├── main.py                  # Central application entry point & interactive CLI
-│   ├── parsers.py               # Excel, Word, and Text document parsers
-│   ├── schema.py                # Dataclasses (DocumentChunk, ExtractedDocument)
-│   └── vector_store.py          # Vector store manager (Qdrant + Gemini embeddings)
+│   ├── main.py                  # Interactive CLI entry point & terminal commands
+│   │
+│   ├── rag_engine/              # Core RAG Domain Package
+│   │   ├── __init__.py          # Exports RAGPipeline, DataExtractionEngine, etc.
+│   │   ├── chunker.py           # Smart semantic & table chunking
+│   │   ├── engine.py            # File parsing orchestrator
+│   │   ├── generator.py         # RAG synthesis engine & telemetry logger
+│   │   ├── parsers.py           # Excel, Word, and Text document parsers
+│   │   ├── pipeline.py          # Unified RAGPipeline orchestrator
+│   │   ├── schema.py            # Dataclasses (DocumentChunk, ExtractedDocument)
+│   │   └── vector_store.py      # Vector store manager (Qdrant + Gemini embeddings)
+│   │
+│   └── api/                     # REST API Layer (FastAPI)
+│       ├── __init__.py
+│       ├── app.py               # FastAPI application setup, CORS, lifespan
+│       ├── routes.py            # REST endpoints (query, ingest, status, health)
+│       └── schemas.py           # Pydantic v2 request & response models
 │
 ├── test/
+│   ├── test_api.py              # FastAPI endpoint integration tests
 │   ├── test_engine.py           # Parser verification tests
 │   ├── test_gemini_rag.py       # Ingestion & retrieval verification
 │   ├── test_rag_2.py            # Multilingual query benchmarks
@@ -118,7 +137,41 @@ GEMINI_EMBEDDING_MODEL=models/gemini-embedding-001
 
 ---
 
-## 5. Usage & CLI Reference
+## 5. Running the REST API
+
+Launch the FastAPI server with hot-reloading:
+```powershell
+.venv\Scripts\uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Once running, explore interactive Swagger API docs at:
+👉 **`http://localhost:8000/docs`**
+
+### API Endpoints Summary
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Service healthcheck. |
+| `GET` | `/api/v1/status` | Current Qdrant point count, active models, storage mode. |
+| `POST` | `/api/v1/query` | Ask a question (Hindi/English), returns answer + sources + latency metrics. |
+| `POST` | `/api/v1/ingest/file` | Ingest an individual file by local path. |
+| `POST` | `/api/v1/ingest/upload` | Upload and ingest a file via multipart form. |
+| `POST` | `/api/v1/ingest/directory` | Ingest all supported documents from a directory. |
+
+#### Example: Query via cURL
+```bash
+curl -X POST "http://localhost:8000/api/v1/query" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "query": "कंप्रेसर का एयर प्रेशर कैसे सेट करते हैं?",
+       "top_k": 3,
+       "show_sources": true
+     }'
+```
+
+---
+
+## 6. Usage & CLI Reference
 
 ### A. Interactive CLI Session (Recommended)
 Start the interactive question-answering assistant:
@@ -154,40 +207,19 @@ Or ingest a single file:
 
 ---
 
-### CLI Arguments Reference
-
-| Argument | Short | Default | Description |
-| :--- | :---: | :--- | :--- |
-| `--query` | `-q` | `None` | Query string to execute directly without launching the interactive prompt. |
-| `--ingest-dir` | `-i` | `None` | Path to a folder of documents to extract, chunk, embed, and index into Qdrant. |
-| `--ingest-file` | | `None` | Path to an individual file to index. |
-| `--top-k` | `-k` | `3` | Number of most relevant semantic chunks to retrieve. |
-| `--collection` | | `industrial_sops_gemini` | Target Qdrant collection name. |
-| `--model` | `-m` | `gemini-3.7-flash` | Gemini model name for the final generation layer. |
-| `--no-sources` | | `False` | Suppress the printing of retrieved source snippets in terminal output. |
-
----
-
-## 6. Telemetry & Execution Logging
-
-Every query executed through `RAGGenerator` or `src/main.py` is logged automatically to the `log/` folder:
-
-### 1. `log/rag_pipeline.log`
-Human-readable records containing:
-- Exact timestamp and question.
-- Per-layer latency breakdown (Embedding time, Vector search time, Prompt assembly time, LLM synthesis time, and Total latency).
-- Selected LLM and Embedding models.
-- Retrieved document attributions (file name, sheet name, row numbers, similarity score).
-- Complete synthesized answer.
-
-### 2. `log/runs.jsonl`
-Machine-readable JSON-Lines format suitable for automated evaluation, latency monitoring, and analytics.
-
----
-
 ## 7. Verification & Benchmarks
 
-Run the benchmark suite:
+Run the complete test suite:
 ```powershell
+# Test Data Extraction Engine
+.venv\Scripts\python.exe test/test_engine.py
+
+# Test Vector Store & Embeddings
+.venv\Scripts\python.exe test/test_vector_store.py
+
+# Test Multilingual Query Benchmark
 .venv\Scripts\python.exe test/test_rag_2.py
+
+# Test FastAPI Endpoints
+.venv\Scripts\python.exe test/test_api.py
 ```

@@ -11,8 +11,7 @@ if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-from src.engine import DataExtractionEngine
-from src.vector_store import VectorStoreManager
+from src.rag_engine import DataExtractionEngine, VectorStoreManager
 
 load_dotenv()
 
