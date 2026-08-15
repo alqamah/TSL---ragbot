@@ -1,0 +1,114 @@
+set chunking limit specific to docs uploaded. 
+smaller chunks = precision
+larger chunks = completeness
+_______________________________________________________
+
+### 1. What is Chunking and Why is it Critical in RAG?
+
+In Retrieval-Augmented Generation (RAG), **chunking** is the process of breaking down large documents (PDFs, Excel sheets, Word docs) into smaller, semantically coherent segments before generating vector embeddings and indexing them into a database like Qdrant.
+
+To understand its significance, consider the core constraint of **vector embeddings**:
+
+```
+                       ┌──────────────────────────────────────┐
+                       │  Embedding Model (e.g., 3072-dims)   │
+                       └──────────────────┬───────────────────┘
+                                          │ Fixed Vector Space
+          50-Page Document                ▼                5-Line SOP Step
+     ┌────────────────────────┐      [ -0.041,       ┌────────────────────────┐
+     │ 50 pages of mixed text │ ───►   0.128,  ◄───  │ "Turn screw 1 time to  │
+     │ and safety warnings    │        ...,          │ increase pressure 4kg" │
+     └────────────────────────┘        0.009 ]       └────────────────────────┘
+          (Semantic Smearing)                             (High Specificity)
+```
+
+1. **The Semantic Smearing Problem (Information Dilution)**:
+   An embedding model (like `models/gemini-embedding-001`) maps text to a fixed-size mathematical coordinate vector (3072 numbers). 
+   - If you feed it an entire 50-page maintenance manual at once, the vector must represent *everything* in the document simultaneously.
+   - Specific, granular details (such as *"1 turn of the screw increases pressure by 4 kg/cm²"*) get "smeared" out and lost in the average vector.
+   - When a user asks a specific question, the cosine similarity between the query and this diluted document vector will be very weak.
+
+2. **The "Needle in a Haystack" Precision**:
+   Smaller, targeted chunks ensure that the vector directly represents a single operational concept or procedure. When searching, you retrieve the exact paragraph or table row needed to answer the question.
+
+3. **LLM Context Window & Noise Reduction**:
+   Passing entire documents to an LLM introduces irrelevant noise, increases API token cost, and triggers the **"Lost in the Middle" phenomenon** (where LLMs struggle to find facts buried in massive prompt contexts).
+
+---
+
+### 2. Higher vs. Smaller Chunk Size: The Trade-off
+
+There is no single "magic number" for chunk size. Instead, choosing a chunk size represents a fundamental engineering trade-off between **Precision (Specificity)** and **Context (Completeness)**:
+
+```
+◄── Smaller Chunks (100 - 300 tokens) ───────────── Larger Chunks (1000 - 3000 tokens) ──►
+
+   [High Retrieval Specificity]                       [High Context Preservation]
+   - Pinpoints exact facts & numbers                  - Keeps full workflows & explanations
+   - Low irrelevant noise in prompt                   - Reduces risk of fragmented sentences
+   
+   [Risks]                                            [Risks]
+   - Loses broader document context                   - Semantic dilution / lower similarity
+   - Fragments tables & multi-step steps              - Dilutes specific needles in large haystack
+```
+
+#### Detailed Comparison Matrix:
+
+| Dimension | Small Chunks (100 – 300 tokens / ~400–1200 chars) | Large Chunks (800 – 2000+ tokens) |
+| :--- | :--- | :--- |
+| **Best For** | Factoid lookups, specific parameters, safety warnings, part numbers, exact error codes. | Summaries, high-level policy explanations, background narratives, broad comparisons. |
+| **Retrieval Precision** | **Very High**: Embedding focuses tightly on a single thought or rule. | **Moderate**: Embedding represents an average of multiple topics. |
+| **Context Completeness** | **Low**: A single step like *"Turn the valve to OFF"* may lose the context of *which machine* it refers to. | **High**: Retains the full background, prerequisites, and sequential steps together. |
+| **Prompt Token Cost** | **Low**: You only send top-3 small paragraphs to the LLM. | **Higher**: Sending top-3 large chunks consumes 3,000–6,000 tokens per query. |
+| **Risk of Fragmentation** | Sentences or table headers can get cut off mid-thought without overlap. | Rarely cuts off concepts, but includes unnecessary surrounding text. |
+
+---
+
+### 3. How We Solved Chunking in this Codebase
+
+In [`src/chunker.py`](file:///d:/TSL/ragbot/src/chunker.py), we implemented a **hybrid, context-preserving chunking strategy** tailored specifically for technical SOPs:
+
+```
+[Input Document]
+       │
+       ├──► Plain Text / Paragraphs ──► Recursive Splitter (chunk_size=600, overlap=100, separators=["\n\n", "\n", "।", "."])
+       │
+       └──► Structured Tables (Excel) ──► Table Header Replication Strategy:
+                                          Line 0-3 (Headers: Parameter | Value | Action)
+                                          + Data Rows 1-4  ──► Chunk 1
+                                          + Data Rows 5-8  ──► Chunk 2 (Re-attaching Headers!)
+```
+
+#### Why this design is effective:
+1. **Hindi Sentence Boundary Awareness (`।`)**:
+   Standard splitters split on English periods (`.`). In [`src/chunker.py:L11`](file:///d:/TSL/ragbot/src/chunker.py#L11), we included the Devanagari Danda (`।`) so Hindi sentences are never sliced mid-phrase.
+2. **Table Header Preservation (`max_table_rows=4`)**:
+   If you slice an Excel table blindly, Chunk #2 might just look like:
+   `| 25 | N/A | 4 kg/cm² | Yes |` (No context on what the columns mean).
+   Our chunker re-attaches the Markdown table header to every sub-chunk, ensuring the embedding model understands what every cell represents.
+3. **Balanced Size (`chunk_size=600`, `overlap=100`)**:
+   - `600 characters` (~120–150 words) is the sweet spot for industrial SOPs: large enough to capture a full step with its hazard and PPE requirement, but small enough to maintain a sharp vector embedding.
+   - `100 character overlap` ensures that thoughts spanning across chunk boundaries are not cut in half.
+
+---
+
+### 4. Rules of Thumb: How to Pick Chunk Size in Future Projects
+
+```
+              What is the primary nature of your queries?
+                               │
+               ┌───────────────┴───────────────┐
+               ▼                               ▼
+       Specific / Factoid              Broad / Synthesis
+   ("What is the oil pressure?")    ("Summarize safety policies")
+               │                               │
+               ▼                               ▼
+         Small Chunks                    Large Chunks
+       (300–600 chars)                (1500–3000 chars)
+      with 15% Overlap                with 10% Overlap
+```
+
+1. **For Tabular / Formatted Data**: Keep chunk size small (2–5 rows per chunk), but **always replicate column headers**.
+2. **For Step-by-Step SOPs & Checklists**: Chunk by individual procedure steps (`400–800 chars`) so each step is its own searchable unit.
+3. **Advanced Strategy (Parent-Child / Hierarchical Chunking)**:
+   Embed small chunks (e.g., 200 chars) for search indexing, but retrieve and feed the surrounding parent paragraph (e.g., 1000 chars) to the LLM for maximum generation context.

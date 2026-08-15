@@ -12,7 +12,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from src.vector_store import VectorStoreManager
+from src.vector_store import GeminiClientManager, VectorStoreManager
 
 load_dotenv()
 
@@ -26,6 +26,7 @@ class RAGGenerator:
         generation_model: Optional[str] = None,
         embedding_model: str = "models/gemini-embedding-001",
         vector_store: Optional[VectorStoreManager] = None,
+        client_manager: Optional[GeminiClientManager] = None,
         log_dir: Optional[str] = None,
     ):
         self.collection_name = collection_name
@@ -38,14 +39,15 @@ class RAGGenerator:
         self.log_dir = log_dir or os.path.join(PROJECT_ROOT, "log")
         os.makedirs(self.log_dir, exist_ok=True)
 
-        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY environment variable is missing!")
-
-        self.ai_client = genai.Client(api_key=api_key)
         self.vector_store = vector_store or VectorStoreManager(
             collection_name=self.collection_name,
             model_name=self.embedding_model,
+            client_manager=client_manager,
+        )
+        self.client_manager = (
+            client_manager
+            or getattr(self.vector_store, "client_manager", None)
+            or GeminiClientManager()
         )
 
     def retrieve_with_metrics(
@@ -172,8 +174,9 @@ Answer:"""
         t_gen_start = time.perf_counter()
         for model in candidate_models:
             for attempt in range(max_retries):
+                client = self.client_manager.current_client
                 try:
-                    response = self.ai_client.models.generate_content(
+                    response = client.models.generate_content(
                         model=model,
                         contents=prompt,
                     )
@@ -184,10 +187,18 @@ Answer:"""
                 except Exception as err:
                     err_str = str(err)
                     last_error = err
-                    if "503" in err_str or "UNAVAILABLE" in err_str or "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                        masked_key = self.client_manager.current_key_masked
+                        self.client_manager.rotate()
+                        next_key = self.client_manager.current_key_masked
+                        if verbose:
+                            print(f"[{model}] Rate limit (429) on Key [{masked_key}]. Rotating to Key [{next_key}]...")
+                        time.sleep(0.5)
+                        continue
+                    if "503" in err_str or "UNAVAILABLE" in err_str:
                         wait_time = 2 * (attempt + 1)
                         if verbose:
-                            print(f"[{model}] Temporary load ({err_str[:40]}...). Retrying in {wait_time}s...")
+                            print(f"[{model}] Temporary server load ({err_str[:40]}...). Retrying in {wait_time}s...")
                         time.sleep(wait_time)
                         continue
                     break

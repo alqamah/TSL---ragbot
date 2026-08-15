@@ -1,0 +1,27 @@
+                          ┌────────────────────────┐
+                          │   User Query (Prompt)  │
+                          └───────────┬────────────┘
+                                      │
+                                      ▼
+┌───────────────────────────────────────────────────────────────────────────┐
+│ Layer 1: Retrieval (Dense Vector Search)                                  │
+│                                                                           │
+│  [1a] Query Embedding        -->  models/gemini-embedding-001 (3072 dims) │
+│  [1b] Vector Database Lookup -->  Qdrant (Cosine Similarity)              │
+└─────────────────────────────────────┬─────────────────────────────────────┘
+                                      │ Top-K Chunks + Metadata
+                                      ▼
+┌───────────────────────────────────────────────────────────────────────────┐
+│ Layer 2: Prompt Augmentation & Context Assembly                           │
+│                                                                           │
+│  - Merges retrieved chunks with metadata (Document, Sheet, Rows)          │
+│  - Enforces strict grounding & multilingual safety constraints            │
+└─────────────────────────────────────┬─────────────────────────────────────┘
+                                      │ Augmented Prompt
+                                      ▼
+┌───────────────────────────────────────────────────────────────────────────┐
+│ Layer 3: Final Generation Layer                                           │
+│                                                                           │
+│  - LLM Model: gemini-3.7-flash (with auto-retry & fallback)               │
+│  - Produces structured, step-by-step answer with source citations         │
+└───────────────────────────────────────────────────────────────────────────┘

@@ -42,11 +42,6 @@ class RAGPipeline:
             or "gemini-3.7-flash"
         )
 
-        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY environment variable is missing!")
-
-        self.ai_client = genai.Client(api_key=api_key)
         self.extractor = DataExtractionEngine()
         self.vector_store = VectorStoreManager(
             collection_name=self.collection_name,

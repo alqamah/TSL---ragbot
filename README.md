@@ -103,8 +103,9 @@ pip install -r requirements.txt
 ### 3. Configure Environment Variables
 Create a `.env` file in the root directory:
 ```env
-# Gemini API Key (Required)
+# Gemini API Key (Single or Multiple Keys for Automatic Rotation)
 GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEYS=key_1,key_2,key_3
 
 # Generation & Embedding Models (Optional overrides)
 GEMINI_GENERATION_MODEL=gemini-3.7-flash
