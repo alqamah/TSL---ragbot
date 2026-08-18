@@ -67,15 +67,23 @@ class VectorStoreManager:
 
     def __init__(
         self,
-        collection_name: str = "industrial_sops_gemini",
+        collection_name: Optional[str] = None,
         qdrant_host: str = "localhost",
         qdrant_port: int = 6333,
         qdrant_path: str = "./qdrant_db",
-        model_name: str = "models/gemini-embedding-001",
+        model_name: Optional[str] = None,
         client_manager: Optional[GeminiClientManager] = None,
     ):
-        self.collection_name = collection_name
-        self.model_name = model_name
+        self.collection_name = (
+            collection_name
+            or os.getenv("QDRANT_COLLECTION")
+            or "industrial_sops_gemini"
+        )
+        self.model_name = (
+            model_name
+            or os.getenv("GEMINI_EMBEDDING_MODEL")
+            or "models/gemini-embedding-001"
+        )
         self.vector_size = 3072
 
         self.client_manager = client_manager or GeminiClientManager()

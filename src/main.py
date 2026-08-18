@@ -108,8 +108,8 @@ def main():
     parser.add_argument("--ingest-dir", "-i", type=str, help="Path to directory of SOP documents to ingest")
     parser.add_argument("--ingest-file", type=str, help="Path to single document to ingest")
     parser.add_argument("--top-k", "-k", type=int, default=3, help="Number of chunks to retrieve (default: 3)")
-    parser.add_argument("--collection", type=str, default="industrial_sops_gemini", help="Qdrant collection name")
-    parser.add_argument("--model", "-m", type=str, default="gemini-3.7-flash", help="Gemini generation model")
+    parser.add_argument("--collection", type=str, default=None, help="Qdrant collection name (defaults to QDRANT_COLLECTION env var)")
+    parser.add_argument("--model", "-m", type=str, default=None, help="Gemini generation model")
     parser.add_argument("--no-sources", action="store_true", help="Hide retrieved sources in output")
 
     args = parser.parse_args()

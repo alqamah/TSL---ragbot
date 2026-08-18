@@ -22,15 +22,23 @@ class RAGGenerator:
 
     def __init__(
         self,
-        collection_name: str = "industrial_sops_gemini",
+        collection_name: Optional[str] = None,
         generation_model: Optional[str] = None,
-        embedding_model: str = "models/gemini-embedding-001",
+        embedding_model: Optional[str] = None,
         vector_store: Optional[VectorStoreManager] = None,
         client_manager: Optional[GeminiClientManager] = None,
         log_dir: Optional[str] = None,
     ):
-        self.collection_name = collection_name
-        self.embedding_model = embedding_model
+        self.collection_name = (
+            collection_name
+            or os.getenv("QDRANT_COLLECTION")
+            or "industrial_sops_gemini"
+        )
+        self.embedding_model = (
+            embedding_model
+            or os.getenv("GEMINI_EMBEDDING_MODEL")
+            or "models/gemini-embedding-001"
+        )
         self.generation_model = (
             generation_model
             or os.getenv("GEMINI_GENERATION_MODEL")

@@ -36,7 +36,7 @@ def render_sidebar(client: RAGAPIClient):
                 <div class="telemetry-card">
                     <div class="telemetry-row">
                         <span class="telemetry-label">Collection</span>
-                        <span class="telemetry-val">{status_data.get('collection_name', 'industrial_sops_gemini')}</span>
+                        <span class="telemetry-val">{status_data.get('collection_name', 'industrial_sops_v2')}</span>
                     </div>
                     <div class="telemetry-row">
                         <span class="telemetry-label">Indexed Points</span>
