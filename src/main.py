@@ -111,12 +111,39 @@ def main():
     parser.add_argument("--collection", type=str, default=None, help="Qdrant collection name (defaults to QDRANT_COLLECTION env var)")
     parser.add_argument("--model", "-m", type=str, default=None, help="Gemini generation model")
     parser.add_argument("--no-sources", action="store_true", help="Hide retrieved sources in output")
+    
+    # Vector DB selection CLI parameters
+    parser.add_argument(
+        "--db-mode",
+        "--mode",
+        dest="db_mode",
+        type=str,
+        choices=["auto", "cloud", "local", "server"],
+        default=None,
+        help="Vector DB storage mode: 'cloud' (remote Qdrant), 'local' (embedded disk), 'server' (local host/port), 'auto' (fallback).",
+    )
+    parser.add_argument("--cloud", action="store_true", help="Shorthand to force Qdrant Cloud online vector DB mode.")
+    parser.add_argument("--local", action="store_true", help="Shorthand to force local embedded vector DB storage.")
+    parser.add_argument("--qdrant-url", type=str, default=None, help="Custom Qdrant Cloud or Server URL.")
+    parser.add_argument("--qdrant-api-key", type=str, default=None, help="Custom Qdrant API key.")
+    parser.add_argument("--qdrant-path", type=str, default=None, help="Custom local storage folder path (default: ./qdrant_db).")
 
     args = parser.parse_args()
+
+    # Determine effective storage mode
+    effective_mode = args.db_mode
+    if args.cloud:
+        effective_mode = "cloud"
+    elif args.local:
+        effective_mode = "local"
 
     pipeline = RAGPipeline(
         collection_name=args.collection,
         generation_model=args.model,
+        db_mode=effective_mode,
+        qdrant_url=args.qdrant_url,
+        qdrant_api_key=args.qdrant_api_key,
+        qdrant_path=args.qdrant_path,
     )
 
     try:

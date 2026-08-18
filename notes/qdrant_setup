@@ -1,0 +1,8 @@
+from qdrant_client import QdrantClient
+
+qdrant_client = QdrantClient(
+    url="https://76aa7355-4c1e-4d7e-b301-ec5c2b4dae96.eu-west-2-0.aws.cloud.qdrant.io:6333", 
+    api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIiwic3ViamVjdCI6ImFwaS1rZXk6YzA5Y2Y3ZmUtOTRkMy00NDI3LTkxMGItOWI2MDJmOGI5ZGQxIn0.8HEklrlhjWsVIm_h1xWo6WemSblEui633e8OVksLo8o",
+)
+
+print(qdrant_client.get_collections())

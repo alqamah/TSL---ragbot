@@ -68,9 +68,12 @@ class VectorStoreManager:
     def __init__(
         self,
         collection_name: Optional[str] = None,
+        db_mode: Optional[str] = None,
         qdrant_host: str = "localhost",
         qdrant_port: int = 6333,
         qdrant_path: str = "./qdrant_db",
+        qdrant_url: Optional[str] = None,
+        qdrant_api_key: Optional[str] = None,
         model_name: Optional[str] = None,
         client_manager: Optional[GeminiClientManager] = None,
     ):
@@ -89,41 +92,111 @@ class VectorStoreManager:
         self.client_manager = client_manager or GeminiClientManager()
         self.ai_client = self.client_manager.current_client
 
+        selected_mode = (
+            db_mode
+            or os.getenv("QDRANT_MODE")
+            or "auto"
+        ).strip().lower()
+
         configured_path = os.getenv("QDRANT_PATH", qdrant_path)
-        configured_url = os.getenv("QDRANT_URL")
-        try:
-            if configured_url:
-                client = QdrantClient(
-                    url=configured_url,
-                    timeout=3.0,
-                    check_compatibility=False,
-                )
-                client.get_collections()
-                self.qdrant_client = client
-                self.mode = f"server ({configured_url})"
-            else:
-                client = QdrantClient(
-                    host=qdrant_host,
-                    port=qdrant_port,
-                    timeout=3.0,
-                    check_compatibility=False,
-                )
-                client.get_collections()
-                self.qdrant_client = client
-                self.mode = f"server ({qdrant_host}:{qdrant_port})"
-        except Exception as server_error:
-            print(
-                f"Warning: Qdrant server unavailable ({server_error}). "
-                f"Using local storage at '{configured_path}'."
+        configured_url = (
+            qdrant_url
+            or os.getenv("QDRANT_URL")
+            or os.getenv("QDRANT_ENDPOINT")
+            or os.getenv("QDRANT_CLOUD_URL")
+        )
+        configured_api_key = (
+            qdrant_api_key
+            or os.getenv("QDRANT_API_KEY")
+            or os.getenv("QDRANT_API")
+        )
+
+        def _mask_url(url: str) -> str:
+            if not url:
+                return ""
+            parts = url.split("://")
+            scheme = parts[0] + "://" if len(parts) > 1 else ""
+            host = parts[-1]
+            if len(host) > 28:
+                return f"{scheme}{host[:12]}...{host[-12:]}"
+            return url
+
+        if selected_mode in ["cloud", "online"]:
+            if not configured_url:
+                raise ValueError("Qdrant Cloud mode requested, but no QDRANT_URL or QDRANT_ENDPOINT is configured.")
+            print(f"[VectorStore] Connecting to Qdrant Cloud at {_mask_url(configured_url)}...")
+            client = QdrantClient(
+                url=configured_url,
+                api_key=configured_api_key,
+                timeout=20.0,
+                check_compatibility=False,
             )
-            try:
-                self.qdrant_client = QdrantClient(path=configured_path)
-            except Exception as local_error:
-                raise RuntimeError(
-                    f"Qdrant server is unavailable and local storage '{configured_path}' "
-                    "is unavailable or locked. Use QDRANT_URL or a different QDRANT_PATH."
-                ) from local_error
+            client.get_collections()
+            self.qdrant_client = client
+            self.mode = f"cloud ({_mask_url(configured_url)})"
+
+        elif selected_mode in ["local", "embedded", "disk"]:
+            print(f"[VectorStore] Initializing local Qdrant storage at '{configured_path}'...")
+            self.qdrant_client = QdrantClient(path=configured_path)
             self.mode = f"local_path ({configured_path})"
+
+        elif selected_mode in ["server", "remote"]:
+            print(f"[VectorStore] Connecting to Qdrant server at {qdrant_host}:{qdrant_port}...")
+            client = QdrantClient(
+                host=qdrant_host,
+                port=qdrant_port,
+                api_key=configured_api_key,
+                timeout=5.0,
+                check_compatibility=False,
+            )
+            client.get_collections()
+            self.qdrant_client = client
+            self.mode = f"server ({qdrant_host}:{qdrant_port})"
+
+        else:
+            # Auto mode: Try configured Cloud URL first, then Server, then fallback to Local Path
+            connected = False
+            if configured_url:
+                try:
+                    client = QdrantClient(
+                        url=configured_url,
+                        api_key=configured_api_key,
+                        timeout=10.0,
+                        check_compatibility=False,
+                    )
+                    client.get_collections()
+                    self.qdrant_client = client
+                    self.mode = f"cloud ({_mask_url(configured_url)})"
+                    connected = True
+                except Exception as cloud_err:
+                    print(f"Warning: Cloud Qdrant connection failed ({cloud_err}).")
+
+            if not connected:
+                try:
+                    client = QdrantClient(
+                        host=qdrant_host,
+                        port=qdrant_port,
+                        api_key=configured_api_key,
+                        timeout=3.0,
+                        check_compatibility=False,
+                    )
+                    client.get_collections()
+                    self.qdrant_client = client
+                    self.mode = f"server ({qdrant_host}:{qdrant_port})"
+                    connected = True
+                except Exception:
+                    pass
+
+            if not connected:
+                print(f"[VectorStore] Using local storage at '{configured_path}'.")
+                try:
+                    self.qdrant_client = QdrantClient(path=configured_path)
+                    self.mode = f"local_path ({configured_path})"
+                except Exception as local_err:
+                    raise RuntimeError(
+                        f"Qdrant server/cloud is unavailable and local storage '{configured_path}' "
+                        "is unavailable or locked. Specify a different QDRANT_PATH or valid QDRANT_URL."
+                    ) from local_err
 
         self._ensure_collection_exists()
 

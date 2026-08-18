@@ -18,6 +18,10 @@ class RAGPipeline:
         collection_name: Optional[str] = None,
         generation_model: Optional[str] = None,
         embedding_model: Optional[str] = None,
+        db_mode: Optional[str] = None,
+        qdrant_url: Optional[str] = None,
+        qdrant_api_key: Optional[str] = None,
+        qdrant_path: Optional[str] = None,
     ):
         self.collection_name = (
             collection_name
@@ -36,10 +40,17 @@ class RAGPipeline:
         )
 
         self.extractor = DataExtractionEngine()
-        self.vector_store = VectorStoreManager(
-            collection_name=self.collection_name,
-            model_name=self.embedding_model,
-        )
+        store_kwargs = {
+            "collection_name": self.collection_name,
+            "model_name": self.embedding_model,
+            "db_mode": db_mode,
+            "qdrant_url": qdrant_url,
+            "qdrant_api_key": qdrant_api_key,
+        }
+        if qdrant_path:
+            store_kwargs["qdrant_path"] = qdrant_path
+
+        self.vector_store = VectorStoreManager(**store_kwargs)
         self.generator = RAGGenerator(
             collection_name=self.collection_name,
             generation_model=self.generation_model,

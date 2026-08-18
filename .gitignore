@@ -10,9 +10,8 @@ qdrant_db
 .env.*
 !.env.example
 
-graphify-out
-
 frontend/.venv_frontend
 frontend/__pycache__
 
-
+graphify-out
+.uv-cache
