@@ -46,3 +46,23 @@ streamlit run frontend/app.py --server.port 8501
 ```
 
 Access the UI at: **`http://localhost:8501`**
+
+---
+
+## Deploying Frontend on Render.com
+
+1. Go to [Render Dashboard](https://dashboard.render.com/) and click **New +** $\rightarrow$ **Web Service**.
+2. Connect your GitHub repository: `https://github.com/alqamah/TSL---ragbot`.
+3. Configure the following settings:
+   - **Name**: `ragbot-frontend`
+   - **Language**: `Python 3`
+   - **Branch**: `main`
+   - **Region**: Same region as your backend (e.g. Frankfurt / Oregon)
+   - **Build Command**: `pip install --upgrade pip && pip install -r frontend/requirements.txt`
+   - **Start Command**: `streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.enableCORS false --server.enableXsrfProtection false`
+   - **Instance Type**: `Free`
+4. Add the **Environment Variables**:
+   - `PYTHON_VERSION` = `3.11.9`
+   - `RAG_BACKEND_URL` = `https://ragbot-backend-q5wj.onrender.com`
+5. Click **Create Web Service**.
+
