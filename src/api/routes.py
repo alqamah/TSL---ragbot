@@ -37,7 +37,7 @@ async def health_check():
 
 
 @router.get("/api/v1/status", response_model=StatusResponse, tags=["Telemetry & Status"])
-async def get_system_status(pipeline: RAGPipeline = Depends(get_pipeline)):
+def get_system_status(pipeline: RAGPipeline = Depends(get_pipeline)):
     """Retrieve vector database index stats, active storage mode, and model configurations."""
     try:
         points_count = pipeline.count_indexed_points()
@@ -57,7 +57,7 @@ async def get_system_status(pipeline: RAGPipeline = Depends(get_pipeline)):
 
 
 @router.post("/api/v1/query", response_model=QueryResponse, tags=["RAG Inference"])
-async def query_rag(
+def query_rag(
     request: QueryRequest,
     pipeline: RAGPipeline = Depends(get_pipeline),
 ):
@@ -82,7 +82,7 @@ async def query_rag(
 
 
 @router.post("/api/v1/ingest/file", response_model=IngestResponse, tags=["Document Ingestion"])
-async def ingest_file_by_path(
+def ingest_file_by_path(
     request: IngestFileRequest,
     pipeline: RAGPipeline = Depends(get_pipeline),
 ):
@@ -109,7 +109,7 @@ async def ingest_file_by_path(
 
 
 @router.post("/api/v1/ingest/upload", response_model=IngestResponse, tags=["Document Ingestion"])
-async def ingest_uploaded_file(
+def ingest_uploaded_file(
     file: UploadFile = File(...),
     pipeline: RAGPipeline = Depends(get_pipeline),
 ):
@@ -148,7 +148,7 @@ async def ingest_uploaded_file(
 
 
 @router.post("/api/v1/ingest/directory", response_model=IngestResponse, tags=["Document Ingestion"])
-async def ingest_directory(
+def ingest_directory(
     request: IngestDirectoryRequest,
     pipeline: RAGPipeline = Depends(get_pipeline),
 ):

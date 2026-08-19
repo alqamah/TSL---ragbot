@@ -143,7 +143,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "smartchunker"
     },
     {
@@ -156,7 +156,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "dataextractionengine"
     },
     {
@@ -169,7 +169,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docparser",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "docparser"
     },
     {
@@ -182,7 +182,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docxparser",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "docxparser"
     },
     {
@@ -195,7 +195,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_excelparser",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "excelparser"
     },
     {
@@ -208,7 +208,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_textparser",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "textparser"
     },
     {
@@ -221,7 +221,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_documentchunk",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "documentchunk"
     },
     {
@@ -234,8 +234,21 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_extracteddocument",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "extracteddocument"
+    },
+    {
+      "label": "VectorStoreManager",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L73",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "vectorstoremanager"
     },
     {
       "label": "RAGPipeline",
@@ -249,19 +262,6 @@
       "community": 3,
       "community_name": "RAGPipeline",
       "norm_label": "ragpipeline"
-    },
-    {
-      "label": "VectorStoreManager",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L73",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "vectorstoremanager"
     },
     {
       "label": "RAGGenerator",
@@ -317,7 +317,7 @@
       "label": ".ingest_by_path()",
       "file_type": "code",
       "source_file": "frontend/api_client.py",
-      "source_location": "L74",
+      "source_location": "L78",
       "_callable": true,
       "_origin": "ast",
       "id": "frontend_api_client_ragapiclient_ingest_by_path",
@@ -329,7 +329,7 @@
       "label": ".ingest_directory()",
       "file_type": "code",
       "source_file": "frontend/api_client.py",
-      "source_location": "L89",
+      "source_location": "L93",
       "_callable": true,
       "_origin": "ast",
       "id": "frontend_api_client_ragapiclient_ingest_directory",
@@ -365,7 +365,7 @@
       "label": ".upload_file()",
       "file_type": "code",
       "source_file": "frontend/api_client.py",
-      "source_location": "L58",
+      "source_location": "L62",
       "_callable": true,
       "_origin": "ast",
       "id": "frontend_api_client_ragapiclient_upload_file",
@@ -514,7 +514,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_chunk_table_text",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "._chunk_table_text()"
     },
     {
@@ -526,7 +526,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_init",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".__init__()"
     },
     {
@@ -538,7 +538,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_process_document",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".process_document()"
     },
     {
@@ -550,7 +550,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine_extract",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".extract()"
     },
     {
@@ -562,7 +562,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine_init",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".__init__()"
     },
     {
@@ -574,7 +574,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docparser_parse",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".parse()"
     },
     {
@@ -586,7 +586,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docxparser_parse",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".parse()"
     },
     {
@@ -598,7 +598,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_excelparser_parse",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".parse()"
     },
     {
@@ -610,8 +610,116 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_textparser_parse",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": ".parse()"
+    },
+    {
+      "label": ".close()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L257",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_close",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".close()"
+    },
+    {
+      "label": ".__enter__()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L260",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_enter",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".__enter__()"
+    },
+    {
+      "label": ".__exit__()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L263",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_exit",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".__exit__()"
+    },
+    {
+      "label": ".get_embedding()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L324",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_get_embedding",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".get_embedding()"
+    },
+    {
+      "label": ".get_embeddings()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L266",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_get_embeddings",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".get_embeddings()"
+    },
+    {
+      "label": "._point_id()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L328",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_point_id",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "._point_id()"
+    },
+    {
+      "label": ".search()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L388",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_search",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".search()"
+    },
+    {
+      "label": ".upsert_chunks()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L338",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_upsert_chunks",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".upsert_chunks()"
+    },
+    {
+      "label": ".upsert_document_chunks()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L380",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_upsert_document_chunks",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": ".upsert_document_chunks()"
     },
     {
       "label": "main()",
@@ -622,7 +730,31 @@
       "_origin": "ast",
       "id": "test_test_engine_main",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
+      "norm_label": "main()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "test/test_gemini_rag.py",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "test_test_gemini_rag_main",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "main()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "test/test_vector_store.py",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "test_test_vector_store_main",
+      "community": 2,
+      "community_name": "VectorStoreManager",
       "norm_label": "main()"
     },
     {
@@ -782,18 +914,6 @@
       "norm_label": ".retrieve()"
     },
     {
-      "label": ".close()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L257",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_close",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".close()"
-    },
-    {
       "label": ".create_collection()",
       "file_type": "code",
       "source_file": "src/rag_engine/vector_store.py",
@@ -802,158 +922,14 @@
       "_origin": "ast",
       "id": "src_rag_engine_vector_store_vectorstoremanager_create_collection",
       "community": 4,
-      "community_name": "VectorStoreManager",
+      "community_name": ".create_collection",
       "norm_label": ".create_collection()"
-    },
-    {
-      "label": "._ensure_collection_exists()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L211",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_ensure_collection_exists",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "._ensure_collection_exists()"
-    },
-    {
-      "label": ".__enter__()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L260",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_enter",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".__enter__()"
-    },
-    {
-      "label": ".__exit__()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L263",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_exit",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".__exit__()"
-    },
-    {
-      "label": ".get_embedding()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L324",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_get_embedding",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".get_embedding()"
-    },
-    {
-      "label": ".get_embeddings()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L266",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_get_embeddings",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".get_embeddings()"
-    },
-    {
-      "label": ".__init__()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L76",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_init",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".__init__()"
-    },
-    {
-      "label": "._point_id()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L328",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_point_id",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "._point_id()"
-    },
-    {
-      "label": ".search()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L388",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_search",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".search()"
-    },
-    {
-      "label": ".upsert_chunks()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L338",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_upsert_chunks",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".upsert_chunks()"
-    },
-    {
-      "label": ".upsert_document_chunks()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L380",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_vectorstoremanager_upsert_document_chunks",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": ".upsert_document_chunks()"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "test/test_gemini_rag.py",
-      "source_location": "L20",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "test_test_gemini_rag_main",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "main()"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "test/test_vector_store.py",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "test_test_vector_store_main",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "main()"
     },
     {
       "label": ".close()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L346",
+      "source_location": "L344",
       "_callable": true,
       "_origin": "ast",
       "id": "src_rag_engine_generator_raggenerator_close",
@@ -965,7 +941,7 @@
       "label": ".__enter__()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L349",
+      "source_location": "L347",
       "_callable": true,
       "_origin": "ast",
       "id": "src_rag_engine_generator_raggenerator_enter",
@@ -977,7 +953,7 @@
       "label": ".__exit__()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L352",
+      "source_location": "L350",
       "_callable": true,
       "_origin": "ast",
       "id": "src_rag_engine_generator_raggenerator_exit",
@@ -1001,7 +977,7 @@
       "label": "._log_layer_summary()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L316",
+      "source_location": "L314",
       "_callable": true,
       "_origin": "ast",
       "id": "src_rag_engine_generator_raggenerator_log_layer_summary",
@@ -1025,7 +1001,7 @@
       "label": "._write_persistent_log()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L250",
+      "source_location": "L248",
       "_callable": true,
       "_origin": "ast",
       "id": "src_rag_engine_generator_raggenerator_write_persistent_log",
@@ -1152,6 +1128,30 @@
       "community": 7,
       "community_name": "GeminiClientManager",
       "norm_label": ".rotate()"
+    },
+    {
+      "label": "._ensure_collection_exists()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L211",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_ensure_collection_exists",
+      "community": 7,
+      "community_name": "GeminiClientManager",
+      "norm_label": "._ensure_collection_exists()"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L76",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_vectorstoremanager_init",
+      "community": 7,
+      "community_name": "GeminiClientManager",
+      "norm_label": ".__init__()"
     },
     {
       "label": "lifespan()",
@@ -1339,9 +1339,9 @@
       "label": "Upload a document file to the backend for indexing.",
       "file_type": "rationale",
       "source_file": "frontend/api_client.py",
-      "source_location": "L59",
+      "source_location": "L63",
       "_origin": "ast",
-      "id": "frontend_api_client_rationale_59",
+      "id": "frontend_api_client_rationale_63",
       "community": 0,
       "community_name": "RAGAPIClient",
       "norm_label": "upload a document file to the backend for indexing."
@@ -1361,9 +1361,9 @@
       "label": "Ingest a single document specified by local path on the server.",
       "file_type": "rationale",
       "source_file": "frontend/api_client.py",
-      "source_location": "L75",
+      "source_location": "L79",
       "_origin": "ast",
-      "id": "frontend_api_client_rationale_75",
+      "id": "frontend_api_client_rationale_79",
       "community": 0,
       "community_name": "RAGAPIClient",
       "norm_label": "ingest a single document specified by local path on the server."
@@ -1372,9 +1372,9 @@
       "label": "Batch ingest an entire directory of documents.",
       "file_type": "rationale",
       "source_file": "frontend/api_client.py",
-      "source_location": "L90",
+      "source_location": "L94",
       "_origin": "ast",
-      "id": "frontend_api_client_rationale_90",
+      "id": "frontend_api_client_rationale_94",
       "community": 0,
       "community_name": "RAGAPIClient",
       "norm_label": "batch ingest an entire directory of documents."
@@ -1686,7 +1686,7 @@
       "_origin": "ast",
       "id": "frontend_readme",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "frontend/readme.md"
     },
     {
@@ -1698,7 +1698,7 @@
       "_origin": "ast",
       "id": "frontend_readme_1_ensure_backend_is_running",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "1. ensure backend is running"
     },
     {
@@ -1710,7 +1710,7 @@
       "_origin": "ast",
       "id": "frontend_readme_2_launch_the_frontend",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "2. launch the frontend"
     },
     {
@@ -1722,8 +1722,20 @@
       "_origin": "ast",
       "id": "frontend_readme_architecture_features",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "architecture & features"
+    },
+    {
+      "label": "Deploying Frontend on Render.com",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "frontend/README.md",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "frontend_readme_deploying_frontend_on_render_com",
+      "community": 15,
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
+      "norm_label": "deploying frontend on render.com"
     },
     {
       "label": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
@@ -1734,7 +1746,7 @@
       "_origin": "ast",
       "id": "frontend_readme_industrial_sop_rag_assistant_streamlit_frontend",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "industrial sop rag assistant \u2014 streamlit frontend"
     },
     {
@@ -1746,7 +1758,7 @@
       "_origin": "ast",
       "id": "frontend_readme_option_a_using_the_powershell_launcher_automated",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "option a: using the powershell launcher (automated)"
     },
     {
@@ -1758,7 +1770,7 @@
       "_origin": "ast",
       "id": "frontend_readme_option_b_manual_setup",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "option b: manual setup"
     },
     {
@@ -1770,7 +1782,7 @@
       "_origin": "ast",
       "id": "frontend_readme_quick_start",
       "community": 15,
-      "community_name": "2. Launch the Frontend",
+      "community_name": "Industrial SOP RAG Assistant \u2014 Streamlit Frontend",
       "norm_label": "quick start"
     },
     {
@@ -1886,7 +1898,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "chunker.py"
     },
     {
@@ -1897,7 +1909,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "engine.py"
     },
     {
@@ -1908,7 +1920,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_generator",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "generator.py"
     },
     {
@@ -1919,7 +1931,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_init",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "rag_engine/__init__.py"
     },
     {
@@ -1930,7 +1942,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "parsers.py"
     },
     {
@@ -1941,7 +1953,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_pipeline",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "pipeline.py"
     },
     {
@@ -1952,7 +1964,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "schema.py"
     },
     {
@@ -1963,8 +1975,19 @@
       "_origin": "ast",
       "id": "src_rag_engine_vector_store",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "vector_store.py"
+    },
+    {
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_py_any",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "any"
     },
     {
       "label": "test_engine.py",
@@ -1974,8 +1997,30 @@
       "_origin": "ast",
       "id": "test_test_engine",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "test_engine.py"
+    },
+    {
+      "label": "test_gemini_rag.py",
+      "file_type": "code",
+      "source_file": "test/test_gemini_rag.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "test_test_gemini_rag",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "test_gemini_rag.py"
+    },
+    {
+      "label": "test_vector_store.py",
+      "file_type": "code",
+      "source_file": "test/test_vector_store.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "test_test_vector_store",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "test_vector_store.py"
     },
     {
       "label": "Splits long table text into smaller contextual blocks while preserving header\u2026",
@@ -1985,7 +2030,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_rationale_38",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "splits long table text into smaller contextual blocks while preserving header..."
     },
     {
@@ -1996,7 +2041,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_rationale_13",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "the master output object returned by any parser."
     },
     {
@@ -2007,8 +2052,19 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_rationale_7",
       "community": 2,
-      "community_name": "DataExtractionEngine",
+      "community_name": "VectorStoreManager",
       "norm_label": "represents a single extracted section, paragraph, or table."
+    },
+    {
+      "label": "Gemini embedding store backed by either Qdrant Server or local Qdrant.",
+      "file_type": "rationale",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store_rationale_74",
+      "community": 2,
+      "community_name": "VectorStoreManager",
+      "norm_label": "gemini embedding store backed by either qdrant server or local qdrant."
     },
     {
       "label": "Request",
@@ -2139,41 +2195,8 @@
       "_origin": "ast",
       "id": "distance",
       "community": 4,
-      "community_name": "VectorStoreManager",
+      "community_name": ".create_collection",
       "norm_label": "distance"
-    },
-    {
-      "label": "Any",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_py_any",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "any"
-    },
-    {
-      "label": "test_gemini_rag.py",
-      "file_type": "code",
-      "source_file": "test/test_gemini_rag.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "test_test_gemini_rag",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "test_gemini_rag.py"
-    },
-    {
-      "label": "test_vector_store.py",
-      "file_type": "code",
-      "source_file": "test/test_vector_store.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "test_test_vector_store",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "test_vector_store.py"
     },
     {
       "label": "Create a collection, optionally replacing it when explicitly requested.",
@@ -2183,19 +2206,8 @@
       "_origin": "ast",
       "id": "src_rag_engine_vector_store_rationale_239",
       "community": 4,
-      "community_name": "VectorStoreManager",
+      "community_name": ".create_collection",
       "norm_label": "create a collection, optionally replacing it when explicitly requested."
-    },
-    {
-      "label": "Gemini embedding store backed by either Qdrant Server or local Qdrant.",
-      "file_type": "rationale",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L74",
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store_rationale_74",
-      "community": 4,
-      "community_name": "VectorStoreManager",
-      "norm_label": "gemini embedding store backed by either qdrant server or local qdrant."
     },
     {
       "label": "README.md",
@@ -2461,9 +2473,9 @@
       "label": "Write human-readable and structured logs to the log directory.",
       "file_type": "rationale",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L257",
+      "source_location": "L255",
       "_origin": "ast",
-      "id": "src_rag_engine_generator_rationale_257",
+      "id": "src_rag_engine_generator_rationale_255",
       "community": 6,
       "community_name": "RAGGenerator",
       "norm_label": "write human-readable and structured logs to the log directory."
@@ -2472,9 +2484,9 @@
       "label": "Format and print timing breakdown and output source telemetry.",
       "file_type": "rationale",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L317",
+      "source_location": "L315",
       "_origin": "ast",
-      "id": "src_rag_engine_generator_rationale_317",
+      "id": "src_rag_engine_generator_rationale_315",
       "community": 6,
       "community_name": "RAGGenerator",
       "norm_label": "format and print timing breakdown and output source telemetry."
@@ -2716,7 +2728,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L353",
+      "source_location": "L351",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator_exit",
@@ -2740,7 +2752,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L238",
+      "source_location": "L236",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator_generate_answer",
@@ -2752,7 +2764,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L241",
+      "source_location": "L239",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator_generate_answer",
@@ -3328,7 +3340,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L74",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient_ingest_by_path",
@@ -3340,7 +3352,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L89",
+      "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient_ingest_directory",
@@ -3364,7 +3376,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L58",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient_upload_file",
@@ -3412,7 +3424,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L316",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator_log_layer_summary",
@@ -3436,7 +3448,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L250",
+      "source_location": "L248",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator_write_persistent_log",
@@ -4647,6 +4659,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/README.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "frontend_readme_industrial_sop_rag_assistant_streamlit_frontend",
+      "target": "frontend_readme_deploying_frontend_on_render_com",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/README.md",
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
@@ -5516,7 +5539,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L58",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient",
@@ -5527,7 +5550,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L74",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient",
@@ -5538,7 +5561,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L89",
+      "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
       "source": "frontend_api_client_ragapiclient",
@@ -5626,7 +5649,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L250",
+      "source_location": "L248",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator",
@@ -5637,7 +5660,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L316",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator",
@@ -5648,7 +5671,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L346",
+      "source_location": "L344",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator",
@@ -5659,7 +5682,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L349",
+      "source_location": "L347",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator",
@@ -5670,7 +5693,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L352",
+      "source_location": "L350",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_rag_engine_generator_raggenerator",
@@ -6088,10 +6111,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L59",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "frontend_api_client_rationale_59",
+      "source": "frontend_api_client_rationale_63",
       "target": "frontend_api_client_ragapiclient_upload_file",
       "confidence_score": 1.0
     },
@@ -6110,10 +6133,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L75",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "frontend_api_client_rationale_75",
+      "source": "frontend_api_client_rationale_79",
       "target": "frontend_api_client_ragapiclient_ingest_by_path",
       "confidence_score": 1.0
     },
@@ -6121,10 +6144,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "frontend/api_client.py",
-      "source_location": "L90",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "frontend_api_client_rationale_90",
+      "source": "frontend_api_client_rationale_94",
       "target": "frontend_api_client_ragapiclient_ingest_directory",
       "confidence_score": 1.0
     },
@@ -6341,10 +6364,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L257",
+      "source_location": "L255",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_rag_engine_generator_rationale_257",
+      "source": "src_rag_engine_generator_rationale_255",
       "target": "src_rag_engine_generator_raggenerator_write_persistent_log",
       "confidence_score": 1.0
     },
@@ -6352,10 +6375,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/rag_engine/generator.py",
-      "source_location": "L317",
+      "source_location": "L315",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_rag_engine_generator_rationale_317",
+      "source": "src_rag_engine_generator_rationale_315",
       "target": "src_rag_engine_generator_raggenerator_log_layer_summary",
       "confidence_score": 1.0
     },
@@ -6943,5 +6966,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0cc279dff503f2f34010ad454bc48af7d9b4b790"
+  "built_at_commit": "349ce3fe22b8eef38dcc54cd77d7a22a939660ce"
 }

@@ -170,7 +170,7 @@ Answer:"""
 
         # Layer 4: LLM Generation (Synthesis) with Gemini fallback pool
         candidate_models = [self.generation_model]
-        for fallback in ["gemini-2.0-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-3.1-flash-lite"]:
+        for fallback in ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.7-flash"]:
             if fallback not in candidate_models:
                 candidate_models.append(fallback)
 
@@ -186,10 +186,8 @@ Answer:"""
                 client = self.client_manager.current_client
                 current_key_label = self.client_manager.current_key_label
                 try:
-                    response = client.models.generate_content(
-                        model=model,
-                        contents=prompt,
-                    )
+                    chat = client.chats.create(model=model)
+                    response = chat.send_message(prompt)
                     active_model = model
                     used_key = current_key_label
                     answer_text = response.text.strip() if response.text else "No response generated."
@@ -207,7 +205,7 @@ Answer:"""
                         time.sleep(0.5)
                         continue
                     if "503" in err_str or "UNAVAILABLE" in err_str:
-                        wait_time = 2 * (attempt + 1)
+                        wait_time = 1.5 * (attempt + 1)
                         if verbose:
                             print(f"[{model}] Temporary server load ({err_str[:40]}...). Retrying in {wait_time}s...")
                         time.sleep(wait_time)
