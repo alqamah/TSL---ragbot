@@ -48,23 +48,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Quick Prompts / Demo Chips
-st.markdown("##### 💡 Multilingual Quick Queries:")
-col1, col2, col3 = st.columns(3)
+# # Quick Prompts / Demo Chips
+# st.markdown("##### 💡 Multilingual Quick Queries:")
+# col1, col2, col3 = st.columns(3)
 
-with col1:
-    if st.button("🇬🇧 Compressor Maintenance Checklist", use_container_width=True):
-        st.session_state.quick_prompt = "What safety precautions and PPEs are mandatory before starting air compressor maintenance?"
+# with col1:
+#     if st.button("🇬🇧 Compressor Maintenance Checklist", use_container_width=True):
+#         st.session_state.quick_prompt = "What safety precautions and PPEs are mandatory before starting air compressor maintenance?"
 
-with col2:
-    if st.button("🇮🇳 कंप्रेसर चालू करने की प्रक्रिया", use_container_width=True):
-        st.session_state.quick_prompt = "कंप्रेसर चालू करने से पहले कौन-कौन से सुरक्षा उपाय और जांच करना जरूरी है?"
+# with col2:
+#     if st.button("🇮🇳 कंप्रेसर चालू करने की प्रक्रिया", use_container_width=True):
+#         st.session_state.quick_prompt = "कंप्रेसर चालू करने से पहले कौन-कौन से सुरक्षा उपाय और जांच करना जरूरी है?"
 
-with col3:
-    if st.button("🗣️ Hinglish: Tower Light Isolation", use_container_width=True):
-        st.session_state.quick_prompt = "Tower light servicing karte waqt electrical hazard se bachne ke liye positive isolation kaise kare?"
+# with col3:
+#     if st.button("🗣️ Hinglish: Tower Light Isolation", use_container_width=True):
+#         st.session_state.quick_prompt = "Tower light servicing karte waqt electrical hazard se bachne ke liye positive isolation kaise kare?"
 
-st.markdown("---")
+# st.markdown("---")
 
 # Render Existing Chat History
 render_chat_history()
