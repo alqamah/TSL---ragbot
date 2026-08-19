@@ -1,13 +1,13 @@
 services:
-  # ---------------------------------------------------------
-  # 1. FastAPI Backend Web Service
-  # ---------------------------------------------------------
+  # ---------------------------------------------------------------------------
+  # FastAPI Backend Web Service (Cloud Vector DB Mode)
+  # ---------------------------------------------------------------------------
   - type: web
     name: ragbot-backend
     runtime: python
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: uvicorn src.api.app:app --host 0.0.0.0 --port $PORT
+    startCommand: python src/api/app.py --cloud --no-reload --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
@@ -27,19 +27,4 @@ services:
       - key: QDRANT_URL
         sync: false
       - key: QDRANT_API_KEY
-        sync: false
-
-  # ---------------------------------------------------------
-  # 2. Streamlit Frontend Web Service
-  # ---------------------------------------------------------
-  - type: web
-    name: ragbot-frontend
-    runtime: python
-    plan: free
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt -r frontend/requirements.txt
-    startCommand: streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
-      - key: RAG_BACKEND_URL
         sync: false
