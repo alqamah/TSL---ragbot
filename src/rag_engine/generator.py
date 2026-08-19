@@ -178,17 +178,20 @@ Answer:"""
         answer_text = ""
         llm_duration = 0.0
         last_error = None
+        used_key = self.client_manager.current_key_label
 
         t_gen_start = time.perf_counter()
         for model in candidate_models:
             for attempt in range(max_retries):
                 client = self.client_manager.current_client
+                current_key_label = self.client_manager.current_key_label
                 try:
                     response = client.models.generate_content(
                         model=model,
                         contents=prompt,
                     )
                     active_model = model
+                    used_key = current_key_label
                     answer_text = response.text.strip() if response.text else "No response generated."
                     llm_duration = (time.perf_counter() - t_gen_start) * 1000
                     break
@@ -225,6 +228,7 @@ Answer:"""
             "total_retrieval_ms": retrieval_metrics["total_retrieval_ms"],
             "prompt_construction_ms": round(prompt_build_duration, 2),
             "final_llm_model": active_model,
+            "gemini_api_key_used": used_key,
             "llm_generation_ms": round(llm_duration, 2),
             "total_e2e_latency_ms": round(total_elapsed, 2),
         }
@@ -268,6 +272,7 @@ Answer:"""
                 f.write(f"  * Total Retrieval   : {metrics['total_retrieval_ms']} ms\n")
                 f.write(f"  * Prompt Assembly   : {metrics['prompt_construction_ms']} ms\n")
                 f.write(f"  * Final LLM Model   : {metrics['final_llm_model']}\n")
+                f.write(f"  * Gemini API Key    : {metrics.get('gemini_api_key_used', 'Key 1')}\n")
                 f.write(f"  * LLM Synthesis     : {metrics['llm_generation_ms']} ms ({metrics['llm_generation_ms']/1000:.2f}s)\n")
                 f.write(f"  * Total Latency     : {metrics['total_e2e_latency_ms']} ms ({metrics['total_e2e_latency_ms']/1000:.2f}s)\n")
                 f.write("-" * 80 + "\n")
@@ -322,6 +327,7 @@ Answer:"""
         print(f"2. Generation Layer:")
         print(f"   - Prompt Assembly    : {metrics['prompt_construction_ms']:.2f} ms")
         print(f"   - Final LLM Model    : {metrics['final_llm_model']}")
+        print(f"   - Gemini API Key     : {metrics.get('gemini_api_key_used', 'Key 1')}")
         print(f"   - LLM Synthesis Time : {metrics['llm_generation_ms']:.2f} ms ({metrics['llm_generation_ms']/1000:.2f}s)")
         print("-" * 75)
         print(f"3. Overall Performance:")

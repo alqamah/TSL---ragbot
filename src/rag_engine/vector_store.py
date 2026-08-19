@@ -46,6 +46,14 @@ class GeminiClientManager:
         return self.clients[self._current_idx]
 
     @property
+    def current_key_index(self) -> int:
+        return self._current_idx
+
+    @property
+    def current_key_label(self) -> str:
+        return f"Key {self._current_idx + 1}"
+
+    @property
     def current_key_masked(self) -> str:
         k = self.api_keys[self._current_idx]
         if len(k) > 12:

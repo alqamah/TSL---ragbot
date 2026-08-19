@@ -22,6 +22,7 @@ class LayerMetrics(BaseModel):
     total_retrieval_ms: float = 0.0
     prompt_construction_ms: float = 0.0
     final_llm_model: Optional[str] = None
+    gemini_api_key_used: Optional[str] = None
     llm_generation_ms: float = 0.0
     total_e2e_latency_ms: float = 0.0
 
