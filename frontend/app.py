@@ -21,11 +21,8 @@ st.set_page_config(
 # Apply Modern Custom CSS
 apply_custom_styles()
 
-# Initialize API Client (defaulting to localhost:8000 or custom port)
-# BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://localhost:8000")
-# client = RAGAPIClient(base_url=BACKEND_URL)
-
-BACKEND_URL = os.getenv("https://ragbot-backend-q5wj.onrender.com")
+# Initialize API Client (defaulting to production Render URL or environment override)
+BACKEND_URL = os.getenv("RAG_BACKEND_URL", "https://ragbot-backend-q5wj.onrender.com")
 client = RAGAPIClient(base_url=BACKEND_URL)
 
 # Initialize Session State

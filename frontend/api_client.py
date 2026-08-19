@@ -1,3 +1,4 @@
+import os
 import requests
 from typing import Any, Dict, Optional, Tuple
 
@@ -5,8 +6,11 @@ from typing import Any, Dict, Optional, Tuple
 class RAGAPIClient:
     """HTTP Client for interacting with the Industrial SOP RAG Assistant FastAPI backend."""
 
-    def __init__(self, base_url: str = "https://ragbot-backend-q5wj.onrender.com", timeout: int = 60):
-        self.base_url = base_url.rstrip("/")
+    DEFAULT_BASE_URL = "https://ragbot-backend-q5wj.onrender.com"
+
+    def __init__(self, base_url: Optional[str] = None, timeout: int = 60):
+        url = base_url or os.getenv("RAG_BACKEND_URL") or self.DEFAULT_BASE_URL
+        self.base_url = str(url).rstrip("/")
         self.timeout = timeout
 
     def check_health(self) -> Tuple[bool, Dict[str, Any]]:
