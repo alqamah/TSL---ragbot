@@ -12,7 +12,7 @@ from frontend.components.chat import render_chat_history, render_message_metrics
 
 # Streamlit Page Configuration
 st.set_page_config(
-    page_title="Industrial SOP RAG Assistant",
+    page_title="TSL-Infra RAG Assistant",
     page_icon="🏭",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -21,8 +21,11 @@ st.set_page_config(
 # Apply Modern Custom CSS
 apply_custom_styles()
 
-# Initialize API Client (defaulting to production Render URL or environment override)
-BACKEND_URL = os.getenv("RAG_BACKEND_URL", "https://ragbot-backend-q5wj.onrender.com")
+# Initialize API Client (defaulting to localhost:8000 or custom port)
+# BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://localhost:8000")
+# client = RAGAPIClient(base_url=BACKEND_URL)
+
+BACKEND_URL = os.getenv("https://ragbot-backend-q5wj.onrender.com")
 client = RAGAPIClient(base_url=BACKEND_URL)
 
 # Initialize Session State
@@ -40,13 +43,9 @@ st.markdown(
     """
     <div class="hero-container">
         <div class="hero-title">
-            <span>🏭 Industrial SOP RAG Assistant</span>
+            <span> TSL-Infra RAG Assistant</span>
             <span class="hero-badge">Google Gemini + Qdrant</span>
         </div>
-        <p class="hero-subtitle">
-            Multilingual AI assistant for steel plant Standard Operating Procedures (SOPs), 
-            equipment maintenance safety checklists, and operational troubleshooting in English, Hindi, and Hinglish.
-        </p>
     </div>
     """,
     unsafe_allow_html=True,
