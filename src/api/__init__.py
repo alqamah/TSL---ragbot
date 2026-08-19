@@ -1,3 +1,1 @@
-from src.api.app import app
-
-__all__ = ["app"]
+"""FastAPI REST API package for Industrial SOP RAG Assistant."""

@@ -15,3 +15,6 @@ frontend/__pycache__
 
 graphify-out
 .uv-cache
+__pycache__/
+*.py[cod]
+*$py.class
