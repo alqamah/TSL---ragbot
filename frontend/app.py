@@ -21,11 +21,8 @@ st.set_page_config(
 # Apply Modern Custom CSS
 apply_custom_styles()
 
-# Initialize API Client (defaulting to localhost:8000 or custom port)
-# BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://localhost:8000")
-# client = RAGAPIClient(base_url=BACKEND_URL)
-
-BACKEND_URL = os.getenv("https://ragbot-backend-q5wj.onrender.com")
+# Initialize API Client (defaulting to production Render URL or environment override)
+BACKEND_URL = os.getenv("RAG_BACKEND_URL", "https://ragbot-backend-q5wj.onrender.com")
 client = RAGAPIClient(base_url=BACKEND_URL)
 
 # Initialize Session State
@@ -93,7 +90,7 @@ if user_query:
     # Process via RAG API
     with st.chat_message("assistant", avatar="🤖"):
         if not settings.get("is_backend_online", True):
-            error_msg = "⚠️ **Backend API is currently offline.** Please ensure the FastAPI server is running (`uvicorn src.api.app:app --port 8000`)."
+            error_msg = f"⚠️ **Backend API is currently unreachable at `{client.base_url}`.** If hosted on a free tier, it may be waking up from sleep mode (takes ~30s). Please wait a moment and retry."
             st.error(error_msg)
             st.session_state.messages.append({"role": "assistant", "content": error_msg})
         else:

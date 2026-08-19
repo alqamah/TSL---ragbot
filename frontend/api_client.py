@@ -5,7 +5,7 @@ from typing import Any, Dict, Optional, Tuple
 class RAGAPIClient:
     """HTTP Client for interacting with the Industrial SOP RAG Assistant FastAPI backend."""
 
-    def __init__(self, base_url: str = "http://localhost:8000", timeout: int = 60):
+    def __init__(self, base_url: str = "https://ragbot-backend-q5wj.onrender.com", timeout: int = 60):
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
 
