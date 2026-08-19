@@ -8,7 +8,7 @@ class RAGAPIClient:
 
     DEFAULT_BASE_URL = "https://ragbot-backend-q5wj.onrender.com"
 
-    def __init__(self, base_url: Optional[str] = None, timeout: int = 60):
+    def __init__(self, base_url: Optional[str] = None, timeout: int = 120):
         url = base_url or os.getenv("RAG_BACKEND_URL") or self.DEFAULT_BASE_URL
         self.base_url = str(url).rstrip("/")
         self.timeout = timeout
@@ -16,7 +16,7 @@ class RAGAPIClient:
     def check_health(self) -> Tuple[bool, Dict[str, Any]]:
         """Check if the backend API service is reachable and healthy."""
         try:
-            resp = requests.get(f"{self.base_url}/health", timeout=5)
+            resp = requests.get(f"{self.base_url}/health", timeout=10)
             if resp.status_code == 200:
                 return True, resp.json()
             return False, {"error": f"HTTP {resp.status_code}: {resp.text}"}
@@ -26,7 +26,7 @@ class RAGAPIClient:
     def get_status(self) -> Tuple[bool, Dict[str, Any]]:
         """Fetch system status, active models, and indexed points telemetry."""
         try:
-            resp = requests.get(f"{self.base_url}/api/v1/status", timeout=8)
+            resp = requests.get(f"{self.base_url}/api/v1/status", timeout=12)
             if resp.status_code == 200:
                 return True, resp.json()
             return False, {"error": f"HTTP {resp.status_code}: {resp.text}"}
@@ -52,6 +52,10 @@ class RAGAPIClient:
                 return True, resp.json()
             detail = resp.json().get("detail", resp.text) if resp.headers.get("content-type") == "application/json" else resp.text
             return False, {"error": f"Error ({resp.status_code}): {detail}"}
+        except requests.exceptions.Timeout:
+            return False, {
+                "error": "The backend request timed out (>120s). Render is likely still building and deploying your latest push or waking up from sleep. Please wait a minute and retry."
+            }
         except requests.exceptions.RequestException as e:
             return False, {"error": f"Connection failed: {str(e)}"}
 
