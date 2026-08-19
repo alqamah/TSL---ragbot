@@ -143,7 +143,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "smartchunker"
     },
     {
@@ -156,7 +156,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "dataextractionengine"
     },
     {
@@ -169,7 +169,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docparser",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "docparser"
     },
     {
@@ -182,7 +182,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docxparser",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "docxparser"
     },
     {
@@ -195,7 +195,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_excelparser",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "excelparser"
     },
     {
@@ -208,7 +208,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_textparser",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "textparser"
     },
     {
@@ -221,7 +221,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_documentchunk",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "documentchunk"
     },
     {
@@ -234,7 +234,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_extracteddocument",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "extracteddocument"
     },
     {
@@ -514,7 +514,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_chunk_table_text",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "._chunk_table_text()"
     },
     {
@@ -526,7 +526,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_init",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".__init__()"
     },
     {
@@ -538,7 +538,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_smartchunker_process_document",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".process_document()"
     },
     {
@@ -550,7 +550,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine_extract",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".extract()"
     },
     {
@@ -562,7 +562,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine_dataextractionengine_init",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".__init__()"
     },
     {
@@ -574,7 +574,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docparser_parse",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".parse()"
     },
     {
@@ -586,7 +586,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_docxparser_parse",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".parse()"
     },
     {
@@ -598,7 +598,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_excelparser_parse",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".parse()"
     },
     {
@@ -610,7 +610,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers_textparser_parse",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": ".parse()"
     },
     {
@@ -622,7 +622,7 @@
       "_origin": "ast",
       "id": "test_test_engine_main",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "main()"
     },
     {
@@ -998,18 +998,6 @@
       "norm_label": ".generate_answer()"
     },
     {
-      "label": ".__init__()",
-      "file_type": "code",
-      "source_file": "src/rag_engine/generator.py",
-      "source_location": "L23",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_rag_engine_generator_raggenerator_init",
-      "community": 6,
-      "community_name": "RAGGenerator",
-      "norm_label": ".__init__()"
-    },
-    {
       "label": "._log_layer_summary()",
       "file_type": "code",
       "source_file": "src/rag_engine/generator.py",
@@ -1068,6 +1056,18 @@
       "community": 6,
       "community_name": "RAGGenerator",
       "norm_label": "main()"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/rag_engine/generator.py",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_rag_engine_generator_raggenerator_init",
+      "community": 7,
+      "community_name": "GeminiClientManager",
+      "norm_label": ".__init__()"
     },
     {
       "label": ".current_client()",
@@ -1807,6 +1807,28 @@
       "norm_label": "\ud83d\udcbb cli reference commands"
     },
     {
+      "label": "api/__init__.py",
+      "file_type": "code",
+      "source_file": "src/api/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_api_init",
+      "community": 18,
+      "community_name": "api/__init__.py",
+      "norm_label": "api/__init__.py"
+    },
+    {
+      "label": "FastAPI REST API package for Industrial SOP RAG Assistant.",
+      "file_type": "rationale",
+      "source_file": "src/api/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_api_init_rationale_1",
+      "community": 18,
+      "community_name": "api/__init__.py",
+      "norm_label": "fastapi rest api package for industrial sop rag assistant."
+    },
+    {
       "label": "chunker.py",
       "file_type": "code",
       "source_file": "src/rag_engine/chunker.py",
@@ -1814,7 +1836,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "chunker.py"
     },
     {
@@ -1825,8 +1847,19 @@
       "_origin": "ast",
       "id": "src_rag_engine_engine",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "engine.py"
+    },
+    {
+      "label": "generator.py",
+      "file_type": "code",
+      "source_file": "src/rag_engine/generator.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_rag_engine_generator",
+      "community": 2,
+      "community_name": "DataExtractionEngine",
+      "norm_label": "generator.py"
     },
     {
       "label": "rag_engine/__init__.py",
@@ -1836,7 +1869,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_init",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "rag_engine/__init__.py"
     },
     {
@@ -1847,8 +1880,19 @@
       "_origin": "ast",
       "id": "src_rag_engine_parsers",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "parsers.py"
+    },
+    {
+      "label": "pipeline.py",
+      "file_type": "code",
+      "source_file": "src/rag_engine/pipeline.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_rag_engine_pipeline",
+      "community": 2,
+      "community_name": "DataExtractionEngine",
+      "norm_label": "pipeline.py"
     },
     {
       "label": "schema.py",
@@ -1858,8 +1902,19 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "schema.py"
+    },
+    {
+      "label": "vector_store.py",
+      "file_type": "code",
+      "source_file": "src/rag_engine/vector_store.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_rag_engine_vector_store",
+      "community": 2,
+      "community_name": "DataExtractionEngine",
+      "norm_label": "vector_store.py"
     },
     {
       "label": "test_engine.py",
@@ -1869,7 +1924,7 @@
       "_origin": "ast",
       "id": "test_test_engine",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "test_engine.py"
     },
     {
@@ -1880,7 +1935,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_chunker_rationale_38",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "splits long table text into smaller contextual blocks while preserving header..."
     },
     {
@@ -1891,7 +1946,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_rationale_13",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "the master output object returned by any parser."
     },
     {
@@ -1902,7 +1957,7 @@
       "_origin": "ast",
       "id": "src_rag_engine_schema_rationale_7",
       "community": 2,
-      "community_name": "Testing & QA (C2)",
+      "community_name": "DataExtractionEngine",
       "norm_label": "represents a single extracted section, paragraph, or table."
     },
     {
@@ -2379,39 +2434,6 @@
       "norm_label": "client"
     },
     {
-      "label": "generator.py",
-      "file_type": "code",
-      "source_file": "src/rag_engine/generator.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_rag_engine_generator",
-      "community": 7,
-      "community_name": "GeminiClientManager",
-      "norm_label": "generator.py"
-    },
-    {
-      "label": "pipeline.py",
-      "file_type": "code",
-      "source_file": "src/rag_engine/pipeline.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_rag_engine_pipeline",
-      "community": 7,
-      "community_name": "GeminiClientManager",
-      "norm_label": "pipeline.py"
-    },
-    {
-      "label": "vector_store.py",
-      "file_type": "code",
-      "source_file": "src/rag_engine/vector_store.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_rag_engine_vector_store",
-      "community": 7,
-      "community_name": "GeminiClientManager",
-      "norm_label": "vector_store.py"
-    },
-    {
       "label": "Manages a pool of Gemini API keys with round-robin cycling and rate-limit\u2026",
       "file_type": "rationale",
       "source_file": "src/rag_engine/vector_store.py",
@@ -2465,17 +2487,6 @@
       "community": 8,
       "community_name": "api/app.py",
       "norm_label": "get"
-    },
-    {
-      "label": "api/__init__.py",
-      "file_type": "code",
-      "source_file": "src/api/__init__.py",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_api_init",
-      "community": 8,
-      "community_name": "api/app.py",
-      "norm_label": "api/__init__.py"
     },
     {
       "label": "test_api.py",
@@ -3002,18 +3013,6 @@
       "_origin": "ast",
       "source": "src_api_routes_query_rag",
       "target": "post",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/api/__init__.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_api_init",
-      "target": "src_api_app",
       "confidence_score": 1.0
     },
     {
@@ -6119,6 +6118,17 @@
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
+      "source_file": "src/api/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_api_init_rationale_1",
+      "target": "src_api_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
       "source_file": "src/api/routes.py",
       "source_location": "L116",
       "weight": 1.0,
@@ -6843,5 +6853,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "64455b59b10797676eea58d3429f638e450d79f7"
+  "built_at_commit": "109344c3b35a9e4159e3b9c8e83e02533e08d773"
 }
