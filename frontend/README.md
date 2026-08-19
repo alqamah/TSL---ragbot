@@ -59,7 +59,7 @@ Access the UI at: **`http://localhost:8501`**
    - **Branch**: `main`
    - **Region**: Same region as your backend (e.g. Frankfurt / Oregon)
    - **Build Command**: `pip install --upgrade pip && pip install -r frontend/requirements.txt`
-   - **Start Command**: `streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.enableCORS false --server.enableXsrfProtection false`
+   - **Start Command**: `streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false --server.fileWatcherType none --browser.gatherUsageStats false`
    - **Instance Type**: `Free`
 4. Add the **Environment Variables**:
    - `PYTHON_VERSION` = `3.11.9`

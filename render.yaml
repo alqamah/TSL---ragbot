@@ -37,10 +37,11 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r frontend/requirements.txt
-    startCommand: streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.enableCORS false --server.enableXsrfProtection false
+    startCommand: streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false --server.fileWatcherType none --browser.gatherUsageStats false
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: RAG_BACKEND_URL
         value: https://ragbot-backend-q5wj.onrender.com
+
 
