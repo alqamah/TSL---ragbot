@@ -22,7 +22,9 @@ st.set_page_config(
 apply_custom_styles()
 
 # Initialize API Client (defaulting to local backend or environment override)
-BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://127.0.0.1:8000")
+# BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://127.0.0.1:8000")
+BACKEND_URL = os.getenv("RAG_BACKEND_URL", "https://ragbot-backend-q5wj.onrender.com")
+
 client = RAGAPIClient(base_url=BACKEND_URL)
 
 # Initialize Session State
