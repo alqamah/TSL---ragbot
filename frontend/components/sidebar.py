@@ -264,7 +264,7 @@ def render_sidebar(client: RAGAPIClient):
             ),
         )
         if not st.session_state.gemini_models:
-            st.caption("Click 🔄 Refresh above to list all models available via the Gemini API.")
+            st.caption("Click 🔄 Refresh above to list all models verified available via the Gemini API (takes ~30s on first fetch).")
 
         top_k = st.slider("Context Chunks (top_k)", min_value=1, max_value=10, value=3, step=1)
         show_sources = st.checkbox("Include Source Citations", value=True)

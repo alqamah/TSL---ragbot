@@ -76,7 +76,7 @@ class RAGAPIClient:
             resp = requests.get(
                 f"{self.base_url}/api/v1/models",
                 params={"force": str(force).lower()},
-                timeout=30,
+                timeout=120,
             )
             if resp.status_code == 200:
                 return True, resp.json()

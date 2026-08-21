@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
@@ -100,11 +101,31 @@ class RAGGenerator:
         ])
         return list(dict.fromkeys(models))
 
+    @staticmethod
+    def _model_probe_ok(client: Any, name: str) -> bool:
+        """Cheap availability probe: 404/permission failures mark a model unusable."""
+        try:
+            client.models.generate_content(
+                model=name,
+                contents="ping",
+                config={"max_output_tokens": 1},
+            )
+            return True
+        except Exception as err:
+            err_str = str(err)
+            if "404" in err_str or "NOT_FOUND" in err_str or "no longer available" in err_str.lower():
+                return False
+            # Quota/transient errors still mean the model exists and is selectable.
+            return True
+
     def list_available_models(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
         """List generation-capable models usable with the configured Gemini API key (free tier).
 
         Results are cached for 10 minutes unless force_refresh is set, so this is
         only queried on explicit user action and never pinged continuously.
+        On a forced refresh every candidate is probed with a 1-token request so
+        models unavailable to the configured key (e.g. retired for new accounts)
+        are filtered out of the selector.
         """
         cache_ttl = 600.0
         if not force_refresh:
@@ -113,15 +134,29 @@ class RAGGenerator:
                 return self._models_cache
 
         client = self.client_manager.current_client
-        available: List[Dict[str, Any]] = []
+        excluded_markers = (
+            "embedding",
+            "tts",
+            "image",
+            "audio",
+            "computer-use",
+            "deep-research",
+            "antigravity",
+            "veo",
+            "imagen",
+            "lyria",
+            "nano-banana",
+            "robotics",
+        )
+        candidates: List[Dict[str, Any]] = []
         for model in client.models.list():
             actions = getattr(model, "supported_actions", None) or []
             if actions and "generateContent" not in actions:
                 continue
             name = (getattr(model, "name", "") or "").removeprefix("models/")
-            if not name or "embedding" in name:
+            if not name or any(marker in name.lower() for marker in excluded_markers):
                 continue
-            available.append(
+            candidates.append(
                 {
                     "name": name,
                     "display_name": getattr(model, "display_name", "") or name,
@@ -129,6 +164,19 @@ class RAGGenerator:
                     "output_token_limit": getattr(model, "output_token_limit", None),
                 }
             )
+
+        # Probe in parallel so manual refresh stays fast; never runs in background.
+        if candidates:
+            safe_print(f"[Models] Verifying {len(candidates)} candidate models with the configured API key...")
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                probe_results = list(
+                    pool.map(lambda m: self._model_probe_ok(client, m["name"]), candidates)
+                )
+            available = [m for m, ok in zip(candidates, probe_results) if ok]
+            safe_print(f"[Models] {len(available)}/{len(candidates)} models verified usable.")
+        else:
+            available = []
+
         available.sort(key=lambda m: m["name"])
         self._models_cache = available
         self._models_cache_ts = time.time()
@@ -246,10 +294,14 @@ Answer:"""
         prompt_build_duration = (time.perf_counter() - t_prompt_start) * 1000
 
         # Layer 4: LLM Generation (Synthesis) with Gemini fallback pool
-        candidate_models = self.candidate_models
         if model:
-            # User-selected model takes priority; the rest remain as fallbacks.
-            candidate_models = [model] + [m for m in candidate_models if m != model]
+            # Explicit user selection is strict: use ONLY this model so the
+            # answer can never silently come from a different one.
+            candidate_models = [model]
+            safe_print(f"[Model Select] User-selected model: {model} (strict, no fallback)")
+        else:
+            candidate_models = self.candidate_models
+            safe_print(f"[Model Select] Pipeline model pool: {', '.join(candidate_models)}")
 
         active_model = None
         answer_text = ""
@@ -281,6 +333,18 @@ Answer:"""
                             print(f"[{model}] Key failure or quota limit on Key [{masked_key}]. Rotating to Key [{next_key}]...")
                         time.sleep(0.5)
                         continue
+                    if "404" in err_str or "NOT_FOUND" in err_str:
+                        # Model not accessible with this key/account; another key may have access.
+                        if self.client_manager.key_count > 1:
+                            masked_key = self.client_manager.current_key_masked
+                            self.client_manager.rotate()
+                            next_key = self.client_manager.current_key_masked
+                            if verbose:
+                                print(f"[{model}] Not available on Key [{masked_key}]. Trying Key [{next_key}]...")
+                            continue
+                        if verbose:
+                            print(f"[{model}] Not available: {err_str[:80]}...")
+                        break
                     if "503" in err_str or "UNAVAILABLE" in err_str:
                         wait_time = 1.5 * (attempt + 1)
                         if verbose:
@@ -292,6 +356,11 @@ Answer:"""
                 break
 
         if not active_model:
+            if model:
+                raise RuntimeError(
+                    f"Selected model '{model}' is unavailable after {max_retries} attempts "
+                    f"(last error: {last_error}). Gemini may be overloaded — try another model or 'auto'."
+                )
             raise RuntimeError(f"Failed to generate answer across candidate models: {last_error}")
 
         total_elapsed = (time.perf_counter() - total_start) * 1000
