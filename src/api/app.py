@@ -2,6 +2,15 @@ import os
 import sys
 from contextlib import asynccontextmanager
 
+# Ensure UTF-8 output across standard streams on Windows
+for stream_name in ("stdout", "stderr"):
+    stream = getattr(sys, stream_name, None)
+    if stream and hasattr(stream, "reconfigure"):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -10,8 +19,12 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from src.api import log_stream
 from src.api.routes import router
 from src.rag_engine.pipeline import RAGPipeline
+
+# Mirror backend terminal output into the log buffer for frontend streaming
+log_stream.install()
 
 
 @asynccontextmanager
@@ -73,6 +86,7 @@ async def root():
             "documentation": "/docs",
             "health": "/health",
             "status": "/api/v1/status",
+            "files": "/api/v1/files",
         }
     )
 

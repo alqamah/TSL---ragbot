@@ -17,7 +17,14 @@ class DataExtractionEngine:
         }
         self.chunker = chunker or SmartChunker()
 
-    def extract(self, file_path: str, enable_chunking: bool = True) -> ExtractedDocument:
+    def extract(
+        self,
+        file_path: str,
+        enable_chunking: bool = True,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
+        max_table_rows: Optional[int] = None,
+    ) -> ExtractedDocument:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
             
@@ -33,13 +40,23 @@ class DataExtractionEngine:
         parser_cls = self.parsers[ext]
         raw_doc = parser_cls.parse(file_path, file_name)
 
-        if enable_chunking and self.chunker:
-            processed_chunks = self.chunker.process_document(raw_doc)
-            return ExtractedDocument(
-                file_name=raw_doc.file_name,
-                file_type=raw_doc.file_type,
-                chunks=processed_chunks,
-                full_text=raw_doc.full_text
-            )
+        if enable_chunking:
+            if chunk_size is not None or chunk_overlap is not None or max_table_rows is not None:
+                active_chunker = SmartChunker(
+                    text_chunk_size=chunk_size if chunk_size is not None else 600,
+                    text_chunk_overlap=chunk_overlap if chunk_overlap is not None else 100,
+                    max_table_rows=max_table_rows if max_table_rows is not None else 4,
+                )
+            else:
+                active_chunker = self.chunker
+
+            if active_chunker:
+                processed_chunks = active_chunker.process_document(raw_doc)
+                return ExtractedDocument(
+                    file_name=raw_doc.file_name,
+                    file_type=raw_doc.file_type,
+                    chunks=processed_chunks,
+                    full_text=raw_doc.full_text,
+                )
 
         return raw_doc

@@ -2,7 +2,7 @@
 .vscode
 log
 io
-test/op
+test
 qdrant_db
 
 # Environment variable files
@@ -17,4 +17,6 @@ graphify-out
 .uv-cache
 __pycache__/
 *.py[cod]
-*$py.class
+*$py.class
+src/__init__.py
+src\rag_engine\__init__.py

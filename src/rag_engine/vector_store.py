@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import sys
 import time
 import uuid
 from typing import Any, Dict, List, Optional, Union
@@ -11,6 +12,34 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
 
 from src.rag_engine.schema import DocumentChunk
+
+# Ensure standard streams are configured with UTF-8 and replace error handler
+for stream_name in ("stdout", "stderr"):
+    stream = getattr(sys, stream_name, None)
+    if stream and hasattr(stream, "reconfigure"):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+
+def safe_print(*args: Any, **kwargs: Any) -> None:
+    """Print helper that guarantees no UnicodeEncodeError on Windows charmap consoles."""
+    try:
+        print(*args, **kwargs)
+    except UnicodeEncodeError:
+        try:
+            encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+            sanitized_args = []
+            for arg in args:
+                if isinstance(arg, str):
+                    sanitized_args.append(arg.encode(encoding, errors="replace").decode(encoding))
+                else:
+                    sanitized_args.append(arg)
+            print(*sanitized_args, **kwargs)
+        except Exception:
+            pass
+
 
 load_dotenv()
 
@@ -68,6 +97,23 @@ class GeminiClientManager:
         """Rotate to next available API key in round-robin fashion."""
         self._current_idx = (self._current_idx + 1) % len(self.clients)
         return self.current_client
+
+    @staticmethod
+    def is_key_rotation_error(error_text: str) -> bool:
+        """Return whether an API error can be recovered by trying another key."""
+        normalized_error = error_text.upper()
+        return any(
+            marker in normalized_error
+            for marker in (
+                "429",
+                "RESOURCE_EXHAUSTED",
+                "401",
+                "403",
+                "UNAUTHENTICATED",
+                "PERMISSION_DENIED",
+                "API_KEY_INVALID",
+            )
+        )
 
 
 class VectorStoreManager:
@@ -240,6 +286,13 @@ class VectorStoreManager:
         name = collection_name or self.collection_name
         size = vector_size or self.vector_size
         if recreate and self.qdrant_client.collection_exists(name):
+            # If local embedded client on Windows, close persistence file handles first so SQLite files can be removed
+            local_inner = getattr(self.qdrant_client, "_client", None)
+            if local_inner and hasattr(local_inner, "collections") and name in local_inner.collections:
+                try:
+                    local_inner.collections[name].close()
+                except Exception:
+                    pass
             self.qdrant_client.delete_collection(name)
         if self.qdrant_client.collection_exists(name):
             info = self.qdrant_client.get_collection(name)
@@ -266,7 +319,7 @@ class VectorStoreManager:
     def get_embeddings(
         self,
         texts: Union[str, List[str]],
-        max_retries: int = 6,
+        max_retries: int = 15,
     ) -> List[List[float]]:
         input_texts = [texts] if isinstance(texts, str) else list(texts)
         cleaned_texts = [text.replace("\n", " ") if text else " " for text in input_texts]
@@ -296,7 +349,7 @@ class VectorStoreManager:
                 return embeddings
             except Exception as error:
                 error_text = str(error)
-                if "429" not in error_text and "RESOURCE_EXHAUSTED" not in error_text:
+                if not self.client_manager.is_key_rotation_error(error_text):
                     raise
                 if attempt == max_retries - 1:
                     break
@@ -306,14 +359,14 @@ class VectorStoreManager:
                 next_key = self.client_manager.current_key_masked
 
                 if attempt < key_pool_size:
-                    print(
-                        f"[Embedding] Rate limit (429) on Key [{masked_key}]. "
+                    safe_print(
+                        f"[Embedding] Key failure or quota limit on Key [{masked_key}]. "
                         f"Instantly rotating to Key [{next_key}]..."
                     )
                     time.sleep(0.5)
                 else:
-                    wait_time = 3 * (attempt - key_pool_size + 1)
-                    print(
+                    wait_time = min(15, 3 * (attempt - key_pool_size + 1))
+                    safe_print(
                         f"[Embedding] All keys rate limited. Rotating to [{next_key}] & pausing {wait_time}s... "
                         f"(Attempt {attempt + 1}/{max_retries})"
                     )
@@ -324,9 +377,37 @@ class VectorStoreManager:
     def get_embedding(self, text: str) -> List[float]:
         return self.get_embeddings(text)[0]
 
+    def list_indexed_files(self, collection_name: Optional[str] = None) -> List[str]:
+        """Return distinct source file names stored in the collection payloads."""
+        target_collection = collection_name or self.collection_name
+        files = set()
+        offset = None
+
+        while True:
+            points, offset = self.qdrant_client.scroll(
+                collection_name=target_collection,
+                limit=256,
+                offset=offset,
+                with_payload=["source"],
+                with_vectors=False,
+            )
+            for point in points:
+                source = (getattr(point, "payload", {}) or {}).get("source")
+                if isinstance(source, str) and source.strip():
+                    files.add(source.strip())
+            if offset is None:
+                break
+
+        return sorted(files, key=str.casefold)
+
     @staticmethod
     def _point_id(chunk: DocumentChunk) -> str:
         payload = chunk.metadata.copy() if chunk.metadata else {}
+        document_metadata = payload.get("document_metadata")
+        if isinstance(document_metadata, dict):
+            document_metadata = document_metadata.copy()
+            document_metadata.pop("processed_at", None)
+            payload["document_metadata"] = document_metadata
         identity = json.dumps(
             {"content": chunk.content, "metadata": payload},
             sort_keys=True,
@@ -370,7 +451,11 @@ class VectorStoreManager:
                         payload=payload,
                     )
                 )
-            self.qdrant_client.upsert(collection_name=target_collection, points=points)
+            self.qdrant_client.upsert(
+                collection_name=target_collection,
+                points=points,
+                wait=True,
+            )
             uploaded += len(points)
             print(f"Embedded batch {batch_idx}/{total_batches} ({uploaded}/{len(chunks)} stored)...")
             if batch_idx < total_batches:

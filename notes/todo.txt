@@ -1,0 +1,3 @@
+create separate sections for large and small docs.
+Large docs: contain the dept. related docs like SOPs etc
+small docs: contain daily logbook, breakdown reports etc

@@ -21,8 +21,8 @@ st.set_page_config(
 # Apply Modern Custom CSS
 apply_custom_styles()
 
-# Initialize API Client (defaulting to production Render URL or environment override)
-BACKEND_URL = os.getenv("RAG_BACKEND_URL", "https://ragbot-backend-q5wj.onrender.com")
+# Initialize API Client (defaulting to local backend or environment override)
+BACKEND_URL = os.getenv("RAG_BACKEND_URL", "http://127.0.0.1:8000")
 client = RAGAPIClient(base_url=BACKEND_URL)
 
 # Initialize Session State
@@ -75,7 +75,7 @@ if st.session_state.quick_prompt:
     user_query = st.session_state.quick_prompt
     st.session_state.quick_prompt = None
 else:
-    user_query = st.chat_input("Ask a question about plant SOPs or maintenance (English / हिंदी / Hinglish)...")
+    user_query = st.chat_input("Ask a question about the uploaded files (English / हिंदी)...")
 
 if user_query:
     # Append User Message to State

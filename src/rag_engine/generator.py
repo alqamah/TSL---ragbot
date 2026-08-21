@@ -12,6 +12,34 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+# Ensure standard streams are configured with UTF-8 and replace error handler
+for stream_name in ("stdout", "stderr"):
+    stream = getattr(sys, stream_name, None)
+    if stream and hasattr(stream, "reconfigure"):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+
+def safe_print(*args: Any, **kwargs: Any) -> None:
+    """Print helper that guarantees no UnicodeEncodeError on Windows charmap consoles."""
+    try:
+        print(*args, **kwargs)
+    except UnicodeEncodeError:
+        try:
+            encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+            sanitized_args = []
+            for arg in args:
+                if isinstance(arg, str):
+                    sanitized_args.append(arg.encode(encoding, errors="replace").decode(encoding))
+                else:
+                    sanitized_args.append(arg)
+            print(*sanitized_args, **kwargs)
+        except Exception:
+            pass
+
+
 from src.rag_engine.vector_store import GeminiClientManager, VectorStoreManager
 
 load_dotenv()
@@ -57,6 +85,20 @@ class RAGGenerator:
             or getattr(self.vector_store, "client_manager", None)
             or GeminiClientManager()
         )
+
+    @property
+    def candidate_models(self) -> List[str]:
+        """Return the configured model followed by the generation fallbacks."""
+        models = [self.generation_model]
+        configured_models = os.getenv("GEMINI_GENERATION_MODELS", "")
+        models.extend(model.strip() for model in configured_models.split(",") if model.strip())
+        models.extend([
+            "gemini-3.6-flash",
+            "gemini-3.5-flash",
+            "gemini-3.5-flash-lite",
+            "gemini-3.7-flash",
+        ])
+        return list(dict.fromkeys(models))
 
     def retrieve_with_metrics(
         self, query: str, top_k: int = 3
@@ -169,10 +211,7 @@ Answer:"""
         prompt_build_duration = (time.perf_counter() - t_prompt_start) * 1000
 
         # Layer 4: LLM Generation (Synthesis) with Gemini fallback pool
-        candidate_models = [self.generation_model]
-        for fallback in ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.7-flash"]:
-            if fallback not in candidate_models:
-                candidate_models.append(fallback)
+        candidate_models = self.candidate_models
 
         active_model = None
         answer_text = ""
@@ -196,12 +235,12 @@ Answer:"""
                 except Exception as err:
                     err_str = str(err)
                     last_error = err
-                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    if self.client_manager.is_key_rotation_error(err_str):
                         masked_key = self.client_manager.current_key_masked
                         self.client_manager.rotate()
                         next_key = self.client_manager.current_key_masked
                         if verbose:
-                            print(f"[{model}] Rate limit (429) on Key [{masked_key}]. Rotating to Key [{next_key}]...")
+                            print(f"[{model}] Key failure or quota limit on Key [{masked_key}]. Rotating to Key [{next_key}]...")
                         time.sleep(0.5)
                         continue
                     if "503" in err_str or "UNAVAILABLE" in err_str:
@@ -238,12 +277,19 @@ Answer:"""
         # 2. Persistent file logging to log/ folder
         self._write_persistent_log(query, answer_text, metrics, contexts)
 
-        return {
+        result = {
             "query": query,
             "answer": answer_text,
             "sources": contexts,
             "metrics": metrics,
         }
+
+        # Keep a single key for one end-to-end query, then round-robin to the
+        # next key so the following query does not repeatedly use the same key.
+        if self.client_manager.key_count > 1:
+            self.client_manager.rotate()
+
+        return result
 
     def _write_persistent_log(
         self,
@@ -313,33 +359,33 @@ Answer:"""
     @staticmethod
     def _log_layer_summary(metrics: Dict[str, Any], sources: List[Dict[str, Any]]):
         """Format and print timing breakdown and output source telemetry."""
-        print("\n" + "=" * 75)
-        print("                   RAG PIPELINE EXECUTION TELEMETRY                    ")
-        print("=" * 75)
-        print(f"1. Retrieval Layer:")
-        print(f"   - Embedding Model    : {metrics['embedding_model']}")
-        print(f"   - Query Embedding    : {metrics['query_embedding_ms']:.2f} ms")
-        print(f"   - Qdrant Vector Search: {metrics['qdrant_search_ms']:.2f} ms")
-        print(f"   - Total Retrieval    : {metrics['total_retrieval_ms']:.2f} ms")
-        print("-" * 75)
-        print(f"2. Generation Layer:")
-        print(f"   - Prompt Assembly    : {metrics['prompt_construction_ms']:.2f} ms")
-        print(f"   - Final LLM Model    : {metrics['final_llm_model']}")
-        print(f"   - Gemini API Key     : {metrics.get('gemini_api_key_used', 'Key 1')}")
-        print(f"   - LLM Synthesis Time : {metrics['llm_generation_ms']:.2f} ms ({metrics['llm_generation_ms']/1000:.2f}s)")
-        print("-" * 75)
-        print(f"3. Overall Performance:")
-        print(f"   - Total E2E Latency  : {metrics['total_e2e_latency_ms']:.2f} ms ({metrics['total_e2e_latency_ms']/1000:.2f}s)")
-        print("=" * 75)
-        print("4. Retrieved Source Attributions:")
+        safe_print("\n" + "=" * 75)
+        safe_print("                   RAG PIPELINE EXECUTION TELEMETRY                    ")
+        safe_print("=" * 75)
+        safe_print(f"1. Retrieval Layer:")
+        safe_print(f"   - Embedding Model    : {metrics['embedding_model']}")
+        safe_print(f"   - Query Embedding    : {metrics['query_embedding_ms']:.2f} ms")
+        safe_print(f"   - Qdrant Vector Search: {metrics['qdrant_search_ms']:.2f} ms")
+        safe_print(f"   - Total Retrieval    : {metrics['total_retrieval_ms']:.2f} ms")
+        safe_print("-" * 75)
+        safe_print(f"2. Generation Layer:")
+        safe_print(f"   - Prompt Assembly    : {metrics['prompt_construction_ms']:.2f} ms")
+        safe_print(f"   - Final LLM Model    : {metrics['final_llm_model']}")
+        safe_print(f"   - Gemini API Key     : {metrics.get('gemini_api_key_used', 'Key 1')}")
+        safe_print(f"   - LLM Synthesis Time : {metrics['llm_generation_ms']:.2f} ms ({metrics['llm_generation_ms']/1000:.2f}s)")
+        safe_print("-" * 75)
+        safe_print(f"3. Overall Performance:")
+        safe_print(f"   - Total E2E Latency  : {metrics['total_e2e_latency_ms']:.2f} ms ({metrics['total_e2e_latency_ms']/1000:.2f}s)")
+        safe_print("=" * 75)
+        safe_print("4. Retrieved Source Attributions:")
         for idx, src in enumerate(sources, 1):
             doc = src.get("source") or "Unknown"
             score = src.get("score", 0.0)
             meta = src.get("metadata", {})
             sheet = meta.get("sheet", "N/A")
             rows = meta.get("row_range", "N/A")
-            print(f"   [{idx}] File: {doc} | Sheet: {sheet} | Rows: {rows} | Similarity: {score:.4f}")
-        print("=" * 75 + "\n")
+            safe_print(f"   [{idx}] File: {doc} | Sheet: {sheet} | Rows: {rows} | Similarity: {score:.4f}")
+        safe_print("=" * 75 + "\n")
 
     def close(self) -> None:
         self.vector_store.close()

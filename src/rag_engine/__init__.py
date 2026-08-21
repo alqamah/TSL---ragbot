@@ -3,11 +3,13 @@ from src.rag_engine.engine import DataExtractionEngine
 from src.rag_engine.generator import RAGGenerator
 from src.rag_engine.parsers import DocParser, DocxParser, ExcelParser, TextParser
 from src.rag_engine.pipeline import RAGPipeline
+from src.rag_engine.metadata import DocumentMetadataGenerator
 from src.rag_engine.schema import DocumentChunk, ExtractedDocument
 from src.rag_engine.vector_store import GeminiClientManager, VectorStore, VectorStoreManager
 
 __all__ = [
     "RAGPipeline",
+    "DocumentMetadataGenerator",
     "DataExtractionEngine",
     "RAGGenerator",
     "VectorStoreManager",

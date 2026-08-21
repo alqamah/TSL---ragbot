@@ -36,10 +36,16 @@ class QueryResponse(BaseModel):
 
 class IngestDirectoryRequest(BaseModel):
     directory_path: str = Field(..., description="Absolute or relative path to directory containing documents")
+    chunk_size: Optional[int] = Field(default=None, ge=50, le=5000, description="Custom chunk size in characters")
+    chunk_overlap: Optional[int] = Field(default=None, ge=0, le=1000, description="Custom chunk overlap in characters")
+    max_table_rows: Optional[int] = Field(default=None, ge=1, le=50, description="Custom table rows per chunk")
 
 
 class IngestFileRequest(BaseModel):
     file_path: str = Field(..., description="Absolute or relative path to a single document")
+    chunk_size: Optional[int] = Field(default=None, ge=50, le=5000, description="Custom chunk size in characters")
+    chunk_overlap: Optional[int] = Field(default=None, ge=0, le=1000, description="Custom chunk overlap in characters")
+    max_table_rows: Optional[int] = Field(default=None, ge=1, le=50, description="Custom table rows per chunk")
 
 
 class IngestResponse(BaseModel):
@@ -47,6 +53,9 @@ class IngestResponse(BaseModel):
     message: str
     chunks_indexed: int
     total_points: int
+    summary: Optional[str] = None
+    document_metadata: Dict[str, Any] = Field(default_factory=dict)
+    documents: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class StatusResponse(BaseModel):
@@ -55,9 +64,27 @@ class StatusResponse(BaseModel):
     storage_mode: str
     generation_model: str
     embedding_model: str
+    llm_models: List[str] = Field(default_factory=list, description="Generation models available to the pipeline")
     status: str = "online"
+
+
+class IndexedFilesResponse(BaseModel):
+    files: List[str] = Field(default_factory=list, description="Distinct source files indexed in the vector database")
+    total_files: int = 0
 
 
 class HealthResponse(BaseModel):
     status: str = "healthy"
     version: str = "1.0.0"
+
+
+class LogEntry(BaseModel):
+    id: int = Field(..., description="Monotonically increasing cursor of the log line")
+    ts: str = Field(..., description="Timestamp of the line as HH:MM:SS")
+    message: str = Field(..., description="Raw terminal line printed by the backend")
+
+
+class LogsResponse(BaseModel):
+    logs: List[LogEntry] = Field(default_factory=list, description="Terminal lines newer than the requested cursor")
+    cursor: int = Field(0, description="Latest cursor to use for subsequent polls")
+    busy: bool = Field(False, description="True when backend logged activity within the last few seconds")
