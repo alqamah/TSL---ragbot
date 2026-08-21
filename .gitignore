@@ -1,6 +1,5 @@
 .venv
 .vscode
-log
 io
 test
 qdrant_db

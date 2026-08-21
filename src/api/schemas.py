@@ -6,6 +6,7 @@ class QueryRequest(BaseModel):
     query: str = Field(..., min_length=1, description="The question in English, Hindi, or Hinglish")
     top_k: int = Field(default=3, ge=1, le=20, description="Number of context chunks to retrieve")
     show_sources: bool = Field(default=True, description="Whether to include retrieved source chunks in response")
+    model: Optional[str] = Field(default=None, description="Preferred Gemini generation model; falls back to the pipeline pool if it fails")
 
 
 class SourceCitation(BaseModel):
@@ -17,6 +18,7 @@ class SourceCitation(BaseModel):
 
 class LayerMetrics(BaseModel):
     embedding_model: Optional[str] = None
+    top_k: Optional[int] = Field(default=None, description="Number of context chunks requested")
     query_embedding_ms: float = 0.0
     qdrant_search_ms: float = 0.0
     total_retrieval_ms: float = 0.0
@@ -88,3 +90,15 @@ class LogsResponse(BaseModel):
     logs: List[LogEntry] = Field(default_factory=list, description="Terminal lines newer than the requested cursor")
     cursor: int = Field(0, description="Latest cursor to use for subsequent polls")
     busy: bool = Field(False, description="True when backend logged activity within the last few seconds")
+
+
+class GeminiModelInfo(BaseModel):
+    name: str = Field(..., description="Model identifier, e.g. gemini-2.0-flash")
+    display_name: str = Field("", description="Human-friendly model name")
+    input_token_limit: Optional[int] = None
+    output_token_limit: Optional[int] = None
+
+
+class ModelsResponse(BaseModel):
+    models: List[GeminiModelInfo] = Field(default_factory=list, description="Generation-capable models available to the configured API key")
+    total_models: int = 0

@@ -275,9 +275,24 @@ class RAGPipeline:
         result = self.generator.generate_answer(query=query, top_k=top_k, verbose=False)
         return result["answer"]
 
-    def ask(self, query: str, top_k: int = 3, show_sources: bool = True) -> Dict[str, Any]:
+    def ask(
+        self,
+        query: str,
+        top_k: int = 3,
+        show_sources: bool = True,
+        model: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """Complete RAG step: Retrieve context, synthesize answer, and log layer metrics."""
-        return self.generator.generate_answer(query=query, top_k=top_k, verbose=show_sources)
+        return self.generator.generate_answer(
+            query=query,
+            top_k=top_k,
+            verbose=show_sources,
+            model=model,
+        )
+
+    def list_available_models(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
+        """List generation-capable Gemini models available to the configured API key."""
+        return self.generator.list_available_models(force_refresh=force_refresh)
 
     def reset_database(self) -> Dict[str, Any]:
         """Delete and recreate the active collection to completely reset indexed vectors."""

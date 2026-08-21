@@ -7,6 +7,7 @@ class RAGAPIClient:
     """HTTP Client for interacting with the Industrial SOP RAG Assistant FastAPI backend."""
 
     DEFAULT_BASE_URL = "http://127.0.0.1:8000"
+    QUERY_TIMEOUT = 240
 
 
     def __init__(self, base_url: Optional[str] = None, timeout: int = 120):
@@ -69,8 +70,26 @@ class RAGAPIClient:
         except requests.exceptions.RequestException as e:
             return False, {"error": f"Reset request failed: {str(e)}"}
 
+    def list_models(self, force: bool = False) -> Tuple[bool, Dict[str, Any]]:
+        """Fetch generation-capable Gemini models available to the backend's API key."""
+        try:
+            resp = requests.get(
+                f"{self.base_url}/api/v1/models",
+                params={"force": str(force).lower()},
+                timeout=30,
+            )
+            if resp.status_code == 200:
+                return True, resp.json()
+            return False, {"error": f"HTTP {resp.status_code}: {resp.text}"}
+        except requests.exceptions.RequestException as e:
+            return False, {"error": str(e)}
+
     def query(
-        self, query_text: str, top_k: int = 3, show_sources: bool = True
+        self,
+        query_text: str,
+        top_k: int = 3,
+        show_sources: bool = True,
+        model: Optional[str] = None,
     ) -> Tuple[bool, Dict[str, Any]]:
         """Execute a semantic search and RAG synthesis query."""
         payload = {
@@ -78,11 +97,13 @@ class RAGAPIClient:
             "top_k": top_k,
             "show_sources": show_sources,
         }
+        if model:
+            payload["model"] = model
         try:
             resp = requests.post(
                 f"{self.base_url}/api/v1/query",
                 json=payload,
-                timeout=self.timeout,
+                timeout=self.QUERY_TIMEOUT,
             )
             if resp.status_code == 200:
                 return True, resp.json()
@@ -90,7 +111,7 @@ class RAGAPIClient:
             return False, {"error": f"Error ({resp.status_code}): {detail}"}
         except requests.exceptions.Timeout:
             return False, {
-                "error": "The backend request timed out (>120s). Render is likely still building and deploying your latest push or waking up from sleep. Please wait a minute and retry."
+                "error": "The backend request timed out (>240s). Gemini may be overloaded (503 retries); try again or pick a lighter model like a flash-lite variant."
             }
         except requests.exceptions.RequestException as e:
             return False, {"error": f"Connection failed: {str(e)}"}

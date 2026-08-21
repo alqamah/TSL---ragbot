@@ -95,6 +95,7 @@ if user_query:
                     query_text=user_query,
                     top_k=settings.get("top_k", 3),
                     show_sources=settings.get("show_sources", True),
+                    model=settings.get("model"),
                 )
 
                 if success:

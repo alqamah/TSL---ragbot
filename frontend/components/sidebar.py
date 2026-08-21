@@ -5,7 +5,6 @@ import streamlit as st
 from frontend.api_client import RAGAPIClient
 
 MAX_STREAM_LINES = 400
-STATUS_POLL_SECONDS = 3
 
 
 def _init_status_state():
@@ -13,11 +12,17 @@ def _init_status_state():
         st.session_state.backend_logs = []
     if "backend_log_cursor" not in st.session_state:
         st.session_state.backend_log_cursor = 0
+    if "gemini_models" not in st.session_state:
+        st.session_state.gemini_models = []
 
 
-@st.fragment(run_every=STATUS_POLL_SECONDS)
+@st.fragment
 def render_status_stream(client: RAGAPIClient):
-    """Live-stream the backend terminal output into the Current Status dropdown."""
+    """Show backend terminal output inside the Current Status dropdown.
+
+    No background polling: the stream only updates when a full app rerun is
+    triggered manually (e.g. via the 🔄 Refresh button or any other action).
+    """
     _init_status_state()
 
     ok, data = client.get_logs(st.session_state.backend_log_cursor)
@@ -49,7 +54,7 @@ def render_status_stream(client: RAGAPIClient):
             st.caption(f"Terminal stream unavailable — cannot reach `{client.base_url}`.")
             return
 
-        st.caption(f"Streaming backend terminal output · auto-refresh {STATUS_POLL_SECONDS}s")
+        st.caption("Mirrors the backend terminal · updates on 🔄 Refresh click (no background pinging)")
 
         if st.session_state.backend_logs:
             lines = [f"{entry['ts']} | {entry['message']}" for entry in st.session_state.backend_logs]
@@ -130,7 +135,13 @@ def render_sidebar(client: RAGAPIClient):
 
         col_ref, col_reset = st.columns(2)
         with col_ref:
-            if st.button("🔄 Refresh", use_container_width=True):
+            if st.button("🔄 Refresh", use_container_width=True, help="Re-fetch telemetry, backend terminal output, and the list of Gemini models available to the API key."):
+                _init_status_state()
+                models_ok, models_data = client.list_models(force=True)
+                if models_ok:
+                    st.session_state.gemini_models = models_data.get("models", [])
+                else:
+                    st.toast(f"Model list unavailable: {models_data.get('error', 'unknown error')}", icon="⚠️")
                 st.rerun()
         with col_reset:
             if st.button("🗑️ Reset DB", use_container_width=True, help="Wipe all indexed points and reset the collection."):
@@ -237,11 +248,30 @@ def render_sidebar(client: RAGAPIClient):
 
         # 4. Search Hyperparameters
         st.markdown("#### 🎛️ Retrieval Settings")
+
+        _init_status_state()
+        model_options = ["auto (pipeline default)"] + [
+            m["name"] for m in st.session_state.gemini_models
+        ]
+        selected_model = st.selectbox(
+            "🤖 Gemini Model",
+            options=model_options,
+            index=0,
+            help=(
+                "Model used to synthesize answers. 'auto' lets the pipeline use its default "
+                "with automatic fallback. Click 🔄 Refresh to fetch the list of models "
+                "available to the configured API key."
+            ),
+        )
+        if not st.session_state.gemini_models:
+            st.caption("Click 🔄 Refresh above to list all models available via the Gemini API.")
+
         top_k = st.slider("Context Chunks (top_k)", min_value=1, max_value=10, value=3, step=1)
         show_sources = st.checkbox("Include Source Citations", value=True)
 
         return {
             "top_k": top_k,
             "show_sources": show_sources,
+            "model": None if selected_model.startswith("auto") else selected_model,
             "is_backend_online": is_healthy,
         }

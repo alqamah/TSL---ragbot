@@ -13,6 +13,7 @@ from src.api.schemas import (
     IngestFileRequest,
     IngestResponse,
     LogsResponse,
+    ModelsResponse,
     QueryRequest,
     QueryResponse,
     StatusResponse,
@@ -73,6 +74,22 @@ def stream_terminal_logs(
     )
 
 
+@router.get("/api/v1/models", response_model=ModelsResponse, tags=["Telemetry & Status"])
+def list_available_models(
+    force: bool = Query(False, description="Bypass the 10-minute cache and re-query the Gemini API"),
+    pipeline: RAGPipeline = Depends(get_pipeline),
+):
+    """List generation-capable Gemini models available via the configured API key (free tier)."""
+    try:
+        models = pipeline.list_available_models(force_refresh=force)
+        return ModelsResponse(models=models, total_models=len(models))
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to list models: {str(e)}",
+        )
+
+
 @router.get("/api/v1/files", response_model=IndexedFilesResponse, tags=["Telemetry & Status"])
 def list_indexed_files(pipeline: RAGPipeline = Depends(get_pipeline)):
     """List the distinct source files currently present in the vector database."""
@@ -112,6 +129,7 @@ def query_rag(
             query=request.query,
             top_k=request.top_k,
             show_sources=request.show_sources,
+            model=request.model,
         )
         return QueryResponse(
             query=result["query"],

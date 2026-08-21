@@ -1,0 +1,1134 @@
+================================================================================
+TIMESTAMP : 2026-08-14 19:48:44
+QUESTION  : कंप्रेसर का एयर प्रेशर कैसे सेट करते हैं और स्क्रू घुमाने पर कितना प्रेशर बढ़ता है?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 862.91 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 5.41 ms
+  * Total Retrieval   : 868.33 ms
+  * Prompt Assembly   : 0.06 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 26880.55 ms (26.88s)
+  * Total Latency     : 27748.99 ms (27.75s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 205-208 | Similarity: 0.7149
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 201-204 | Similarity: 0.6329
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.6205
+--------------------------------------------------------------------------------
+RESPONSE:
+प्रदान किए गए संदर्भ (Context) के अनुसार, कंप्रेसर का एयर प्रेशर सेट करने की प्रक्रिया और स्क्रू घुमाने पर बढ़ने वाले प्रेशर का विवरण निम्नलिखित है:
+
+### **कंप्रेसर का एयर प्रेशर सेट करने की चरण-दर-चरण प्रक्रिया:**
+
+1. **तैयारी और सुरक्षा:** प्रेशर सेट करने से पहले इंजन को रोकें (बंद करें)। कंप्रेसर का दरवाजा खोलें और स्टैंड को ठीक से रखें। कंप्रेसर के चलने (रनिंग) की स्थिति में प्रेशर सेट न करें।
+2. **प्रेशर हटाना:** डिस्चार्ज वाल्व को खोलकर कंप्रेसर के पूरे प्रेशर को हटा दें (रिलीज़ कर दें)।
+3. **चेक नट ढीला करना:** प्रेशर रेगुलेटर वाल्व के चेक नट (check nut) को ढीला करें।
+4. **प्रेशर सेट करना:**
+   * **प्रेशर बढ़ाने के लिए:** स्क्रू को टाइट (कसें) करें।
+   * **प्रेशर घटाने के लिए:** स्क्रू को ढीला करें।
+5. **सुरक्षित करना और जांचना:** प्रेशर सेट करने के बाद चेक नट को वापस ठीक से टाइट करें। इसके बाद इंजन को शुरू करके प्रेशर की जांच करें। यदि फिर से सुधार की आवश्यकता हो, तो इसी प्रक्रिया को दोबारा दोहराएं।
+
+---
+
+### **स्क्रू घुमाने पर प्रेशर में वृद्धि:**
+* स्क्रू को कसने के दौरान सावधानी बरतें, क्योंकि स्क्रू को **एक बार घुमा कर टाइट करने पर प्रेशर में 4 किलो/सेमी² (4 kg/cm²)** की वृद्धि होती है।
+
+---
+**स्रोत (Source):** 
+यह जानकारी **[Source 1]: 01_test.XLSX (Rows: 205-208, Sheet: Hindi Sop)** से ली गई है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-14 19:48:49
+QUESTION  : What safety precautions are required before marching the mobile crane?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 710.24 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 5.06 ms
+  * Total Retrieval   : 715.31 ms
+  * Prompt Assembly   : 0.07 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 3677.66 ms (3.68s)
+  * Total Latency     : 4393.08 ms (4.39s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.6370
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6240
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.6224
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, there is no information or Standard Operating Procedure (SOP) regarding **marching the mobile crane** or safety precautions specific to a mobile crane. 
+
+The provided sources (**Source 1, Source 2, and Source 3** from `01_test.XLSX`) only cover safety guidelines and standard operating procedures for **compressor inspection, startup, and servicing/maintenance**.
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 11:43:14
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 2346.65 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 18.69 ms
+  * Total Retrieval   : 2365.34 ms
+  * Prompt Assembly   : 0.07 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 7541.23 ms (7.54s)
+  * Total Latency     : 9906.66 ms (9.91s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 29-32 | Similarity: 0.6725
+  [2] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 33-36 | Similarity: 0.6627
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6563
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, here is the step-by-step procedure to start and operate the compressor:
+
+---
+
+### **1. Pre-Start Checks & Safety Preparation**
+* **PPE:** Wear required personal protective equipment (safety helmet, hand gloves, safety shoes, and safety glasses) **[Source 3]**.
+* **Levels & Connections:** Check the engine oil level, radiator water level, battery condition, and self-starter connections **[Source 3]**.
+  * *Note: Use an aluminum ladder when checking the radiator water level **[Source 3]**.*
+* **Valve Positions:** 
+  * Ensure the air delivery line valve is kept closed before starting the engine **[Source 2, Source 3]**.
+  * Keep the positive isolation valve in the OFF position **[Source 3]**.
+
+---
+
+### **2. Starting the Compressor**
+* Turn ON the ignition switch using the key, then press the starting switch to start the compressor **[Source 1, Source 3]**.
+
+---
+
+### **3. Warm-up and Loading**
+* **Warm-up:** Run the compressor for 5 minutes to let the compressor oil warm up **[Source 3]**.
+* **Loading:** Ensure the air delivery valve remains closed, and once the pressure reaches $4\text{ kg/cm}^2$, press/operate the loading switch/valve to put the compressor on load **[Source 2, Source 3]**.
+
+---
+
+### **4. Running Checks & Precautions**
+* **Door Safety:** Keep the compressor doors closed while it is running **[Source 2]**.
+* **Inspection of Gauges & Operation:** Check the machine sound, body vibration, and verify all gauges are functioning properly (engine oil pressure gauge, water temperature gauge, air discharge temperature gauge, hour meter, ampere meter, etc.) **[Source 1, Source 2]**.
+* **Leakage Checks:** Check for any oil leakages or abnormalities. If a leak is detected, stop the compressor immediately and inform the relevant section **[Source 1, Source 3]**.
+
+---
+
+**Sources:**
+* `09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx` **[Source 1 & Source 2]**
+* `01_test.XLSX` **[Source 3]**
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 12:11:16
+QUESTION  : compressor kaise start karte hain? mention all the safety points regarding compressor SOP
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 3754.42 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 20.42 ms
+  * Total Retrieval   : 3774.85 ms
+  * Prompt Assembly   : 0.09 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 264960.68 ms (264.96s)
+  * Total Latency     : 268735.64 ms (268.74s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.8049
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.8049
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.7920
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए SOP (मानक संचालन प्रक्रिया) संदर्भ के अनुसार कंप्रेसर शुरू करने की प्रक्रिया और उससे संबंधित सभी सुरक्षा बिंदु नीचे दिए गए हैं:
+
+---
+
+### **कंप्रेसर को स्टार्ट करने की प्रक्रिया (Operational Steps):**
+1. **शुरुआती जाँच (Pre-checks):** 
+   - इंजन ऑइल का लेवल, रेडिएटर के पानी का लेवल, बैटरी की कंडीशन और सेल्फ स्टार्टर के कनेक्शन आदि की अच्छी तरह जाँच कर लें।
+   - रेडिएटर के पानी के लेवल की जाँच के लिए एल्युमिनियम सीढ़ी का प्रयोग करें।
+   - सुनिश्चित करें कि फ्यूल सिस्टम से हवा पूरी तरह निकली हो ताकि बैटरी डिस्चार्ज न हो।
+2. **वाल्व की स्थिति:** पॉज़िटिव आइसोलेशन वाल्व को 'ऑफ' (Off) रखें और एयर डिलीवरी वाल्व को बंद रखें।
+3. **इग्निशन एवं स्टार्ट:** 
+   - पॉज़िटिव आइसोलेशन स्विच ऑन करें।
+   - इग्निशन स्विच को 'ऑन' (ON) करें और फिर स्टार्टिंग स्विच दबाएँ।
+4. **लोडिंग स्विच:** जब इंजन ऑइल का प्रेशर **4 kg/cm²** हो जाए, तब लोडिंग स्विच दबाएँ।
+5. **वार्म-अप और लीकेज जाँच:** कंप्रेसर ऑइल को गरम होने के लिए कंप्रेसर को **5 मिनट** के लिए स्टार्ट रखें और किसी भी प्रकार के लीकेज या असामान्यता (Abnormality) की जाँच करें।
+
+---
+
+### **सुरक्षा बिंदु (Safety Points):**
+* **व्यक्तिगत सुरक्षा उपकरण (PPE):** सिर और अंगुलियों में चोट से बचाव के लिए सेफ़्टी हेलमेट, हाथ के दस्ताने (Hand Gloves), सुरक्षा जूते (Safety Shoes) और सुरक्षा चश्मे का अनिवार्य रूप से प्रयोग करें।
+* **फिसलन और गिरने से बचाव:** जूते के स्लिप होने तथा साइड डोर के गिरने से चोट लगने का जोखिम रहता है, अतः सतर्क रहें।
+* **अनपेक्षित स्टार्ट से सुरक्षा:** किसी अन्य व्यक्ति द्वारा इंजन स्टार्ट करने की वजह से होने वाली दुर्घटना से बचने के लिए पॉज़िटिव आइसोलेशन स्विच का उपयोग करें।
+* **विजुअल चेकिंग के दौरान सुरक्षा:** कंप्रेसर के दरवाज़े खोलते समय स्टैंड को ठीक से लगाएं और सुनिश्चित करें कि विज़ुअल चेकिंग के दौरान मशीन पूरी तरह बंद हो।
+* **चलने वाले भाग और बैटरी:** बैटरी की फ्लैशिंग और इंजन के घूमने/चलने वाले भागों से चोट से बचें; सभी इलेक्ट्रिकल कनेक्शन सही रखें।
+* **डिस्चार्ज वाल्व होसेस:** डिस्चार्ज वाल्व होसेस को हमेशा चेन के साथ बांधकर रखें।
+
+---
+**स्रोत (Source):** 
+- `01_Compressor_Maintenance_SOP.XLSX` (Rows: 13-16, Sheet: Hindi Sop)
+- `01_test.XLSX` (Rows: 13-16, 197-200, Sheet: Hindi Sop)
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 19:32:49
+QUESTION  : कंप्रेसर को स्टार्ट कैसे करें?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 595.11 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 34.06 ms
+  * Total Retrieval   : 629.19 ms
+  * Prompt Assembly   : 0.05 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 37429.6 ms (37.43s)
+  * Total Latency     : 38058.91 ms (38.06s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 29-32 | Similarity: 0.7411
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.7239
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए दस्तावेजों के आधार पर, कंप्रेसर को स्टार्ट करने की मानक संचालन प्रक्रिया (SOP) और सुरक्षा सावधानियां निम्नलिखित चरणों में दी गई हैं:
+
+### **1. स्टार्ट करने से पहले की तैयारियां और सुरक्षा (Pre-start & Safety Checks):**
+* **दस्तावेजों की जांच:** सबसे पहले इंजन ऑयल लेवल, रेडिएटर के पानी का लेवल, बैटरी की कंडीशन और सेल्फ स्टार्टर के कनेक्शन की जांच कर लें। *(स्रोत: [Source 2])*
+* **सीढ़ी का प्रयोग:** रेडिएटर के पानी के लेवल की जांच करने के लिए एल्युमिनियम सीढ़ी का प्रयोग करें। *(स्रोत: [Source 2])*
+* **व्यक्तिगत सुरक्षा उपकरण (PPE):** सिर और उंगलियों में चोट की संभावना से बचने के लिए सेफ्टी हेलमेट, हाथ के दस्ताने, सुरक्षा जूते और चश्मे का प्रयोग करें। *(स्रोत: [Source 2])*
+* **आइसोलेशन:** किसी अन्य व्यक्ति द्वारा अचानक इंजन स्टार्ट करने से होने वाली चोट से बचने के लिए पॉजिटिव आइसोलेशन स्विच को ऑन करें। *(स्रोत: [Source 2])*
+
+### **2. स्टार्ट करने की चरण-दर-चरण प्रक्रिया (Starting Procedure):**
+1. पॉजिटिव आइसोलेशन वाल्व को ऑफ (OFF) रखें और एयर डिलीवरी वाल्व को बंद रखें। *(स्रोत: [Source 2])*
+2. इग्निशन स्विच/चाभी को ऑन (ON) करें और फिर स्टार्टिंग स्विच दबाएं। *(स्रोत: [Source 1] और [Source 2])*
+3. जब इंजन ऑयल का प्रेशर **4kg/cm²** हो जाए, तब लोडिंग स्विच को दबाएं। *(स्रोत: [Source 2])*
+4. कंप्रेसर ऑयल को गर्म होने के लिए कंप्रेसर को **5 मिनट** के लिए स्टार्ट रखें। *(स्रोत: [Source 2])*
+
+### **3. स्टार्ट होने के बाद की जांच (Post-start Checks):**
+* कंप्रेसर चालू होने पर मशीन की आवाज (साउंड), बॉडी वाइब्रेशन और इंजन के सभी गेज (जैसे इंजन ऑयल प्रेशर गेज, पानी का तापमान गेज, एयर डिस्चार्ज तापमान गेज, घंटा मीटर, एम्पीयर मीटर आदि) का निरीक्षण करें। *(स्रोत: [Source 1])*
+* किसी भी तरह के तेल के लीकेज या असामान्यता (Abnormality) की जांच करें। *(स्रोत: [Source 1] और [Source 2])*
+* **महत्वपूर्ण निर्देश:** यदि किसी भी प्रकार का तेल लीकेज मिलता है, तो कंप्रेसर को तुरंत बंद करें और संबंधित सेक्शन को सूचित करें। *(स्रोत: [Source 1])*
+
+---
+**स्रोत (Sources):**
+* **[Source 1]:** *09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx (Sheet1)*
+* **[Source 2]:** *01_Compressor_Maintenance_SOP.XLSX (Hindi Sop)*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 19:35:04
+QUESTION  : कंप्रेसर को स्टार्ट कैसे करें?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 560.83 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 23.87 ms
+  * Total Retrieval   : 584.72 ms
+  * Prompt Assembly   : 0.09 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 38205.54 ms (38.21s)
+  * Total Latency     : 38790.4 ms (38.79s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 29-32 | Similarity: 0.7411
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.7239
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए दस्तावेजों के आधार पर कंप्रेसर को स्टार्ट करने की मानक संचालन प्रक्रिया (SOP) नीचे दी गई है:
+
+### **1. स्टार्ट करने से पहले की तैयारियाँ और सुरक्षा (Pre-start Checks & Safety):**
+* इंजन ऑयल लेवल, रेडिएटर के पानी का लेवल, बैटरी की कंडीशन और सेल्फ-स्टार्टर के कनेक्शन की अच्छी तरह जाँच कर लें। **[Source 2]**
+* रेडिएटर के पानी के लेवल की जाँच के लिए हमेशा **एल्युमिनियम सीढ़ी** का प्रयोग करें। **[Source 2]**
+* सुरक्षा के लिए **सेफ्टी हेलमेट, हाथ के दस्ताने, सुरक्षा जूते और चश्मे** का अनिवार्य रूप से प्रयोग करें। **[Source 2]**
+* किसी अन्य व्यक्ति द्वारा गलती से इंजन स्टार्ट करने के कारण होने वाली चोट के जोखिम से बचने के लिए **पॉज़िटिव आइसोलेशन स्विच ऑन** करें। **[Source 2]**
+
+### **2. स्टार्ट करने की प्रक्रिया (Starting Procedure):**
+* सबसे पहले **पॉज़िटिव आइसोलेशन वाल्व को ऑफ** रखें और **एयर डिलीवरी वाल्व को बंद** रखें। **[Source 2]**
+* इग्निशन चाभी (Ignition Switch) को ऑन करें और फिर **स्टार्टिंग स्विच** दबाएँ। **[Source 1, Source 2]**
+* जब इंजन ऑयल का प्रेशर **4kg/cm²** हो जाए, तब **लोडिंग स्विच** को दबाएँ। **[Source 2]**
+* कंप्रेसर ऑयल को गर्म होने के लिए कंप्रेसर को **5 मिनट** के लिए चालू (स्टार्ट) रखें। **[Source 2]**
+
+### **3. चालू अवस्था में जाँच (Checks During Running Condition):**
+* कंप्रेसर चालू होने पर मशीन की आवाज़ (साउंड), बॉडी वाइब्रेशन और इंजन के सभी गेज (जैसे: इंजन ऑयल प्रेशर गेज, पानी का तापमान गेज, एयर डिस्चार्ज तापमान गेज, घंटा मीटर, एम्पीयर मीटर आदि) का निरीक्षण करें। **[Source 1]**
+* किसी भी प्रकार के तेल (ऑयल) के लीकेज या असामान्यता (Abnormality) की जाँच करें। यदि कोई लीकेज पाया जाता है, तो कंप्रेसर को तुरंत बंद करें और संबंधित सेक्शन को सूचित करें। **[Source 1, Source 2]**
+
+---
+**स्रोत (Sources):**
+* **[Source 1]:** 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx (Sheet1)
+* **[Source 2]:** 01_test.XLSX (Hindi Sop)
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 19:36:25
+QUESTION  : कंप्रेसर का एयर प्रेशर कैसे सेट करते हैं और स्क्रू घुमाने पर कितना प्रेशर बढ़ता है?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 2471.66 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 21.9 ms
+  * Total Retrieval   : 2493.58 ms
+  * Prompt Assembly   : 0.09 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 39989.52 ms (39.99s)
+  * Total Latency     : 42483.23 ms (42.48s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 205-208 | Similarity: 0.7149
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 205-208 | Similarity: 0.7149
+  [3] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 33-36 | Similarity: 0.6346
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए संदर्भ **[Source 1]: 01_test.XLSX** और **[Source 2]: 01_Compressor_Maintenance_SOP.XLSX** के अनुसार, कंप्रेसर का एयर प्रेशर सेट करने की प्रक्रिया और स्क्रू घुमाने पर प्रेशर में होने वाली वृद्धि का विवरण नीचे दिया गया है:
+
+### स्क्रू घुमाने पर प्रेशर में वृद्धि:
+* स्क्रू को **एक बार घुमा कर टाइट करने पर प्रेशर में 4 किलो/सेमी² (4 kg/cm²)** की वृद्धि होती है। इसलिए स्क्रू को कसने के दौरान विशेष सावधानी बरतनी चाहिए।
+
+---
+
+### कंप्रेसर का एयर प्रेशर सेट करने की चरण-दर-चरण प्रक्रिया:
+
+1. **इंजन को रोकें:** प्रेशर सेट करने से पहले हमेशा इंजन को बंद करें। दरवाजा खोलें और स्टैंड रखें। (ध्यान रहे कि कंप्रेसर के चलने की स्थिति में प्रेशर सेट नहीं करना है)।
+2. **प्रेशर को शून्य करें:** डिस्चार्ज वाल्व खोलकर कंप्रेसर के पूरे प्रेशर को हटा दें।
+3. **चेक नट ढीला करें:** प्रेशर रेगुलेटर वाल्व के चेक नट को ढीला करें।
+4. **प्रेशर सेट करें:** 
+   * प्रेशर **बढ़ाने** के लिए स्क्रू को **टाइट (कसें)** करें।
+   * प्रेशर **घटाने** के लिए स्क्रू को **ढीला** करें।
+5. **चेक नट टाइट करें और जांचें:** प्रेशर सेट करने के बाद चेक नट को ठीक से वापस टाइट कर दें। इसके बाद इंजन को शुरू करके प्रेशर की जांच करें।
+6. **आवश्यकता पड़ने पर दोहराएं:** यदि प्रेशर अभी भी सही नहीं मिला है, तो दोबारा सेट करने के लिए उपरोक्त प्रक्रिया को फिर से दोहराएं।
+
+### महत्वपूर्ण सुरक्षा सावधानियां (कार्य के दौरान):
+* चलते हुए भागों (moving parts) के कारण चोट लग सकती है, इसलिए सावधानी बरतें।
+* इंजन और कंप्रेसर के गर्म होने के कारण जलने का खतरा रहता है।
+* स्पैनर के फिसलने के कारण भी चोट लग सकती है, अतः सही टूल्स का सुरक्षित उपयोग करें।
+
+**स्रोत (Source):**
+* **01_test.XLSX (Rows: 205-208) [Sheet: Hindi Sop]**
+* **01_Compressor_Maintenance_SOP.XLSX (Rows: 205-208) [Sheet: Hindi Sop]**
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 19:39:17
+QUESTION  : What safety precautions are required before marching the mobile crane?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1846.95 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 19.21 ms
+  * Total Retrieval   : 1866.17 ms
+  * Prompt Assembly   : 0.02 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 170329.2 ms (170.33s)
+  * Total Latency     : 172195.43 ms (172.20s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 04_Heavy_Mobile_tyre_mounted_Crane_SOP.DOC | Sheet: N/A | Rows: 297-300 | Similarity: 0.7364
+  [2] 02_test.DOC | Sheet: N/A | Rows: 297-300 | Similarity: 0.7364
+  [3] 05 Mibile Crane working & operation ( F15 & TRX23).doc | Sheet: N/A | Rows: 381-384 | Similarity: 0.7327
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, here are the safety precautions required when marching a mobile crane, structured by their respective sources:
+
+### **From Source 1 & 2: [04_Heavy_Mobile_tyre_mounted_Crane_SOP.DOC] / [02_test.DOC]**
+*   **Check Road Safety Timings:** Always check and verify the road safety timings before/while marching the crane.
+*   **Understand Permits and Hazards:** Thoroughly understand the E-permit and the hazards associated with the six directions (*six-directional hazards*) before proceeding.
+
+### **From Source 3: [05 Mibile Crane working & operation ( F15 & TRX23).doc]**
+*   **Use Safety Belts:** Always wear and use a safety belt while marching the crane on the road.
+*   **Avoid Long-Distance Reversing:** Do not march the crane in the reverse direction for long distances.
+*   **Adhere to Timing Restrictions:** Do not operate or run the crane during restricted safety timings (*safety hours*).
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 20:15:23
+QUESTION  : What safety precautions are required during air compressor maintenance?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 842.54 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 22.99 ms
+  * Total Retrieval   : 865.54 ms
+  * Prompt Assembly   : 0.07 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 6562.33 ms (6.56s)
+  * Total Latency     : 7427.98 ms (7.43s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_test.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.6744
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.6744
+  [3] 01_test.XLSX | Sheet: N/A | Rows: 57-60 | Similarity: 0.6742
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context (**Source 1: 01_test.XLSX**, **Source 2: 01_Compressor_Maintenance_SOP.XLSX**, and **Source 3: 01_test.XLSX**), the required safety precautions during air compressor servicing and maintenance are as follows:
+
+### 1. Work Permits, Isolation, and Hazard Assessment
+* **Work Permit:** Obtain an E-permit to work before starting any servicing or maintenance.
+* **Positive Isolation:** Ensure positive isolation is carried out on the compressor.
+* **Pre-job Discussion & Hazard Identification:** Discuss all work-related safety precautions beforehand and ensure the identification of 6-directional hazards (छह दिशा के खतरे).
+
+### 2. Personal Protective Equipment (PPE) & Clothing
+* **Mandatory PPE:** Wear required personal protective equipment during work, which includes:
+  * Helmet
+  * Safety shoes
+  * Protective safety goggles/glasses (to prevent injuries such as oil splashing into eyes)
+  * Fluorescent jacket
+  * Hand gloves and rubber hand gloves
+* **Clothing:** Do not wear loose clothing.
+
+### 3. Equipment Placement & Tool Safety
+* **Location:** Place the compressor on a designated servicing pit or shed.
+* **Wheel Chocks:** Ensure that scotch blocks (wheel chocks) are placed on both rear tires in opposite directions after positioning the compressor.
+* **Tool Inspection:** Inspect all tools and equipment before beginning work to prevent accidents (e.g., injuries from slipping spanners).
+
+---
+*Sources: Derived from Source 1 & Source 2 (Sheet: Hindi Sop, Step 1) and Source 3 (Sheet: Hindi Sop, Step 7).*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 20:15:58
+QUESTION  : कंप्रेसर का रखरखाव करते समय किन सुरक्षा सावधानियों का पालन करना चाहिए?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1002.98 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 20.81 ms
+  * Total Retrieval   : 1023.8 ms
+  * Prompt Assembly   : 0.04 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 32196.73 ms (32.20s)
+  * Total Latency     : 33220.64 ms (33.22s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.7210
+  [2] 01_test.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.7210
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए संदर्भों (**01_Compressor_Maintenance_SOP.XLSX** और **01_test.XLSX** के 'Hindi Sop' शीट) के अनुसार, कंप्रेसर के रखरखाव और सर्विसिंग के दौरान निम्नलिखित सुरक्षा सावधानियों और प्रक्रियाओं का पालन किया जाना चाहिए:
+
+### **1. कार्य शुरू करने से पहले की सावधानियां (Pre-work Precautions):**
+* **E-परमिट:** काम शुरू करने से पहले काम करने के लिए **E-परमिट** लें।
+* **कंप्रेसर की स्थिति:** कंप्रेसर को सर्विसिंग पीट/शेड पर रखें।
+* **पॉजिटिव आइसोलेशन:** कंप्रेसर का पॉजिटिव आइसोलेशन सुनिश्चित करें।
+* **सुरक्षा चर्चा:** काम शुरू करने से पहले काम से संबंधित सुरक्षा सावधानियों के बारे में चर्चा करें।
+* **खतरे की पहचान:** छह दिशा के खतरे की पहचान (6-direction hazard identification) सुनिश्चित कर लें।
+* **उपकरणों की जांच:** काम शुरू करने से पहले सभी उपकरणों की ठीक से जांच कर लें।
+
+### **2. व्यक्तिगत सुरक्षा और पीपीई (PPE) का उपयोग:**
+काम के दौरान दुर्घटना और चोट से बचने के लिए निम्नलिखित सुरक्षा उपकरणों (PPEs) का उपयोग अनिवार्य रूप से करें:
+* फ्लोरोसेंट जैकेट
+* हाथ दस्ताने (Hand gloves) और रबर हैंड ग्लव्स
+* हेलमेट
+* सुरक्षा जूता (Safety shoes)
+* चश्मा
+* **ढीले वस्त्र न पहनें** (ढीले कपड़े पहनने से बचें)।
+
+### **3. कंप्रेसर की स्थिरता (Wheel Chocking):**
+* यह सुनिश्चित करें कि कंप्रेसर को निर्धारित स्थान पर रखने के बाद, उसके विपरीत दिशा में **दोनों पिछले टायरों में स्कॉच ब्लॉक (Scotch Block)** लगाया गया हो ताकि वह हिले नहीं।
+
+### **जिम्मेदारी (Responsibility):**
+* इन सभी सुरक्षा सावधानियों और प्रक्रियाओं को सुनिश्चित करने की जिम्मेदारी **सुपरवाइज़र** की है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 20:16:39
+QUESTION  : Tower light maintenance karte waqt electrical hazard se kaise bache?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 694.56 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 19.28 ms
+  * Total Retrieval   : 713.84 ms
+  * Prompt Assembly   : 0.02 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 37901.42 ms (37.90s)
+  * Total Latency     : 38615.35 ms (38.62s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 03_Tower_light_maintenance_work.xlsx | Sheet: N/A | Rows: 5-8 | Similarity: 0.6833
+  [2] 03_Tower_light_maintenance_work.xlsx | Sheet: N/A | Rows: 45-48 | Similarity: 0.6768
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए संदर्भ (Context) के आधार पर, टॉवर लाइट के रखरखाव (maintenance/servicing) के दौरान खतरों (जिसमें इलेक्ट्रिकल व अन्य ऊर्जा संबंधी खतरे शामिल हैं) से बचने के लिए निम्नलिखित सुरक्षा प्रक्रियाओं का पालन करना चाहिए:
+
+* **पॉज़िटिव इसोलेसन (Positive Isolation) करना:** 
+  लाइट टॉवर की सर्विसिंग करते समय सुरक्षा का पूरा ध्यान रखें और **पॉज़िटिव इसोलेसन (Positive Isolation)** करने के बाद ही कार्य शुरू करें। यह किसी भी संभावित बिजली या ऊर्जा के खतरे से बचने के लिए सबसे महत्वपूर्ण कदम है। *(स्रोत: [Source 2])*
+
+* **टॉवर लाइट को चालू करने से पहले जांच (Inspection):**
+  * **आंतरिक जांच:** टॉवर लाइट को चालू करने से पहले उसके दरवाजे को खोलें और आंतरिक जांच सुनिश्चित करें। *(स्रोत: [Source 1])*
+  * **बाहरी जांच:** बाहरी जांच करें जिसमें रोशनी, किसी भी प्रकार की क्षति (damage), स्लिंग की स्थिति, बूम की स्थिति, पहिये, टोइंग आर्म, ब्रेक, टॉवर लॉक और दरवाज़े के लॉक आदि की जांच शामिल है। *(स्रोत: [Source 1])*
+
+* **सर्विसिंग के दौरान स्थिरता सुनिश्चित करना:**
+  * गिरने या झुकने के कारण लगने वाली चोटों से बचने के लिए टॉवर लाइट को सर्विसिंग पीट पर रखें।
+  * दोनों तरफ के टायरों में **स्कॉच ब्लॉक** लगाएं।
+  * सामने और साइड में स्क्रू स्टैंड रखें और पिन लॉक करें। *(स्रोत: [Source 2])*
+
+**नोट/कमी:** दिए गए संदर्भ में सीधे तौर पर "इलेक्ट्रिकल हैज़ार्ड" (electrical hazard) शब्द का विशेष रूप से उल्लेख नहीं है, लेकिन विद्युत सुरक्षा सुनिश्चित करने के लिए **"पॉज़िटिव इसोलेसन" (Positive Isolation)** करने की अनिवार्य प्रक्रिया बताई गई है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-15 20:34:08
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 979.46 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 20.0 ms
+  * Total Retrieval   : 999.47 ms
+  * Prompt Assembly   : 0.05 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 35668.67 ms (35.67s)
+  * Total Latency     : 36668.26 ms (36.67s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 29-32 | Similarity: 0.6725
+  [2] 09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MAHINE & TOWER LIGHT).xlsx | Sheet: N/A | Rows: 33-36 | Similarity: 0.6627
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6563
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided standard operating procedures, here is the step-by-step procedure on how to start the compressor safely and correctly:
+
+### **Phase 1: Pre-Start Inspection & Safety Preparation**
+1. **Wear Proper PPE:** Ensure you are wearing a safety helmet, hand gloves, safety shoes, and protective goggles to prevent injuries from slipping or falling side doors. *(Source 3)*
+2. **Perform Level Checks:** Check the engine oil level, radiator water level (use an aluminum ladder to safely check this), battery condition, and self-starter connections. *(Source 3)*
+3. **Set Valves & Switches:** 
+   * Keep the positive isolation valve **OFF** and turn the positive isolation switch **ON**. *(Source 3)*
+   * Ensure the **air delivery line valve is completely closed** before starting the engine. *(Source 2, Source 3)*
+
+---
+
+### **Phase 2: Starting the Compressor**
+4. **Turn the Ignition:** Turn on the ignition switch/key, and then press the starting switch to start the compressor. *(Source 1, Source 3)*
+5. **Keep Doors Closed:** Ensure the compressor side doors are kept closed while the compressor is running. *(Source 2)*
+6. **Engage Load:** Once the pressure reaches **4 kg/cm²**, press/operate the loading valve/switch to put the compressor on load. *(Source 2, Source 3)*
+7. **Warm-up Period:** Let the compressor run for **5 minutes** to allow the compressor oil to warm up. *(Source 3)*
+
+---
+
+### **Phase 3: Post-Start Monitoring & Inspection**
+8. **Check Gauges & Machine Condition:** While the compressor is running, inspect the following:
+   * Engine oil pressure gauge, water temperature gauge, air discharge temperature gauge, hour meter, and ampere meter. *(Source 1)*
+   * Listen for any abnormal machine sound, body vibration, or overall gauge functionality. *(Source 1, Source 2)*
+9. **Leakage Check:** Inspect the system closely for any kind of leakage (oil, water, etc.). 
+   * *Note:* If any leakage is detected, **immediately shut down the compressor** and inform the concerned section. *(Source 1, Source 3)*
+
+---
+
+### **Sources Derived From:**
+* **[Source 1 & 2]:** *09 CHECKING OF EQUIPMENT (COMPRESSOR, DG WELDING MACHINE & TOWER LIGHT).xlsx (Sheet1)*
+* **[Source 3]:** *01_Compressor_Maintenance_SOP.XLSX (Hindi Sop)*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-18 18:50:29
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1172.66 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 6.52 ms
+  * Total Retrieval   : 1179.18 ms
+  * Prompt Assembly   : 0.01 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * LLM Synthesis     : 12487.41 ms (12.49s)
+  * Total Latency     : 13666.66 ms (13.67s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, there is no information or documentation available regarding the Standard Operating Procedure (SOP) for starting the compressor. 
+
+**Missing Information:**
+* The specific type/model of the compressor (e.g., reciprocating, rotary screw, centrifugal).
+* The relevant operating manual, technical documentation, or SOP document detailing the pre-start checks, safety precautions, and starting sequence.
+
+Please provide the relevant documentation or context to receive a step-by-step procedure.
+
+**Source:** None (Context is empty).
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-18 18:53:12
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 896.31 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 7.61 ms
+  * Total Retrieval   : 903.94 ms
+  * Prompt Assembly   : 0.11 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 41167.78 ms (41.17s)
+  * Total Latency     : 42071.88 ms (42.07s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6563
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 241-244 | Similarity: 0.6530
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-204 | Similarity: 0.6528
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided Standard Operating Procedure (SOP) documents, here is the step-by-step procedure on how to start the compressor:
+
+### 1. Pre-Start Checks and Preparation
+*   **Inspect Levels & Connections:** Check the engine oil level, radiator water level, battery condition, and self-starter connections. Use an aluminum ladder specifically to check the radiator water level. **[Source 1]**
+*   **Check Battery Tightness:** Ensure the battery connections are tight. **[Source 3]**
+*   **Position Valves:** Keep the positive isolation valve turned **OFF** and ensure the air delivery/discharge valve is **closed**. **[Source 1, Source 3]**
+*   **Secure Doors and Area:** Close the side doors of the engine before starting. Do not allow any unauthorized persons to stand nearby. **[Source 3]**
+*   **Wear PPE:** Put on safety helmets, hand gloves, safety shoes, and safety glasses to prevent injuries from slipping or falling doors. **[Source 1]**
+*   **Isolation Switch:** Turn ON the positive isolation switch (to prevent accidental starting by anyone else). **[Source 1]**
+
+### 2. Starting Procedure
+*   **Ignition & Startup:** Turn the ignition switch **ON**, and then press the starting switch. **[Source 1]**
+*   **Engage Loading:** Once the engine oil pressure reaches **4 kg/cm²**, press the loading switch. **[Source 1]**
+*   **Warm-up:** Let the compressor run for **5 minutes** to warm up the compressor oil. **[Source 1]**
+*   **Safety Warning:** Do not inspect or check any mechanical parts while the compressor is running. **[Source 3]**
+
+### 3. Post-Start Inspection and Operation
+*   **Leakage Check:** Inspect the unit for any leaks or abnormalities after starting. **[Source 1]**
+*   **Pressure Gauge Check:** Verify the air pressure on the panel board gauge. It should show **10 kg/cm²**. **[Source 3]**
+*   **Discharge Valve Operation:** Slowly open the discharge valve and verify the pressure. The pressure in this state must be a minimum of **4 kg/cm²**. Ensure absolutely no one is standing directly in front of the discharge valve. **[Source 3]**
+
+---
+*Derived strictly from **[Source 1]: 01_Compressor_Maintenance_SOP.XLSX (Rows: 13-16)** and **[Source 3]: 01_Compressor_Maintenance_SOP.XLSX (Rows: 201-204)**.*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-18 19:45:05
+QUESTION  : how to start the compressor
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1385.85 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 473.44 ms
+  * Total Retrieval   : 1859.3 ms
+  * Prompt Assembly   : 0.04 ms
+  * Final LLM Model   : gemini-3.5-flash
+  * LLM Synthesis     : 36730.24 ms (36.73s)
+  * Total Latency     : 38589.64 ms (38.59s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 13-16 | Similarity: 0.6563
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 241-244 | Similarity: 0.6530
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-204 | Similarity: 0.6528
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context from **01_Compressor_Maintenance_SOP.XLSX (Sheet: Hindi Sop)**, here is the step-by-step procedure to start the compressor:
+
+### 1. Pre-Start Inspections & Safety Checks
+* **Check Levels:** Inspect the engine oil level, radiator water level, battery condition, and self-starter connections. *(Source 1)*
+* **Use Ladder:** Use an aluminum ladder to check the radiator water level. *(Source 1)*
+* **Personal Protective Equipment (PPE):** Wear a safety helmet, hand gloves, safety shoes, and safety glasses to prevent head, finger, or other bodily injuries. *(Source 1)*
+* **Isolation:** Turn ON the positive isolation switch to prevent accidental starting by another person. *(Source 1)*
+
+### 2. Starting Procedure *(Derived from Source 1)*
+1. Keep the positive isolation valve **OFF** and keep the air delivery (discharge) valve **closed**.
+2. Turn the **ignition switch ON**, then press the **starting switch**.
+3. Once the engine starts, monitor the engine oil pressure. Press the **loading switch** when the engine oil pressure reaches $4\text{ kg/cm}^2$.
+4. Let the compressor run for **5 minutes** to warm up the compressor oil.
+5. Check the unit thoroughly for any leaks or abnormalities.
+
+### 3. Monitoring and Pressure Verification *(Derived from Source 3)*
+1. **Ensure Enclosures are Closed:** Check the tightness of the battery connection and close the side doors during engine startup. Do not inspect or touch any parts while the compressor is running.
+2. **Clear the Area:** Do not allow any unauthorized persons to stand nearby.
+3. **Check Air Pressure:** 
+   * Keep the discharge valve closed and check the air pressure gauge on the panel board. It should read $10\text{ kg/cm}^2$.
+   * Slowly open the discharge valve and recheck the pressure. In this state, the pressure should be a minimum of $4\text{ kg/cm}^2$. 
+   * *Safety Warning:* Ensure that no person is standing directly in front of the discharge valve.
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-19 18:44:00
+QUESTION  : What is the daily compressor checklist?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 865.84 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 18.39 ms
+  * Total Retrieval   : 884.24 ms
+  * Prompt Assembly   : 0.02 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 10279.66 ms (10.28s)
+  * Total Latency     : 11163.97 ms (11.16s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 197-200 | Similarity: 0.7117
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context from **[Source 1]: 01_Compressor_Maintenance_SOP.XLSX (Rows: 197-200)**, the checklist and safety procedures for compressor inspection and pressure setting include the following steps:
+
+### **Compressor Inspection Checklist & Safety Procedures**
+
+1. **Visual & Machine Safety Check:**
+   * Ensure the machine is **turned OFF** during the visual inspection.
+   * Open the compressor doors and securely position the support stand to prevent injury from sharp edges or falling doors.
+
+2. **Electrical & Fluid Levels Check:**
+   * Inspect all electrical connections (to prevent battery flashing and electrical hazards).
+   * Check all oil levels and water (coolant) levels **before** starting the engine. Add oil or water if necessary.
+
+3. **Fuel System & Engine Starting:**
+   * Bleed all air completely from the fuel system prior to cranking the engine to prevent battery discharge from continuous cranking.
+   * Keep clear of moving engine parts.
+
+4. **Hose & Discharge Valve Safety:**
+   * Securely tie/fasten the discharge valve hoses with chains.
+
+---
+*Note: The provided context contains specific pre-start checks and inspection points under the "Compressor Inspection and Pressure Setting" section. If a separate comprehensive daily maintenance log exists, it is not fully detailed in the current excerpt.*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-19 19:10:15
+QUESTION  : What PPE is mandatory for compressor maintenance?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 749.51 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 5.63 ms
+  * Total Retrieval   : 755.15 ms
+  * Prompt Assembly   : 0.03 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 14289.62 ms (14.29s)
+  * Total Latency     : 15044.84 ms (15.04s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 5-8 | Similarity: 0.6972
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided document, the mandatory Personal Protective Equipment (PPE) required for compressor maintenance includes:
+
+* **Fluorescent Jacket** (फ्लोरोसेंट जैकेट)
+* **Hand Gloves** (हाथ दस्ताने)
+* **Rubber Hand Gloves** (रबर हैंड ग्लव्स)
+* **Helmet** (हेलमेट)
+* **Safety Shoes** (सुरक्षा जूता)
+* **Safety Goggles / Glasses** (चश्मे)
+
+*(Note: The SOP also specifies that loose clothing should not be worn during the work.)*
+
+**Source:** 
+* `[Source 1]: 01_Compressor_Maintenance_SOP.XLSX` (Sheet: Hindi Sop, Step 1)
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:11:50
+QUESTION  : list all files present
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1070.79 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 16.47 ms
+  * Total Retrieval   : 1087.28 ms
+  * Prompt Assembly   : 0.04 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 1
+  * LLM Synthesis     : 25642.78 ms (25.64s)
+  * Total Latency     : 26730.18 ms (26.73s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 9-12 | Similarity: 0.5500
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 9-12 | Similarity: 0.5500
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 1-4 | Similarity: 0.5477
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context, the following file is present:
+
+* **`01_Compressor_Maintenance_SOP.XLSX`**
+
+*(Derived from Source 1, Source 2, and Source 3)*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:15:59
+QUESTION  : how to maintain tower light 
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1188.88 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 13.14 ms
+  * Total Retrieval   : 1202.03 ms
+  * Prompt Assembly   : 0.03 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 32262.12 ms (32.26s)
+  * Total Latency     : 33464.23 ms (33.46s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 03_Tower_light_maintenance_work.xlsx | Sheet: N/A | Rows: 45-48 | Similarity: 0.6365
+  [2] 03_Tower_light_maintenance_work.xlsx | Sheet: N/A | Rows: 5-8 | Similarity: 0.6325
+  [3] 03_Tower_light_maintenance_work.xlsx | Sheet: N/A | Rows: 21-24 | Similarity: 0.6214
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided Standard Operating Procedure (SOP) documents, here are the step-by-step procedures and safety guidelines for maintaining and servicing a tower light:
+
+---
+
+### **1. Safety Precautions & Preparation**
+* **Positive Isolation:** Ensure full adherence to safety protocols and begin work **only after completing positive isolation** *[Source 1]*.
+* **Hazard Awareness:** Be cautious of hazards such as injury caused by the tower light falling/tilting, protruding parts, or falling compartment doors *[Source 1, Source 2]*.
+* **Personnel Responsible:** Shift In-charge, Technician, Electrical Staff, Supervisor, and Employees *[Source 1, Source 2]*.
+
+---
+
+### **2. Positioning and Securing the Tower Light**
+* **Positioning:** Place the tower light properly on the servicing pit *[Source 1]*.
+* **Wheel Chocking:** Apply scotch blocks (wheel chocks) to the tires on both sides to prevent movement *[Source 1]*.
+* **Stabilizing:** Position the front and side screw stands firmly and secure them using lock pins *[Source 1]*.
+
+---
+
+### **3. Inspection (External & Internal)**
+* **External Checks:** Inspect the lights, check for any physical damage, and verify the condition of the slings, boom, wheels, towing arm, brakes, tower locks, and door locks *[Source 2]*.
+* **Internal / Fluid Checks:** Open the doors for internal inspection and ensure there are no leakages from the engine, radiator, or fuel system (do not operate the machine if leaks are found) *[Source 2, Source 3]*.
+
+---
+
+### **4. Cleaning and Servicing Process**
+* Follow the dedicated maintenance checklist *[Source 1]*.
+* **Air Cleaning:** First, clean the unit thoroughly using compressed air *[Source 1]*.
+* **Water Cleaning:** Following the air clean, wash and clean the equipment properly with water *[Source 1]*.
+
+---
+*(Derived from **03_Tower_light_maintenance_work.xlsx**: Source 1, Source 2, and Source 3)*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:34:49
+QUESTION  : compressor mei pressure vessel kaise change kare? 
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 833.53 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 13.23 ms
+  * Total Retrieval   : 846.77 ms
+  * Prompt Assembly   : 0.06 ms
+  * Final LLM Model   : gemini-3.6-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 178510.68 ms (178.51s)
+  * Total Latency     : 179357.59 ms (179.36s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6950
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6603
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6588
+--------------------------------------------------------------------------------
+RESPONSE:
+कंप्रेसर में **प्रेशर वेसेल बदलने (Pressure Vessel Change)** की प्रक्रिया और सुरक्षा दिशा-निर्देश निम्नलिखित हैं:
+
+### **सुरक्षा सावधानियां (Safety Precautions):**
+1. **दरवाजे/कवर का गिरना:** दरवाजे और कवर के गिरने के कारण चोट लग सकती है।
+2. **गर्म तेल से खतरा:** ड्रेनिंग प्रक्रिया के दौरान गर्म तेल के कारण आंखों में चोट या शरीर जलने की संभावना रहती है।
+3. **पर्यवेक्षण:** यह कार्य सुपरवाइज़र की देखरेख में किया जाना चाहिए।
+
+---
+
+### **प्रेशर वेसेल चेंज करने की चरणबद्ध प्रक्रिया (Step-by-Step Procedure):**
+
+1. **दरवाजा उठाना और लॉक करना:** साइड के दरवाजे को पर्याप्त (कम से कम दो) व्यक्तियों की सहायता से उठाएं और इसे ठीक से लॉक करें।
+2. **अतिरिक्त सपोर्ट लगाना:** सुरक्षित रहने के लिए दरवाजे पर अतिरिक्त समर्थन हेतु एक अन्य सपोर्ट रॉड (Support Rod) रखें।
+3. **सीढ़ी का उपयोग:** कंप्रेसर की छत पर चढ़ने के लिए एल्यूमीनियम सीढ़ी का उपयोग करें।
+4. **सुरक्षा बेल्ट का उपयोग:** कंप्रेसर की छत पर काम करते समय हमेशा सुरक्षा बेल्ट (Safety Belt) का उपयोग करें।
+
+---
+
+**(स्रोत:** `01_Compressor_Maintenance_SOP.XLSX`, Sheet: Hindi Sop - [Source 1]**)**
+================================================================================
+
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:43:36
+QUESTION  : compressor mei pressure vessel kaise change kare?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1176.51 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 12.59 ms
+  * Total Retrieval   : 1189.11 ms
+  * Prompt Assembly   : 0.06 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 1
+  * LLM Synthesis     : 139180.33 ms (139.18s)
+  * Total Latency     : 140369.57 ms (140.37s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6961
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6617
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6610
+  [4] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 57-58 | Similarity: 0.6605
+  [5] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 73-74 | Similarity: 0.6573
+  [6] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-202 | Similarity: 0.6465
+--------------------------------------------------------------------------------
+RESPONSE:
+दस्तावेज़ **01_Compressor_Maintenance_SOP.XLSX (Rows: 69-70, 73-74)** के अनुसार, कंप्रेसर में प्रेशर वेसेल (Pressure Vessel) बदलने की मानक प्रक्रिया और सुरक्षा सावधानियां निम्नलिखित हैं:
+
+---
+
+### **सुरक्षा सावधानियां (Safety Precautions):**
+1. **दरवाजे/कवर से सुरक्षा:** साइड दरवाजे और कवर के गिरने से चोट लग सकती है, इसलिए अतिरिक्त सावधानी बरतें।
+2. **गर्म तेल से बचाव:** ड्रेनिंग के दौरान गर्म तेल से आंखों में चोट या जलने का खतरा रहता है।
+3. **सुरक्षा उपकरण (PPE):** कंप्रेसर की छत पर काम करते समय **सुरक्षा बेल्ट (Safety Belt)** का उपयोग करें और छत पर चढ़ने के लिए **एल्यूमीनियम सीढ़ी** का प्रयोग करें।
+
+---
+
+### **प्रेशर वेसेल चेंज करने की चरणबद्ध प्रक्रिया (Step-by-Step Procedure):**
+
+1. **दरवाजा खोलना व लॉक करना:** 
+   - साइड के दरवाजे को दो व्यक्तियों की सहायता से उठाएं और ठीक से लॉक करें।
+   - दरवाजे को अतिरिक्त सहारा देने के लिए एक सपोर्ट रॉड लगाएं।
+
+2. **टॉप फ्लेंज और सेपरेटर निकालना:**
+   - टॉप फ्लेंज को **18-19 mm सॉकेट** की मदद से खोलें।
+   - दो व्यक्तियों की सहायता से फ्लेंज को बाहर निकालें।
+   - वेसेल के अंदर लगे सेपरेटर (Separator) को बाहर निकालें।
+
+3. **ऑइल डिलीवरी लाइन खोलना:**
+   - **45 mm के D-साइज़ पाना (Spanner)** की मदद से नीचे का आउटपुट ऑइल डिलीवरी लाइन खोलें।
+
+4. **इनकमिंग फ्लेंज और बेस बोल्ट हटाना:**
+   - इनकमिंग फ्लेंज को खोलकर हटाएं।
+   - प्रेशर वेसेल के बेस बोल्ट (Base Bolts) को खोलकर रिमूव करें।
+
+5. **प्रेशर वेसेल को बाहर निकालना:**
+   - **चैन ब्लॉक या क्रेन** की मदद से प्रेशर वेसेल को सुरक्षित रूप से बाहर निकालें।
+
+---
+*(संदर्भ: 01_Compressor_Maintenance_SOP.XLSX - Sheet: Hindi Sop)*
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:43:44
+QUESTION  : compressor mei pressure vessel kaise change kare?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 946.86 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 12.7 ms
+  * Total Retrieval   : 959.56 ms
+  * Prompt Assembly   : 0.03 ms
+  * Final LLM Model   : gemini-3.6-flash
+  * Gemini API Key    : Key 1
+  * LLM Synthesis     : 297262.25 ms (297.26s)
+  * Total Latency     : 298221.92 ms (298.22s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6961
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6617
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6610
+--------------------------------------------------------------------------------
+RESPONSE:
+दिए गए संदर्भ **[Source 1: 01_Compressor_Maintenance_SOP.XLSX (Sheet: Hindi Sop)]** के अनुसार, कंप्रेसर में प्रेसर वेसेल बदलने (Pressure Vessel Change) की प्रक्रिया, सुरक्षा नियम और चरण निम्नलिखित हैं:
+
+### **उत्तरदायी व्यक्ति:**
+* **सुपरवाइज़र (Supervisor)**
+
+---
+
+### **सुरक्षा संबंधी खतरे (Safety Hazards):**
+1. दरवाजे और कवर के गिरने से चोट लगने की संभावना।
+2. ड्रेनिंग प्रक्रिया के दौरान गर्म तेल के कारण आंख में चोट या त्वचा जलने का खतरा।
+
+---
+
+### **प्रेशर वेसेल चेंज करने की चरणबद्ध प्रक्रिया एवं सुरक्षा उपाय:**
+
+1. **साइड का दरवाजा खोलना और लॉक करना:**
+   * साइड के दरवाजे को पर्याप्त (कम से कम दो) व्यक्तियों की सहायता से उठाएं और इसे ठीक से लॉक करें।
+
+2. **अतिरिक्त सपोर्ट लगाना:**
+   * दरवाजे को सुरक्षित रखने और अतिरिक्त समर्थन (extra support) देने के लिए एक अन्य सपोर्ट रॉड लगाएं।
+
+3. **छत पर कार्य करने हेतु सुरक्षा निर्देश:**
+   * छत पर चढ़ने के लिए **एल्यूमीनियम सीढ़ी (Aluminum Ladder)** का ही उपयोग करें।
+   * कंप्रेसर की छत पर काम करते समय हमेशा **सुरक्षा बेल्ट (Safety Belt)** का उपयोग करें।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:45:09
+QUESTION  : What safety precautions are required before compressor maintenance?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1052.37 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 11.73 ms
+  * Total Retrieval   : 1064.11 ms
+  * Prompt Assembly   : 0.03 ms
+  * Final LLM Model   : gemini-3.6-flash
+  * Gemini API Key    : Key 3
+  * LLM Synthesis     : 266178.66 ms (266.18s)
+  * Total Latency     : 267242.87 ms (267.24s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6682
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 57-58 | Similarity: 0.6646
+--------------------------------------------------------------------------------
+RESPONSE:
+Based on the provided context from **`01_Compressor_Maintenance_SOP.XLSX` (Sheet: Hindi Sop)**, the following safety precautions and guidelines are required during compressor maintenance:
+
+### **Safety Precautions & Handling Guidelines**
+
+1. **Personal Safety & PPE:**
+   * **Hand Protection:** Wear hand gloves when fixing slings to prevent injury.
+   * **Eye Protection:** Take safety measures to prevent oil from falling into the eyes.
+   * **General PPE:** Use all required safety equipment/PPE throughout the operation.
+
+2. **Lifting & Air-End Removal Safety:**
+   * **Sling Specifications:** Use a sling with a minimum thickness/width of 1 inch for lifting operations.
+   * **Lifting Equipment:** Use a Hydra, Omega, or Overhead Crane to lift the air end.
+   * **Signaling:** Signals for lifting must strictly be given **only by authorized crane staff**.
+   * **Lifting Procedure:** 
+     * First, lift the air end slightly to completely disengage it from the coupling before raising it out fully through the roof/canopy.
+     * Place the lifted air end safely on wooden planks.
+     * Pay strict attention to surrounding obstacles/barriers during movement.
+
+3. **Tool Safety & Component Handling:**
+   * **Spanner Safety:** Use a 22 mm ring spanner to loosen mounting bolts properly and prevent injury from spanner slippage.
+   * **Filter & Component Servicing:** Clean the moisture filter and engine breather carefully. If any component is found damaged, report it to the supervisor for replacement.
+
+---
+
+**Source:** 
+* `01_Compressor_Maintenance_SOP.XLSX` (Sheet: Hindi Sop, Rows: 57-58, 231-232)
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:46:35
+QUESTION  : 
+compressor mei pressure vessel kaise change kare?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1086.23 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 11.63 ms
+  * Total Retrieval   : 1097.87 ms
+  * Prompt Assembly   : 0.08 ms
+  * Final LLM Model   : gemini-3.6-flash
+  * Gemini API Key    : Key 1
+  * LLM Synthesis     : 161128.28 ms (161.13s)
+  * Total Latency     : 162226.28 ms (162.23s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6994
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6654
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6643
+  [4] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 57-58 | Similarity: 0.6637
+  [5] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 73-74 | Similarity: 0.6621
+  [6] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-202 | Similarity: 0.6493
+  [7] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 211-212 | Similarity: 0.6490
+--------------------------------------------------------------------------------
+RESPONSE:
+कंप्रेसर में प्रेसर वेसेल बदलने (Pressure Vessel Change) की मानक संचालन प्रक्रिया (SOP) और सुरक्षा निर्देश निम्नलिखित हैं:
+
+---
+
+### **सुरक्षा संबंधी सावधानियां (Safety Precautions)**
+1. **दरवाजे/कवर का खतरा:** दरवाजे और कवर के गिरने से चोट लग सकती है। 
+2. **गर्म तेल से सुरक्षा:** ड्रेनिंग प्रक्रिया के दौरान गर्म तेल के कारण आंख में चोट या जलने की संभावना रहती है।
+3. **ऊंचाई पर सुरक्षा:** कंप्रेसर की छत पर चढ़ने के लिए एल्यूमीनियम सीढ़ी का उपयोग करें और काम करते समय सुरक्षा बेल्ट अवश्य पहनें।
+
+---
+
+### **प्रेसर वेसेल बदलने की प्रक्रिया (Step-by-Step Procedure)**
+
+1. **साइड का दरवाजा लॉक करें:** साइड के दरवाजे को दो व्यक्तियों की सहायता से उठाएं और इसे ठीक से लॉक करें।
+2. **सपोर्ट रॉड लगाएं:** दरवाजे को अतिरिक्त सहारा देने के लिए एक अन्य सपोर्ट रॉड रखें।
+3. **टॉप फ्लेंज खोलें:** 18-19 mm सॉकेट की मदद से टॉप फ्लेंज को खोलें। 
+4. **सेपरेटर निकालें:** दो व्यक्तियों की मदद से फ्लेंज को बाहर निकालें और फिर अंदर के सेपरेटर को निकालें।
+5. **ऑइल डिलीवरी लाइन खोलें:** 45mm के D-साइज पाना (Spanner) का उपयोग करके नीचे की आउटपुट ऑइल डिलीवरी लाइन को खोलें।
+6. **इनकमिंग फ्लेंज और बेस बोल्ट हटाएं:** इनकमिंग फ्लेंज को खोलकर हटाएं, फिर प्रेसर वेसेल के बेस बोल्ट (Base Bolt) को रिमूव करें।
+7. **वेसेल को बाहर निकालें:** चैन ब्लॉक (Chain Block) या क्रेन की मदद से प्रेसर वेसेल को सावधानीपूर्वक बाहर निकालें।
+
+---
+
+**स्रोत (Source):** 
+यह जानकारी `01_Compressor_Maintenance_SOP.XLSX` (Sheet: Hindi Sop) के **[Source 1]** एवं **[Source 5]** से ली गई है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:47:01
+QUESTION  : 
+compressor mei pressure vessel kaise change kare?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 725.88 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 10.05 ms
+  * Total Retrieval   : 735.94 ms
+  * Prompt Assembly   : 0.08 ms
+  * Final LLM Model   : gemini-3.6-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 79593.28 ms (79.59s)
+  * Total Latency     : 80329.35 ms (80.33s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6994
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6654
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6643
+  [4] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 57-58 | Similarity: 0.6637
+  [5] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 73-74 | Similarity: 0.6621
+  [6] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-202 | Similarity: 0.6493
+  [7] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 211-212 | Similarity: 0.6490
+--------------------------------------------------------------------------------
+RESPONSE:
+कंप्रेसर में **प्रेशर वेसेल (Pressure Vessel)** बदलने की प्रक्रिया और उससे जुड़ी सुरक्षा सावधानियां निम्नलिखित हैं:
+
+---
+
+### **सुरक्षा सावधानियां (Safety Precautions):**
+1. दरवाजे और कवर के गिरने के कारण चोट लगने का जोखिम रहता है।
+2. ड्रेनिंग प्रक्रिया के दौरान गर्म तेल के कारण आंख में चोट लगने या जलने की संभावना होती है।
+3. कंप्रेसर की छत पर चढ़ने के लिए एल्यूमीनियम सीढ़ी का उपयोग करें और छत पर काम करते समय सुरक्षा बेल्ट (Safety Belt) का उपयोग अनिवार्य रूप से करें।
+
+---
+
+### **प्रेशर वेसेल बदलने की चरणबद्ध प्रक्रिया (Step-by-Step Procedure):**
+
+1. **दरवाजा खोलना और लॉक करना:** साइड के दरवाजे को दो व्यक्तियों की सहायता से उठाएं और इसे ठीक से लॉक करें। दरवाजे को अतिरिक्त सहारा देने के लिए एक सपोर्ट रॉड लगाएं।
+2. **टॉप फ्लेंज खोलना:** 18-19 mm सॉकेट से टॉप फ्लेंज को खोलें। फिर दो व्यक्तियों की मदद से फ्लेंज को बाहर निकालें।
+3. **सेपरेटर और डिलीवरी लाइन हटाना:** अंदर मौजूद सेपरेटर को बाहर निकालें। इसके बाद 45mm के D-साइज़ पाना की मदद से नीचे की 'आउटपुट ऑइल डिलीवरी लाइन' को खोलें।
+4. **इनकमिंग फ्लेंज और बेस बोल्ट खोलना:** इनकमिंग फ्लेंज को खोलकर हटाएं। उसके बाद वेसल के बेस बोल्ट को रिमूव (हटाएं) करें।
+5. **वेसेल को बाहर निकालना:** चैन ब्लॉक या क्रेन की मदद से प्रेशर वेसेल को सावधानीपूर्वक बाहर निकालें।
+
+---
+
+**संदर्भ/स्रोत (Source):** 
+यह जानकारी **01_Compressor_Maintenance_SOP.XLSX** (*Sheet: Hindi Sop*, Source 1 एवं Source 5) से प्राप्त की गई है।
+================================================================================
+
+================================================================================
+TIMESTAMP : 2026-08-21 20:49:20
+QUESTION  : compressor mei pressure vessel kaise change kare?
+--------------------------------------------------------------------------------
+LAYER TIMINGS & MODELS:
+  * Query Embedding   : 1127.39 ms  (Model: models/gemini-embedding-001)
+  * Qdrant Lookup     : 12.59 ms
+  * Total Retrieval   : 1139.99 ms
+  * Prompt Assembly   : 0.06 ms
+  * Final LLM Model   : gemini-3.7-flash
+  * Gemini API Key    : Key 2
+  * LLM Synthesis     : 47902.91 ms (47.90s)
+  * Total Latency     : 49043.01 ms (49.04s)
+--------------------------------------------------------------------------------
+RETRIEVED SOURCES:
+  [1] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 69-70 | Similarity: 0.6961
+  [2] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 231-232 | Similarity: 0.6617
+  [3] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 207-208 | Similarity: 0.6610
+  [4] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 57-58 | Similarity: 0.6605
+  [5] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 73-74 | Similarity: 0.6573
+  [6] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 201-202 | Similarity: 0.6465
+  [7] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 211-212 | Similarity: 0.6445
+  [8] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 71-72 | Similarity: 0.6385
+  [9] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 41-42 | Similarity: 0.6384
+  [10] 01_Compressor_Maintenance_SOP.XLSX | Sheet: N/A | Rows: 213-214 | Similarity: 0.6378
+--------------------------------------------------------------------------------
+RESPONSE:
+एसओपी (SOP) के अनुसार कंप्रेसर में **प्रेशर वेसेल (Pressure Vessel) चेंज करने की प्रक्रिया** और उससे जुड़ी सुरक्षा सावधानियां निम्नलिखित हैं:
+
+---
+
+### **सुरक्षा सावधानियां (Safety Precautions):**
+1. **दरवाजे/कवर:** साइड के दरवाजे को दो व्यक्तियों की मदद से उठाएं और इसे ठीक से लॉक करें। अतिरिक्त सहायता के लिए एक अन्य सपोर्ट रॉड लगाएं ताकि दरवाजे गिरने से चोट न लगे।
+2. **छत पर काम:** कंप्रेसर की छत पर काम करते समय सुरक्षा बेल्ट का उपयोग करें और छत पर चढ़ने के लिए एल्यूमीनियम सीढ़ी का इस्तेमाल करें।
+3. **गर्म तेल से बचाव:** ड्रेनिंग प्रक्रिया के दौरान गर्म तेल आँखों में जाने या जलने का खतरा रहता है, सावधानी बरतें।
+4. **स्पैनर का उपयोग:** स्पैनर के फिसलने से होने वाली चोट से बचें।
+
+---
+
+### **प्रेशर वेसेल चेंज करने की चरणबद्ध प्रक्रिया (Step-by-Step Procedure):**
+
+1. **दरवाजा सुरक्षित करना:** साइड के दरवाजे को पर्याप्त (दो) व्यक्तियों की सहायता से उठाएं, ठीक से लॉक करें और अतिरिक्त सपोर्ट रॉड लगाएं।
+2. **तेल ड्रेन करना:** वाल्व को खोलें। ड्रेन ट्रॉली को नीचे रखकर तेल को ड्रेन करें और रिजेक्टेड तेल को ड्रम में रखें।
+3. **पाइप कनेक्शन खोलना:** 
+   - प्रेशर वेसेल आउटपुट एयर डिलीवरी लाइन को **18-19 mm के रिंग पाना** की मदद से खोलें।
+   - टॉप कनेक्टर पाइप को **18-19 mm डी-पाना (D-Spanner)** की मदद से खोलें।
+4. **टॉप फ्लेंज और सेपरेटर निकालना:**
+   - टॉप फ्लेंज को **18-19 mm सॉकेट** से खोलें। 
+   - फ्लेंज को दो व्यक्तियों की मदद से बाहर निकालें। 
+   - अंदर के सेपरेटर को निकालें।
+5. **आउटपुट ऑयल डिलीवरी लाइन खोलना:** **45 mm के D-साइज़ पाना** की मदद से नीचे का आउटपुट ऑयल डिलीवरी लाइन खोलें।
+6. **इनकमिंग फ्लेंज व बेस बोल्ट हटाना:** इनकमिंग फ्लेंज को खोलकर हटाएं और वेसेल के बेस बोल्ट को रिमूव करें।
+7. **वेसेल बाहर निकालना:** **चैन ब्लॉक (Chain Block)** या **क्रेन** की मदद से प्रेशर वेसेल को बाहर निकालें।
+
+---
+
+**संदर्भ (Source):** 
+- *[Source 1], [Source 8], और [Source 5]: 01_Compressor_Maintenance_SOP.XLSX (Rows: 69-74)*
+================================================================================
+

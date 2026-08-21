@@ -19,10 +19,14 @@ def render_message_metrics(metrics: Dict[str, Any]):
         or "Key 1"
     )
 
+    top_k_val = metrics.get("top_k")
+    top_k_badge = f'<span class="latency-pill">🎯 Top-K: {top_k_val}</span>' if top_k_val is not None else ""
+
     st.markdown(
         f"""
         <div style="margin-top: 10px; margin-bottom: 6px;">
             <span class="latency-pill">⚡ Total: {total:.0f} ms</span>
+            {top_k_badge}
             <span class="latency-pill">🔍 Qdrant: {q_search:.1f} ms</span>
             <span class="latency-pill">🧠 Gemini ({model_name}): {llm_gen:.0f} ms</span>
             <span class="latency-pill">📐 Embedding: {q_emb:.1f} ms</span>

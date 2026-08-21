@@ -100,6 +100,40 @@ class RAGGenerator:
         ])
         return list(dict.fromkeys(models))
 
+    def list_available_models(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
+        """List generation-capable models usable with the configured Gemini API key (free tier).
+
+        Results are cached for 10 minutes unless force_refresh is set, so this is
+        only queried on explicit user action and never pinged continuously.
+        """
+        cache_ttl = 600.0
+        if not force_refresh:
+            age = time.time() - getattr(self, "_models_cache_ts", 0.0)
+            if age < cache_ttl:
+                return self._models_cache
+
+        client = self.client_manager.current_client
+        available: List[Dict[str, Any]] = []
+        for model in client.models.list():
+            actions = getattr(model, "supported_actions", None) or []
+            if actions and "generateContent" not in actions:
+                continue
+            name = (getattr(model, "name", "") or "").removeprefix("models/")
+            if not name or "embedding" in name:
+                continue
+            available.append(
+                {
+                    "name": name,
+                    "display_name": getattr(model, "display_name", "") or name,
+                    "input_token_limit": getattr(model, "input_token_limit", None),
+                    "output_token_limit": getattr(model, "output_token_limit", None),
+                }
+            )
+        available.sort(key=lambda m: m["name"])
+        self._models_cache = available
+        self._models_cache_ts = time.time()
+        return available
+
     def retrieve_with_metrics(
         self, query: str, top_k: int = 3
     ) -> Dict[str, Any]:
@@ -156,6 +190,7 @@ class RAGGenerator:
         top_k: int = 3,
         max_retries: int = 3,
         verbose: bool = True,
+        model: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Execute full RAG generation with per-layer latency tracking and automated persistent logging."""
         total_start = time.perf_counter()
@@ -212,6 +247,9 @@ Answer:"""
 
         # Layer 4: LLM Generation (Synthesis) with Gemini fallback pool
         candidate_models = self.candidate_models
+        if model:
+            # User-selected model takes priority; the rest remain as fallbacks.
+            candidate_models = [model] + [m for m in candidate_models if m != model]
 
         active_model = None
         answer_text = ""
@@ -260,6 +298,7 @@ Answer:"""
 
         metrics = {
             "embedding_model": self.embedding_model,
+            "top_k": top_k,
             "query_embedding_ms": retrieval_metrics["query_embedding_ms"],
             "qdrant_search_ms": retrieval_metrics["qdrant_search_ms"],
             "total_retrieval_ms": retrieval_metrics["total_retrieval_ms"],
@@ -311,6 +350,7 @@ Answer:"""
                 f.write(f"QUESTION  : {query}\n")
                 f.write("-" * 80 + "\n")
                 f.write("LAYER TIMINGS & MODELS:\n")
+                f.write(f"  * Top-K Chunks      : {metrics.get('top_k', len(sources))}\n")
                 f.write(f"  * Query Embedding   : {metrics['query_embedding_ms']} ms  (Model: {metrics['embedding_model']})\n")
                 f.write(f"  * Qdrant Lookup     : {metrics['qdrant_search_ms']} ms\n")
                 f.write(f"  * Total Retrieval   : {metrics['total_retrieval_ms']} ms\n")
@@ -332,7 +372,7 @@ Answer:"""
                 f.write(f"RESPONSE:\n{answer}\n")
                 f.write("=" * 80 + "\n\n")
         except Exception as e:
-            print(f"[Warning] Failed to write readable log: {e}")
+            safe_print(f"[Warning] Failed to write readable log: {e}")
 
         # Write to log/runs.jsonl
         jsonl_log_file = os.path.join(self.log_dir, "runs.jsonl")
@@ -354,7 +394,7 @@ Answer:"""
             with open(jsonl_log_file, "a", encoding="utf-8") as f:
                 f.write(json.dumps(record, ensure_ascii=False) + "\n")
         except Exception as e:
-            print(f"[Warning] Failed to write JSONL log: {e}")
+            safe_print(f"[Warning] Failed to write JSONL log: {e}")
 
     @staticmethod
     def _log_layer_summary(metrics: Dict[str, Any], sources: List[Dict[str, Any]]):
@@ -363,6 +403,7 @@ Answer:"""
         safe_print("                   RAG PIPELINE EXECUTION TELEMETRY                    ")
         safe_print("=" * 75)
         safe_print(f"1. Retrieval Layer:")
+        safe_print(f"   - Top-K Requested    : {metrics.get('top_k', len(sources))}")
         safe_print(f"   - Embedding Model    : {metrics['embedding_model']}")
         safe_print(f"   - Query Embedding    : {metrics['query_embedding_ms']:.2f} ms")
         safe_print(f"   - Qdrant Vector Search: {metrics['qdrant_search_ms']:.2f} ms")
